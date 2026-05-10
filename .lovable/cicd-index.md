@@ -10,7 +10,9 @@
 | 04 | [`cicd-issues/04-no-email-notifications.md`](./cicd-issues/04-no-email-notifications.md) | Constraint: never configure email-based CI notifications | 🚫 Permanent constraint |
 | 05 | [`cicd-issues/05-cross-repo-mirror-drift.md`](./cicd-issues/05-cross-repo-mirror-drift.md) | `cross-repo/core-v9/` can drift if main-repo CI changes aren't mirrored | 🔄 Procedural — handled per-change |
 | 06 | [`cicd-issues/06-baseline-gate-seed.md`](./cicd-issues/06-baseline-gate-seed.md) | golangci-lint baseline gate is seed-then-gate; empty baseline = warnings only | ✅ Working as designed |
-| 07 | [`cicd-issues/07-coverage-gate-60.md`](./cicd-issues/07-coverage-gate-60.md) | Coverage gate ≥ 60% enforced in `.github/workflows/ci.yml` | ✅ Working as designed |
+| 07 | [`cicd-issues/07-coverage-gate-60.md`](./cicd-issues/07-coverage-gate-60.md) | Coverage gate ≥ 75% (total) enforced in `.github/workflows/ci.yml` | ✅ Working as designed (raised from 60% to 75% during AO) |
+| 08 | [`cicd-issues/08-per-package-coverage-gate.md`](./cicd-issues/08-per-package-coverage-gate.md) | Per-package coverage gate ≥ 75% — locks in AO uplift, prevents silent per-package regression | ✅ Cycle 53 (v1.30.0, Task AS) |
+| 09 | [`cicd-issues/09-stringer-recursion-guard.md`](./cicd-issues/09-stringer-recursion-guard.md) | Static guard for RCA Pattern P9 — `String()` body must not call `converters.AnyTo.ValueString` | ✅ Cycle 54 (v1.31.0, Task AX); surfaced + fixed real violation in `scripttype/ScriptDefault.go` |
 
 ## How to add a new CI/CD issue
 
