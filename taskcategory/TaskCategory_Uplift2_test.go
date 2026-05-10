@@ -44,7 +44,7 @@ func TestTaskCategory_Uplift(t *testing.T) {
 	_ = v.ValueInt8()
 	_ = v.ValueInt16()
 	_ = v.ValueInt32()
-	_ = v.Value()
+	_ = v.ValueByte()
 	_ = v.ValueUInt16()
 
 	if !v.IsValid() || v.IsInvalid() {
@@ -53,7 +53,7 @@ func TestTaskCategory_Uplift(t *testing.T) {
 	if !v.IsAnyOf(v, Invalid) {
 		t.Error("IsAnyOf")
 	}
-	if !v.IsNameEqual("Help") || !v.IsValueEqual(v.Value()) || !v.IsByteValueEqual(v.Value()) || !v.IsAnyValuesEqual(v.Value()) || !v.IsAnyNamesOf("Help") {
+	if !v.IsNameEqual("Help") || !v.IsValueEqual(v.ValueByte()) || !v.IsByteValueEqual(v.ValueByte()) || !v.IsAnyValuesEqual(v.ValueByte()) || !v.IsAnyNamesOf("Help") {
 		t.Error("predicates")
 	}
 
