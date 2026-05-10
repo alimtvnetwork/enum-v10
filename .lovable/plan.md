@@ -212,11 +212,11 @@
 
 **Recommended next task:** Pick from this list (in order):
 
-1. **AB residual** — All active ❓ probes drained (PI-003 fully resolved, deferred carry-overs all OOB/ⓘ). Closeable.
-2. **AJ-45 / S-002** — Blocked by `spec/01-app/` freeze; cannot ship until user thaws.
-3. **A** — Manual `cross-repo/core-v9/` push ⏭️
+1. **AJ-45 / S-002** — Blocked by `spec/01-app/` freeze; cannot ship until user thaws.
+2. **A** — Manual `cross-repo/core-v9/` push ⏭️ (user-only)
+3. **AP / AQ / AS** — Proactive candidates (thaw-cycle, osdetect Linux-branch coverage, per-package CI gate). See chat suggestions.
 
-**Recently closed:** AO ✅ (v1.25.0), AN-D ✅ (sandbox lint = `0 issues.`), AC ✅ (v1.26.0, Cycle 49), **AJ-46 ✅ (v1.27.0, Cycle 50 — `tests/contracttests/converters_test.go` 5/5 PASS, §09 active ❓ pool drained)**.
+**Recently closed:** AO ✅ (v1.25.0), AN-D ✅ (sandbox lint = `0 issues.`), AC ✅ (v1.26.0, Cycle 49), AJ-46 ✅ (v1.27.0, Cycle 50 — `tests/contracttests/converters_test.go` 5/5 PASS, §09 active ❓ pool drained), **AR ✅ (v1.28.0, Cycle 51 — PI-003 closed + AB-residual retired from Next list, bookkeeping only).**
 
 **Done from this list (reconciled 2026-05-10):**
 - AL2-02 ✅ (Cycles 68–69, v0.40.0/v0.41.0 — DB family Coverage_test files in all 6 packages)
