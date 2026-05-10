@@ -2,6 +2,8 @@ package inttype
 
 import (
 	"encoding/json"
+	"errors"
+	"fmt"
 	"math"
 	"strconv"
 
@@ -44,11 +46,14 @@ func (it Variant) AllNameValues() []string {
 }
 
 func (it Variant) OnlySupportedErr(names ...string) error {
-	panic("not implemented for generic int enum")
+	if len(names) == 0 {
+		return errors.New("inttype: only supported names: <none specified>")
+	}
+	return fmt.Errorf("inttype: only supported names: %v", names)
 }
 
 func (it Variant) OnlySupportedMsgErr(message string, names ...string) error {
-	panic("not implemented for generic int enum")
+	return fmt.Errorf("inttype: %s — only supported names: %v", message, names)
 }
 
 func (it Variant) IntegerEnumRanges() []int {
