@@ -233,6 +233,7 @@ jobs:
             test-artifacts/test-results/coverage.out \
             --threshold 75
 
+      - uses: actions/upload-artifact@v4
         if: always() && needs.sha-check.outputs.already-built != 'true'
         with:
           name: coverage-summary
