@@ -95,7 +95,7 @@ func (it generate) OperatingSystemDetailLazy() (detail *OperatingSystemDetail, e
 		// warning intentionally:
 		//  swallowing the error
 		//  as it is cache and has issues so removing it
-		os.RemoveAll(osDetailTempCacheRootPath)
+		_ = os.RemoveAll(osDetailTempCacheRootPath)
 	}
 	
 	// make a fresh start
@@ -309,7 +309,7 @@ func (it generate) linuxOperatingSystemDetail() (*OperatingSystemDetail, error) 
 		return nil, err
 	}
 	
-	defer defaultLinuxReleaseFile.Close()
+	defer func() { _ = defaultLinuxReleaseFile.Close() }()
 	
 	var (
 		name                   string
@@ -353,16 +353,16 @@ func (it generate) linuxOperatingSystemDetail() (*OperatingSystemDetail, error) 
 		osMixType = Centos
 		vendorType = linuxvendortype.CentOs
 		
-		if release := readTrimmedFile(vendorType.ReleaseInfoFilePath()); release != "" {
-			if m := centOSRegex.FindStringSubmatch(release); m != nil {
+		if rel := readTrimmedFile(vendorType.ReleaseInfoFilePath()); rel != "" {
+			if m := centOSRegex.FindStringSubmatch(rel); m != nil {
 				release = m[2]
 			}
 		}
 	case linuxvendortype.RHEL.ComparingName():
 		osMixType = RedHatEnterpriseLinux
 		vendorType = linuxvendortype.RHEL
-		if release := readTrimmedFile(vendorType.ReleaseInfoFilePath()); release != "" {
-			if m := redHatRegex.FindStringSubmatch(release); m != nil {
+		if rel := readTrimmedFile(vendorType.ReleaseInfoFilePath()); rel != "" {
+			if m := redHatRegex.FindStringSubmatch(rel); m != nil {
 				release = m[1]
 			}
 		}
