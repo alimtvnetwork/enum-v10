@@ -67,11 +67,18 @@ jobs:
       # golangci-lint v2.x — required because go.mod declares `go 1.25.0`.
       # v1.64.8 (last v1) was compiled with Go 1.24 and its type-checker
       # rejects Go 1.25 packages outright. v2 ships a Go 1.25 toolchain.
+      # Cache disabled (AN-B, 2026-05-10): golangci-lint-action v7 caches
+      # analysis results keyed on go.sum + version. When source changes but
+      # go.sum doesn't, the action can replay stale lint findings (errors at
+      # line numbers that no longer exist in source). Disabling the cache
+      # eliminates that failure mode at the cost of ~30s per run.
       - uses: golangci/golangci-lint-action@v7
         if: needs.sha-check.outputs.already-built != 'true'
         with:
           version: v2.5.0
           args: --timeout=5m
+          skip-cache: true
+          skip-save-cache: true
 
   # -----------------------------------------------------------------------------
   # Vulnerability scan (in-CI). Third-party = fail; stdlib-only = warn.
