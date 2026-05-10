@@ -290,8 +290,10 @@
 
 #### AN-C. Apply the verified fix ✅ DONE (folded into AN-B above)
 
-#### AN-D. Validate ⏳ Pending
-- Re-run CI and confirm `0 issues`.
+#### AN-D. Validate ✅ DONE (2026-05-10, sandbox dry-run)
+- Local `golangci-lint v2.6.2 run --timeout=5m ./...` against the entire repo with `core-v9 v1.5.8`: **`0 issues.`**
+- Confirms the original 4 errors (`osdetect/generate.go:312` errcheck on `defaultLinuxReleaseFile.Close`, `:358`/`:366` ineffassign on `release`) are no longer present in the source. The CI cache fix (AN-B/AN-C) will surface this same clean result on the next push.
+- No version bump (validation only, no source change).
 
 ---
 
