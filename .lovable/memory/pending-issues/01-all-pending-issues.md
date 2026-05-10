@@ -62,6 +62,6 @@
 ### PI-001: Upstream `core-v9` `go.mod` module path mismatch (Task W + AG)
 
 - **resolved:** 2026-05-05
-- **fix:** User renamed upstream `go.mod` → `module github.com/alimtvnetwork/core-v9`, tagged `v1.5.8`. AI dropped `replace` bridge in `enum-v9/go.mod`, pinned `core-v9 v1.5.8`.
+- **fix:** User renamed upstream `go.mod` → `module github.com/alimtvnetwork/core-v9`, tagged `v1.5.8`. AI dropped `replace` bridge in `enum-v10/go.mod`, pinned `core-v9 v1.5.8`.
 
 _(Consolidated from `.lovable/pending-issues/01-core-v9-go-mod-rename.md` and `02-cross-spec-stale-paths.md` — those files are now superseded by this tracker)_

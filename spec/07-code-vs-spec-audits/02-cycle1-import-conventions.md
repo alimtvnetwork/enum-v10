@@ -40,8 +40,8 @@
 | D-1 | "consumes `core-v9` packages" (line 4) | Module is `core-v9`; only `core-v9` references should be in `cross-repo/core-v9/` | LOW | **Spec** — s/core-v9/core-v9/ in line 4 |
 | D-2 | "Even though the path ends in `core-v9`, Go uses the `package core` declaration" (line 88) | Path now ends in `core-v9` | LOW | **Spec** — s/core-v9/core-v9/ in line 88 |
 | D-3 | "For `core-v9`, this means: `…/core-v9/internal/...`" (lines 94–98) | Mismatch: prose says v8, example says v9 | LOW | **Spec** — s/`core-v9`/`core-v9`/ in line 94 |
-| D-4 | "the test module is rooted at the same `core-v9` module" (line 121) | Test module is rooted at `enum-v9`, not `core-v*` (this repo IS enum-v9) | MEDIUM | **Spec** — clarify that the rule is "rooted at the same module" generically; for this repo that module is `enum-v9`, not `core-vN` |
-| D-5 | "`coredata/coregeneric`" listed in canonical imports (line 61) | 0 files import it in this repo | LOW | **Spec** — note this is canonical for `core-v9` itself; downstream consumers like `enum-v9` may not use it |
+| D-4 | "the test module is rooted at the same `core-v9` module" (line 121) | Test module is rooted at `enum-v10`, not `core-v*` (this repo IS enum-v10) | MEDIUM | **Spec** — clarify that the rule is "rooted at the same module" generically; for this repo that module is `enum-v10`, not `core-vN` |
+| D-5 | "`coredata/coregeneric`" listed in canonical imports (line 61) | 0 files import it in this repo | LOW | **Spec** — note this is canonical for `core-v9` itself; downstream consumers like `enum-v10` may not use it |
 
 ### ❌ Contradiction (2) — spec describes structure that doesn't exist here
 
@@ -52,7 +52,7 @@
 
 ### Tally of canonical-import usage (claim 2 detail)
 
-The spec lists 11 canonical packages under "copy-paste-ready". In this repo (`enum-v9`):
+The spec lists 11 canonical packages under "copy-paste-ready". In this repo (`enum-v10`):
 
 | Package | Files using it | Status |
 |---|---|---|
@@ -69,7 +69,7 @@ The spec lists 11 canonical packages under "copy-paste-ready". In this repo (`en
 | `core-v9/isany` | 0 | unused |
 | `core-v9/issetter` | 10 | ✅ |
 
-8 of 11 used; 3 unused. **Not a defect** — the canonical block is for *consumers of `core-v9`*, and `enum-v9` happens not to need all 11. But this should be clarified in the spec ("not every consumer uses every package").
+8 of 11 used; 3 unused. **Not a defect** — the canonical block is for *consumers of `core-v9`*, and `enum-v10` happens not to need all 11. But this should be clarified in the spec ("not every consumer uses every package").
 
 ---
 
@@ -89,6 +89,6 @@ The spec lists 11 canonical packages under "copy-paste-ready". In this repo (`en
 
 ## Score interpretation
 
-41.7% sounds catastrophic but isn't — **0 of the 7 findings indicate broken code**. Every drift is documentation that lagged behind the `core-v9` → `core-v9` rename or the conversion of this repo from a `core-v9` mirror into the `enum-v9` consumer. Once D-CVS-01..05 are applied (single-line edits) and C-CVS-01..02 are decided (the test-folder question is the only architectural call), match rate jumps to ~95%.
+41.7% sounds catastrophic but isn't — **0 of the 7 findings indicate broken code**. Every drift is documentation that lagged behind the `core-v9` → `core-v9` rename or the conversion of this repo from a `core-v9` mirror into the `enum-v10` consumer. Once D-CVS-01..05 are applied (single-line edits) and C-CVS-01..02 are decided (the test-folder question is the only architectural call), match rate jumps to ~95%.
 
 **Recommended next cycle:** `01-app/04-error-system.md` — high churn, lots of API claims, good drift candidate.

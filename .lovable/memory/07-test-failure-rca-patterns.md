@@ -43,7 +43,7 @@ func (it Pair) String() string {
 
 **Symptom:** Packages reported as `Blocked` in pre-coverage compile check, or as `RUNTIME FAILURE` after the coverage run, but the captured diagnostic contains ONLY repeated lines like:
 
-    warning: no packages being tested depend on matches for pattern github.com/alimtvnetwork/enum-v9/...
+    warning: no packages being tested depend on matches for pattern github.com/alimtvnetwork/enum-v10/...
 
 These warnings are emitted by Go when a `-coverpkg=` glob includes packages the test binary doesn't transitively import. They are harmless. Under parallel runspace load, the build cache contention sometimes causes `go test -c` to also exit non-zero transiently, masking the warning-only nature.
 

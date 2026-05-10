@@ -1,20 +1,20 @@
 # Cycle 12 — `01-app/14-tests-folder-walkthrough.md` Code-vs-Spec Audit
 
-> Audited 2026-05-05. Spec catalogues `tests/integratedtests/` layout, `tests/testwrappers/` packages, and `coretests.GetAssert` helper inventory — **none of which `enum-v9` consumes**. Mirrors the §13 finding from cycle 11. Also exposed that cycle 11's "01-app/ is clean" claim was premature — 7 more `integratedtests` hits remained across `01-package-map.md`, `02-design-philosophy.md`, and `14-…` itself.
+> Audited 2026-05-05. Spec catalogues `tests/integratedtests/` layout, `tests/testwrappers/` packages, and `coretests.GetAssert` helper inventory — **none of which `enum-v10` consumes**. Mirrors the §13 finding from cycle 11. Also exposed that cycle 11's "01-app/ is clean" claim was premature — 7 more `integratedtests` hits remained across `01-package-map.md`, `02-design-philosophy.md`, and `14-…` itself.
 
 ## Method
-Read end-to-end, extracted every checkable claim, then verified each against `enum-v9/tests/creationtests/` and against referenced spec sub-paths.
+Read end-to-end, extracted every checkable claim, then verified each against `enum-v10/tests/creationtests/` and against referenced spec sub-paths.
 
 ## Claim ledger
 
 | # | Claim | Source line | Status (baseline) | Evidence | Status (post-fix) |
 |---|-------|-------------|-------------------|----------|-------------------|
-| 1 | Audience: helpers in `tests/testwrappers/` | header | ⚠️ Drift (**D-CVS-42**) | spec lives in `enum-v9`; `rg tests/testwrappers` over `enum-v9/` source = 0 hits | ✅ Match — added consumer-coverage callout |
+| 1 | Audience: helpers in `tests/testwrappers/` | header | ⚠️ Drift (**D-CVS-42**) | spec lives in `enum-v10`; `rg tests/testwrappers` over `enum-v10/` source = 0 hits | ✅ Match — added consumer-coverage callout |
 | 2 | Cross-ref `13-testing-patterns.md` exists | line 7 | ✅ Match | present | ✅ Match |
 | 3 | "`tests/integratedtests/` — One Folder per Source Package" | §1 line 11 | ⚠️ Drift (**D-CVS-39**, 7th occurrence) | folder doesn't exist; correct upstream path is `tests/creationtests/` | ✅ Match — §1 retitled "**upstream `core-v9`**", path corrected, scope warning added |
 | 4 | 50+ subfolders listed (`argstests/`, `anycmptests/`, …) | §1 lines 14-31 | ❓ Unverifiable | **Cycle 86 AB:** `ls /tmp/core-v9-upstream/tests/integratedtests/` = **92 entries**, all spec-listed subfolders (`argstests/`, `anycmptests/`, `bytetypetests/`, …) present | ✅ Match |
 | 5 | `GetAssert_*_test.go` at top of `integratedtests/` | §1 line 31 | ⚠️ Drift (subsumed by D-CVS-39) | path → `tests/creationtests/` | ⚠️ **Regression — see D-CVS-64**: upstream `tests/integratedtests/GetAssert_*_test.go` actually exists (13 files); prior "fix" wrong for upstream, only correct for `enum-v5` |
-| 6 | Naming rule: folder = source-pkg + `tests`; pkg name = same as folder; `_test.go` runners only; `_testcases.go` no `import "testing"`; one `NilReceiver_test.go` per package | §1 lines 36-40 | ❓ Unverifiable (`enum-v9` has no per-pkg dirs); applies to upstream | **Cycle 86 AB:** sampled `argstests/` — `Args_Core_test.go`, `Extended_testcases.go`, `Dynamic_NilReceiver_test.go` confirm convention; `rg -l NilReceiver_test` finds matches in 5+ pkgs | ✅ Match (upstream) |
+| 6 | Naming rule: folder = source-pkg + `tests`; pkg name = same as folder; `_test.go` runners only; `_testcases.go` no `import "testing"`; one `NilReceiver_test.go` per package | §1 lines 36-40 | ❓ Unverifiable (`enum-v10` has no per-pkg dirs); applies to upstream | **Cycle 86 AB:** sampled `argstests/` — `Args_Core_test.go`, `Extended_testcases.go`, `Dynamic_NilReceiver_test.go` confirm convention; `rg -l NilReceiver_test` finds matches in 5+ pkgs | ✅ Match (upstream) |
 | 7 | Cross-ref `/spec/06-testing-guidelines/01-folder-structure.md` exists | §1 line 42 | ✅ Match | present | ✅ Match |
 | 8 | Cross-ref `/spec/02-app-issues/04-testwrappers-public-surface.md` exists | §2 line 50 | ✅ Match | present | ✅ Match |
 | 9 | `stringstestwrapper.StringsTestWrapper` API: `Arrange()/Expected() []string` | §2.1 lines 60-67 | ❓ Unverifiable | **Cycle 86 AB:** `tests/testwrappers/stringstestwrapper/StringsTestWrapper.go:39` `func (it StringsTestWrapper) Arrange() []string` and `:44` `Expected() []string` | ✅ Match |
@@ -41,16 +41,16 @@ Read end-to-end, extracted every checkable claim, then verified each against `en
 
 ### D-CVS-39 — `tests/integratedtests/` per-package layout in §14 (7th occurrence)
 - §1 prescribed `tests/integratedtests/` as the canonical layout with 16+ subfolder examples — folder doesn't exist; correct upstream path is `tests/creationtests/`.
-- Fix: §1 retitled "**`tests/creationtests/` *(upstream)* — One Folder per Source Package**"; scope warning added pointing `enum-v9` readers at §13's §6.1; tree diagram updated; cross-link to all six prior occurrences (C-CVS-01 / D-CVS-17 / D-CVS-26 / D-CVS-27 / D-CVS-32 / D-CVS-36).
+- Fix: §1 retitled "**`tests/creationtests/` *(upstream)* — One Folder per Source Package**"; scope warning added pointing `enum-v10` readers at §13's §6.1; tree diagram updated; cross-link to all six prior occurrences (C-CVS-01 / D-CVS-17 / D-CVS-26 / D-CVS-27 / D-CVS-32 / D-CVS-36).
 
 ### D-CVS-40 — `tests/integratedtests/widgettests/` walkthrough example (8th occurrence)
-- §5 line 175 worked-example folder path corrected to `tests/creationtests/widgettests/` with an inline `enum-v9`-specific redirect ("register the enum in `tests/creationtests/allBasicEnumsCollection.go` instead").
+- §5 line 175 worked-example folder path corrected to `tests/creationtests/widgettests/` with an inline `enum-v10`-specific redirect ("register the enum in `tests/creationtests/allBasicEnumsCollection.go` instead").
 
 ### D-CVS-41 — GetAssert observation source path (9th occurrence)
 - §3 stability note rewritten to cite upstream `tests/creationtests/GetAssert_*_test.go`.
 
 ### D-CVS-42 — Spec lacks consumer-coverage callout (NEW, mirrors D-CVS-38)
-- Same pattern as cycle 11's D-CVS-38: every wrapper, helper, and layout described is upstream-only for `enum-v9`. Added explicit callout naming `tests/testwrappers/`, `coretests.GetAssert`, `coretestcases.CaseV1`, `StringsTestWrapper` and pointing `enum-v9` readers at §13 §6.1.
+- Same pattern as cycle 11's D-CVS-38: every wrapper, helper, and layout described is upstream-only for `enum-v10`. Added explicit callout naming `tests/testwrappers/`, `coretests.GetAssert`, `coretestcases.CaseV1`, `StringsTestWrapper` and pointing `enum-v10` readers at §13 §6.1.
 
 ### Collateral fixes — `01-package-map.md` §8 + `02-design-philosophy.md` line 183
 - Cycle 11 declared `spec/01-app/` clean of `integratedtests` references after fixing D-CVS-36, but a re-sweep this cycle found 7 more hits (5 in `01-package-map.md` §8, 1 in `02-design-philosophy.md` line 183, 1 latent in `14-…` outside §1). All fixed in this cycle as in-scope collateral. Sweep now genuinely clean: `rg -n 'tests/integratedtests' spec/01-app/` returns only **intentional anti-pattern callouts** in `05-enum-system.md` line 417 (a "do NOT do this" entry that must keep the wrong path) and the new D-CVS-39/D-CVS-42 references in `13-…` and `14-…` themselves.

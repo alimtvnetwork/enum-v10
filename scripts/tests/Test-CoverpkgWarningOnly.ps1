@@ -32,17 +32,17 @@ function Assert-Eq {
 # 1. Pure warnings stream — the canonical false-positive that bombed
 #    licensetype / onofftype / rootcmdnames in Cycle 51.
 $warnOnly = @(
-    'warning: no packages being tested depend on matches for pattern github.com/alimtvnetwork/enum-v9/...',
-    'warning: no packages being tested depend on matches for pattern github.com/alimtvnetwork/enum-v9/...'
+    'warning: no packages being tested depend on matches for pattern github.com/alimtvnetwork/enum-v10/...',
+    'warning: no packages being tested depend on matches for pattern github.com/alimtvnetwork/enum-v10/...'
 )
 Assert-Eq 'pure-warnings' $true $warnOnly
 
 # 2. Warnings interleaved with PASS / "ok " / blank lines — still warnings-only.
 $warnWithNoise = @(
     '',
-    'warning: no packages being tested depend on matches for pattern github.com/alimtvnetwork/enum-v9/...',
+    'warning: no packages being tested depend on matches for pattern github.com/alimtvnetwork/enum-v10/...',
     'PASS',
-    'ok  	github.com/alimtvnetwork/enum-v9/foo	0.123s',
+    'ok  	github.com/alimtvnetwork/enum-v10/foo	0.123s',
     ''
 )
 Assert-Eq 'warnings+pass+ok+blank' $true $warnWithNoise
@@ -50,8 +50,8 @@ Assert-Eq 'warnings+pass+ok+blank' $true $warnWithNoise
 # 3. Warnings + a real "FAIL pkg [build failed]" marker — tolerated by
 #    the helper as expected (the marker is metadata, not a diagnostic).
 $warnWithBuildFailedMarker = @(
-    'warning: no packages being tested depend on matches for pattern github.com/alimtvnetwork/enum-v9/...',
-    'FAIL	github.com/alimtvnetwork/enum-v9/brackets	[build failed]'
+    'warning: no packages being tested depend on matches for pattern github.com/alimtvnetwork/enum-v10/...',
+    'FAIL	github.com/alimtvnetwork/enum-v10/brackets	[build failed]'
 )
 Assert-Eq 'warnings+build-failed-marker' $true $warnWithBuildFailedMarker
 
@@ -62,7 +62,7 @@ Assert-Eq 'null-input'  $false $null
 # 5. Real compile error mixed with warnings — MUST return false so the
 #    error is surfaced.
 $realError = @(
-    'warning: no packages being tested depend on matches for pattern github.com/alimtvnetwork/enum-v9/...',
+    'warning: no packages being tested depend on matches for pattern github.com/alimtvnetwork/enum-v10/...',
     './foo.go:12:3: undefined: bar'
 )
 Assert-Eq 'real-compile-error' $false $realError
@@ -70,7 +70,7 @@ Assert-Eq 'real-compile-error' $false $realError
 # 6. Real test failure — MUST return false (this is the regression we're
 #    locking: the helper must never swallow a genuine FAIL line).
 $realFail = @(
-    'warning: no packages being tested depend on matches for pattern github.com/alimtvnetwork/enum-v9/...',
+    'warning: no packages being tested depend on matches for pattern github.com/alimtvnetwork/enum-v10/...',
     '--- FAIL: TestFoo (0.00s)',
     '    foo_test.go:42: expected 1 got 2',
     'FAIL'
@@ -79,12 +79,12 @@ Assert-Eq 'real-test-failure' $false $realFail
 
 # 7. Only PASS/ok markers, no warnings — must be false (no warning seen,
 #    so the helper has nothing to suppress).
-$pkgPassOnly = @('PASS', 'ok  	github.com/alimtvnetwork/enum-v9/foo	0.123s')
+$pkgPassOnly = @('PASS', 'ok  	github.com/alimtvnetwork/enum-v10/foo	0.123s')
 Assert-Eq 'pass-without-warnings' $false $pkgPassOnly
 
 # 8. CRLF input — `\r` on line endings must not throw the matcher off.
 $crlf = @(
-    "warning: no packages being tested depend on matches for pattern github.com/alimtvnetwork/enum-v9/...`r",
+    "warning: no packages being tested depend on matches for pattern github.com/alimtvnetwork/enum-v10/...`r",
     "PASS`r"
 )
 Assert-Eq 'crlf-line-endings' $true $crlf

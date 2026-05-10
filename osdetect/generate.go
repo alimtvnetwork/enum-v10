@@ -14,9 +14,9 @@ import (
 	"github.com/alimtvnetwork/core-v9/filemode"
 	"github.com/alimtvnetwork/core-v9/osconsts"
 	"github.com/alimtvnetwork/core-v9/ostype"
-	"github.com/alimtvnetwork/enum-v9/linuxvendortype"
-	"github.com/alimtvnetwork/enum-v9/osarchs"
-	"github.com/alimtvnetwork/enum-v9/strtype"
+	"github.com/alimtvnetwork/enum-v10/linuxvendortype"
+	"github.com/alimtvnetwork/enum-v10/osarchs"
+	"github.com/alimtvnetwork/enum-v10/strtype"
 )
 
 type generate struct{}
@@ -207,7 +207,7 @@ func (it generate) macOsOperatingSystemDetail() (*OperatingSystemDetail, error) 
 //	Generates Operating System Details for Windows
 //
 // References:
-//   - Our issue : https://github.com/alimtvnetwork/enum-v9/-/issues/4
+//   - Our issue : https://github.com/alimtvnetwork/enum-v10/-/issues/4
 func (it generate) windowsOperatingSystemDetail() (*OperatingSystemDetail, error) {
 	sysDetailGetter, err := getWinSysDetail()
 	

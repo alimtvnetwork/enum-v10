@@ -5,7 +5,7 @@
 > guidelines, coverage push protocols, and the run.ps1 architecture — all with generic examples
 > that apply to any Go module.
 
-> **Consumer-coverage note (`enum-v9`)** — every reference below to `tests/integratedtests/<pkg>tests/`, the per-package directory tree, and example package names (`pkgtests`, `corejsontests`, etc.) describes the **upstream `core-v9`** convention. `enum-v9` itself uses a single shared `tests/creationtests/` package (Goconvey-based registry over `EnumTestWrapper`) — see [`/spec/01-app/13-testing-patterns.md` §6.1](../01-app/13-testing-patterns.md#61-enum-v9-specific-layout) and [`/spec/01-app/14-tests-folder-walkthrough.md`](../01-app/14-tests-folder-walkthrough.md). The `run.ps1` implementation is layout-agnostic (reads from disk via `go list ./tests/...`) and works on either name without modification.
+> **Consumer-coverage note (`enum-v10`)** — every reference below to `tests/integratedtests/<pkg>tests/`, the per-package directory tree, and example package names (`pkgtests`, `corejsontests`, etc.) describes the **upstream `core-v9`** convention. `enum-v10` itself uses a single shared `tests/creationtests/` package (Goconvey-based registry over `EnumTestWrapper`) — see [`/spec/01-app/13-testing-patterns.md` §6.1](../01-app/13-testing-patterns.md#61-enum-v10-specific-layout) and [`/spec/01-app/14-tests-folder-walkthrough.md`](../01-app/14-tests-folder-walkthrough.md). The `run.ps1` implementation is layout-agnostic (reads from disk via `go list ./tests/...`) and works on either name without modification.
 
 ---
 

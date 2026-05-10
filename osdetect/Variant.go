@@ -3,7 +3,7 @@ package osdetect
 import (
 	"github.com/alimtvnetwork/core-v9/coredata/corejson"
 	"github.com/alimtvnetwork/core-v9/coreinterface/enuminf"
-	"github.com/alimtvnetwork/enum-v9/linuxvendortype"
+	"github.com/alimtvnetwork/enum-v10/linuxvendortype"
 )
 
 type Variant byte

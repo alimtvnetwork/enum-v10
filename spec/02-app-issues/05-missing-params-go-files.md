@@ -4,7 +4,7 @@
 > **Severity**: low
 > **Resolved**: 2026-04-23 — adopted proposed rule and added it to `spec/06-testing-guidelines/03-args-reference.md` §"`params.go` convention" (see edit below).
 
-> **Scope note (`enum-v9`, added Cycle 18)**: `tests/integratedtests/` and `errcoretests/` cited below are **upstream `core-v9`** package names. `enum-v9` uses a single shared `tests/creationtests/` package with shared `vars.go` (no per-package `params.go`), so the "grandfathered, no back-fill" rule applies vacuously here. The `params.go` convention itself remains relevant only for upstream consumers. Historical resolution text is preserved verbatim below.
+> **Scope note (`enum-v10`, added Cycle 18)**: `tests/integratedtests/` and `errcoretests/` cited below are **upstream `core-v9`** package names. `enum-v10` uses a single shared `tests/creationtests/` package with shared `vars.go` (no per-package `params.go`), so the "grandfathered, no back-fill" rule applies vacuously here. The `params.go` convention itself remains relevant only for upstream consumers. Historical resolution text is preserved verbatim below.
 
 ## Decision
 

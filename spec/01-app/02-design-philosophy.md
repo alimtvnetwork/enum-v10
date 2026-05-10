@@ -180,7 +180,7 @@ These follow from the pillars above but are worth calling out:
 
 1. **Errors are values, never panics.** Use `errcore` to construct rich errors. See [`04-error-system.md`](./04-error-system.md).
 2. **No package-level mutable state.** `var` declarations must be either constants-in-disguise (the `New` factory, the `Serialize` namespace) or backed by `sync.Once` / `mutexbykey`.
-3. **Test packages mirror production packages** *(upstream `core-v9`)*. A package `foo/` has tests at `tests/creationtests/footests/`. See [`/spec/06-testing-guidelines/01-folder-structure.md`](../06-testing-guidelines/01-folder-structure.md). In `enum-v9` (this module) all enum tests instead live in the shared `tests/creationtests/` registry — see [`13-testing-patterns.md` §6.1](./13-testing-patterns.md#61-enum-v9-specific-layout).
+3. **Test packages mirror production packages** *(upstream `core-v9`)*. A package `foo/` has tests at `tests/creationtests/footests/`. See [`/spec/06-testing-guidelines/01-folder-structure.md`](../06-testing-guidelines/01-folder-structure.md). In `enum-v10` (this module) all enum tests instead live in the shared `tests/creationtests/` registry — see [`13-testing-patterns.md` §6.1](./13-testing-patterns.md#61-enum-v10-specific-layout).
 4. **Internal packages stay internal.** Code under `internal/` can be refactored without bumping a major version.
 
 ---

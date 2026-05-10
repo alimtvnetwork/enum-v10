@@ -6,7 +6,7 @@ import (
 
 	"github.com/alimtvnetwork/core-v9/constants"
 	"github.com/alimtvnetwork/core-v9/corecsv"
-	"github.com/alimtvnetwork/enum-v9/pathpatterntype"
+	"github.com/alimtvnetwork/enum-v10/pathpatterntype"
 )
 
 func generatePathPatternTestCases() {

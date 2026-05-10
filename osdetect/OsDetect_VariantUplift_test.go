@@ -3,7 +3,7 @@ package osdetect_test
 import (
 	"testing"
 
-	"github.com/alimtvnetwork/enum-v9/osdetect"
+	"github.com/alimtvnetwork/enum-v10/osdetect"
 )
 
 // AO pass-3 uplift: cover trivial accessors and JSON binders on Variant.

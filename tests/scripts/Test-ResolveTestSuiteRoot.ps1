@@ -27,7 +27,7 @@ $r4 = Resolve-TestSuiteRoot -ProjectRoot $tmpLegacy
 if ($r4 -ne 'integratedtests') { throw "Test4 FAIL: expected 'integratedtests', got '$r4'" }
 Write-Host "Test 4 PASS — legacy-only layout → $r4"
 
-# Test 5: real enum-v9 repo → creationtests
+# Test 5: real enum-v10 repo → creationtests
 $r5 = Resolve-TestSuiteRoot -ProjectRoot (Get-Location).Path
 if ($r5 -ne 'creationtests') { throw "Test5 FAIL: expected 'creationtests' for live repo, got '$r5'" }
 Write-Host "Test 5 PASS — live repo resolves → $r5"

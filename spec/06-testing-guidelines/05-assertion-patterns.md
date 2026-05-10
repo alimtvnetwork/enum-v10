@@ -458,7 +458,7 @@ and then call `ShouldBe` directly.
 
 ## Sub-Pattern: GoConvey-Only Diff Assertion
 
-> **Scope:** Companion to the [GoConvey-Only sub-pattern in §02](./02-test-case-types.md#sub-pattern-goconvey-only-local-wrapper). Use when a downstream package (e.g. `enum-v9`) opts out of `coretests` entirely.
+> **Scope:** Companion to the [GoConvey-Only sub-pattern in §02](./02-test-case-types.md#sub-pattern-goconvey-only-local-wrapper). Use when a downstream package (e.g. `enum-v10`) opts out of `coretests` entirely.
 
 The GoConvey-only equivalent of `ShouldBeEqualMap` is the **diff-based assertion**:
 
@@ -485,4 +485,4 @@ So(diff, ShouldBeEmpty)
 | `So(value, ShouldBeTrue)` / `ShouldBeFalse` | Boolean invariants |
 | `So(diff, ShouldBeEmpty)` | Diff-based map/struct equality (above) |
 
-**Worked example:** `github.com/alimtvnetwork/enum-v9/tests/creationtests/AllEnums_ContractsTesting_test.go`.
+**Worked example:** `github.com/alimtvnetwork/enum-v10/tests/creationtests/AllEnums_ContractsTesting_test.go`.

@@ -3,10 +3,10 @@ package osdetect_test
 import (
 	"testing"
 
-	"github.com/alimtvnetwork/enum-v9/inttype"
-	"github.com/alimtvnetwork/enum-v9/osarchs"
-	"github.com/alimtvnetwork/enum-v9/osdetect"
-	"github.com/alimtvnetwork/enum-v9/strtype"
+	"github.com/alimtvnetwork/enum-v10/inttype"
+	"github.com/alimtvnetwork/enum-v10/osarchs"
+	"github.com/alimtvnetwork/enum-v10/osdetect"
+	"github.com/alimtvnetwork/enum-v10/strtype"
 )
 
 // AL2-08 bespoke coverage for osdetect — exercises the platform-guarded

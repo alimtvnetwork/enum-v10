@@ -1,6 +1,6 @@
 name: Release
 
-# Library release pipeline for enum-v9.
+# Library release pipeline for enum-v10.
 # Triggers on `release/**` branches and `v*` tags.
 # Produces source archives + checksums + a GitHub Release with extracted changelog.
 #
@@ -80,8 +80,8 @@ jobs:
           # Strip CI/dev artifacts that should not appear in release archives.
           tar --exclude='./.git' --exclude='./node_modules' --exclude='./dist' \
               --exclude='./data' --exclude='./tmp' \
-              -czf "dist/enum-v9-${VERSION}-source.tar.gz" .
-          (cd .. && zip -qr "$GITHUB_WORKSPACE/dist/enum-v9-${VERSION}-source.zip" \
+              -czf "dist/enum-v10-${VERSION}-source.tar.gz" .
+          (cd .. && zip -qr "$GITHUB_WORKSPACE/dist/enum-v10-${VERSION}-source.zip" \
               "$(basename "$GITHUB_WORKSPACE")" \
               -x "*/.git/*" "*/node_modules/*" "*/dist/*" "*/data/*" "*/tmp/*")
           (cd dist && sha256sum -- * > checksums.txt)
@@ -136,12 +136,12 @@ jobs:
             echo "| Commit  | \`${GITHUB_SHA:0:10}\` |"
             echo "| Ref     | \`${GITHUB_REF}\` |"
             echo "| Build Date | $(date -u '+%Y-%m-%d %H:%M:%S UTC') |"
-            echo "| Module | \`github.com/alimtvnetwork/enum-v9\` |"
+            echo "| Module | \`github.com/alimtvnetwork/enum-v10\` |"
             echo ""
             echo "### Install"
             echo ""
             echo '```bash'
-            echo "go get github.com/alimtvnetwork/enum-v9@${VERSION}"
+            echo "go get github.com/alimtvnetwork/enum-v10@${VERSION}"
             echo '```'
             echo ""
             echo "### Checksums (SHA256)"
@@ -156,7 +156,7 @@ jobs:
         uses: softprops/action-gh-release@v2
         with:
           tag_name: ${{ steps.version.outputs.version }}
-          name: "enum-v9 ${{ steps.version.outputs.version }}"
+          name: "enum-v10 ${{ steps.version.outputs.version }}"
           body_path: ${{ steps.body.outputs.path }}
           files: dist/*
           draft: false
