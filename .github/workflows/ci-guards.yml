@@ -120,7 +120,7 @@ jobs:
 
       - name: Restore lint baseline
         id: baseline-cache
-        uses: actions/cache/restore@v4
+        uses: actions/cache/restore@v5
         with:
           path: .ci-cache/lint-baseline.json
           key: lint-baseline-v2.5.0-refs/heads/main
@@ -155,7 +155,7 @@ jobs:
 
       - name: Save lint baseline
         if: success() && github.ref == 'refs/heads/main' && github.event_name == 'push'
-        uses: actions/cache/save@v4
+        uses: actions/cache/save@v5
         with:
           path: .ci-cache/lint-baseline.json
           key: lint-baseline-v2.5.0-refs/heads/main
