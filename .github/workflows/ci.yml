@@ -46,7 +46,7 @@ jobs:
       - uses: actions/checkout@v4
         if: needs.sha-check.outputs.already-built != 'true'
 
-      - uses: actions/setup-go@v5
+      - uses: actions/setup-go@v6
         if: needs.sha-check.outputs.already-built != 'true'
         with:
           go-version-file: go.mod
@@ -94,7 +94,7 @@ jobs:
       - uses: actions/checkout@v4
         if: needs.sha-check.outputs.already-built != 'true'
 
-      - uses: actions/setup-go@v5
+      - uses: actions/setup-go@v6
         if: needs.sha-check.outputs.already-built != 'true'
         with:
           go-version-file: go.mod
@@ -137,7 +137,7 @@ jobs:
       - uses: actions/checkout@v4
         if: needs.sha-check.outputs.already-built != 'true'
 
-      - uses: actions/setup-go@v5
+      - uses: actions/setup-go@v6
         if: needs.sha-check.outputs.already-built != 'true'
         with:
           go-version-file: go.mod
@@ -194,7 +194,7 @@ jobs:
       - uses: actions/checkout@v4
         if: needs.sha-check.outputs.already-built != 'true'
 
-      - uses: actions/setup-go@v5
+      - uses: actions/setup-go@v6
         if: needs.sha-check.outputs.already-built != 'true'
         with:
           go-version-file: go.mod
@@ -303,7 +303,7 @@ jobs:
       - uses: actions/checkout@v4
         if: needs.sha-check.outputs.already-built != 'true'
 
-      - uses: actions/setup-go@v5
+      - uses: actions/setup-go@v6
         if: needs.sha-check.outputs.already-built != 'true'
         with:
           go-version-file: go.mod
