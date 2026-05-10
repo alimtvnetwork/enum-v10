@@ -83,4 +83,5 @@ if (Test-Path (Join-Path $real 'coredata/coregeneric')) {
     Write-Host "  ⊘ Case 6 skipped (no /tmp/core-v9-upstream)" -ForegroundColor Yellow
 }
 
+if ($failed -gt 0) { Write-Host "`n$failed test(s) failed" -ForegroundColor Red; exit 1 }
 Write-Host "`nAll tests passed" -ForegroundColor Green
