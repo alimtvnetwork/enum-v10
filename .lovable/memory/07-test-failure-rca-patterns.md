@@ -54,3 +54,15 @@ Manifested as: `licensetype` 58.9%, `onofftype` 32.1%, `rootcmdnames` 58.1% all 
 ---
 
 (prior patterns 1–7 retained — see git history)
+
+---
+
+## Audit Log
+
+### 2026-05-10 (Cycle 52, Task AT) — all patterns ✅ still mitigated
+
+- **P8 (`-coverpkg` warning-only false-positive):** `Test-IsCoverpkgWarningOnlyOutput` exported from `scripts/Utilities.psm1:118` and wired into the four call sites that previously misclassified warnings as failures (`CoverageRunner.psm1:217,236`; `CoverageCompileCheck.psm1:200`). Mitigation intact.
+- **P9 (`Stringer` infinite recursion via `converters.AnyTo.ValueString(self)`):** Detection sweep `rg "converters\.AnyTo\.ValueString" --type go -g '!*_test.go'` returns **zero hits**. The recursion bombs that motivated this pattern have not regressed.
+- **P10 (Brace-unaware Go declaration scanner):** `scripts/ci/check-collisions.py` retains `brace_depth` accounting (line 103) with `at_top = (brace_depth == 0)` gate (line 147) and per-branch `brace_depth += opens - closes` updates (lines 155, 160, 165, 176). Mitigation intact.
+
+No new patterns surfaced this cycle. Index entry in `mem://index.md` says "4 patterns" — that referred to the original Cycles 57/60/63 set (P1–P4). The doc has since rotated to the 3 most recent active patterns (P8–P10) with P1–P7 retained in git history. Index wording left unchanged for historical accuracy.
