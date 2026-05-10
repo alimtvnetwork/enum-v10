@@ -6,7 +6,7 @@ import (
 	"github.com/alimtvnetwork/core-v9/coredata/coredynamic"
 	"github.com/alimtvnetwork/core-v9/coredata/corejson"
 	"github.com/alimtvnetwork/core-v9/ostype"
-	"github.com/alimtvnetwork/enum-v8/osarchs"
+	"github.com/alimtvnetwork/enum-v9/osarchs"
 )
 
 var (

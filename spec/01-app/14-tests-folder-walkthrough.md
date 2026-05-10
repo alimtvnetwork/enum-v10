@@ -4,7 +4,7 @@
 > **Status**: filled in audit Step 4 (2026-04-23, Asia/Kuala_Lumpur).
 > **Audience**: AI agents and contributors needing the **physical** layout of `tests/` and the public surface of in-tree test helpers (`coretests.GetAssert`, `tests/testwrappers/*`).
 
-> **Consumer-coverage note (`enum-v8`)**: every layout, wrapper, and helper described on this page (`tests/integratedtests/`, `tests/testwrappers/`, `coretests.GetAssert`, `coretestcases.CaseV1`, `StringsTestWrapper`, etc.) refers to **upstream `core-v9`**. `enum-v8` does not consume any of them — `rg tests/testwrappers` and `rg coretests.GetAssert` over `enum-v8` source both return zero hits. This module's tests live at `tests/creationtests/` (one shared package, Goconvey-based registry over `EnumTestWrapper`); see [`13-testing-patterns.md` §6.1](./13-testing-patterns.md#61-enum-v8-specific-layout) for that file-by-file layout. Treat §§1–5 below as the authoritative reference for upstream `core-v9`.
+> **Consumer-coverage note (`enum-v9`)**: every layout, wrapper, and helper described on this page (`tests/integratedtests/`, `tests/testwrappers/`, `coretests.GetAssert`, `coretestcases.CaseV1`, `StringsTestWrapper`, etc.) refers to **upstream `core-v9`**. `enum-v9` does not consume any of them — `rg tests/testwrappers` and `rg coretests.GetAssert` over `enum-v9` source both return zero hits. This module's tests live at `tests/creationtests/` (one shared package, Goconvey-based registry over `EnumTestWrapper`); see [`13-testing-patterns.md` §6.1](./13-testing-patterns.md#61-enum-v9-specific-layout) for that file-by-file layout. Treat §§1–5 below as the authoritative reference for upstream `core-v9`.
 
 For the **conceptual** style matrix (when to use `CaseV1` vs `BaseTestCase` etc.), see [`13-testing-patterns.md`](./13-testing-patterns.md).
 
@@ -12,7 +12,7 @@ For the **conceptual** style matrix (when to use `CaseV1` vs `BaseTestCase` etc.
 
 ## 1. `tests/creationtests/` *(upstream)* — One Folder per Source Package
 
-> ⚠️ **Scope:** the layout below applies to **upstream `core-v9`**. `enum-v8` uses a single shared `tests/creationtests/` package — see [`13-testing-patterns.md` §6.1](./13-testing-patterns.md#61-enum-v8-specific-layout). Prior fixes that removed stale `tests/integratedtests/` references from the spec corpus: C-CVS-01 / D-CVS-17 / D-CVS-26 / D-CVS-27 / D-CVS-32 / D-CVS-36 — this section is the 7th occurrence (D-CVS-39).
+> ⚠️ **Scope:** the layout below applies to **upstream `core-v9`**. `enum-v9` uses a single shared `tests/creationtests/` package — see [`13-testing-patterns.md` §6.1](./13-testing-patterns.md#61-enum-v9-specific-layout). Prior fixes that removed stale `tests/integratedtests/` references from the spec corpus: C-CVS-01 / D-CVS-17 / D-CVS-26 / D-CVS-27 / D-CVS-32 / D-CVS-36 — this section is the 7th occurrence (D-CVS-39).
 
 ```
 tests/creationtests/
@@ -176,7 +176,7 @@ This is **idiomatic** and **safe** — both types share the same memory layout. 
 Suppose you are adding a new public package `widget/` with three pointer-receiver methods on `*Widget` and one package-level function `BuildWidget`. The minimum test package looks like:
 
 ```
-tests/creationtests/widgettests/    # ← upstream core-v9 layout; in enum-v8 register the enum in tests/creationtests/allBasicEnumsCollection.go instead
+tests/creationtests/widgettests/    # ← upstream core-v9 layout; in enum-v9 register the enum in tests/creationtests/allBasicEnumsCollection.go instead
 ├── params.go                          # args.Map key constants (Style A)
 ├── BuildWidget_testcases.go           # Style A cases for BuildWidget
 ├── BuildWidget_test.go                # Style A runner

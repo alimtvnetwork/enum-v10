@@ -239,7 +239,7 @@ The toolchain was extracted from `core-v9` but is **not coupled** to it. Specifi
 | Module path hard-coded | ❌ No — read from `go.mod` via `go list -m` |
 | Package list hard-coded | ❌ No — discovered via `go list ./...` |
 | `coretests` framework required | ❌ No — toolchain only invokes `go test`, doesn't care which framework you use |
-| `tests/integratedtests/` mirror layout required | ❌ No — works with any test layout `go test ./...` accepts (e.g. `enum-v8` uses `tests/creationtests/`; upstream `core-v9` uses `tests/integratedtests/<pkg>tests/`) |
+| `tests/integratedtests/` mirror layout required | ❌ No — works with any test layout `go test ./...` accepts (e.g. `enum-v9` uses `tests/creationtests/`; upstream `core-v9` uses `tests/integratedtests/<pkg>tests/`) |
 | Specific Go version required | ⚠️ 1.21+ recommended for generics support in your code; toolchain itself is version-agnostic |
 | `args.Map` / `BaseTestCase` patterns required | ❌ No — those are `core-v9` test-style choices, completely independent of the runner |
 | Phase names must match `core-v9` | ⚪ No, but renaming requires updating `02-powershell-dashboard-ui.md` §12.1 in your fork |

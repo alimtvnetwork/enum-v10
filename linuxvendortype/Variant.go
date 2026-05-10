@@ -9,7 +9,7 @@ import (
 
 type Variant byte
 
-// github.com/alimtvnetwork/enum-v8/-/issues/4
+// github.com/alimtvnetwork/enum-v9/-/issues/4
 // https://t.ly/wSF1,
 // https://github.com/zcalusic/sysinfo : https://t.ly/D5U3
 const (

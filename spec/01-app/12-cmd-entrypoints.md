@@ -18,7 +18,7 @@
 
 ## 1. `cmd/` Policy — Library-First, Smoke-Test Allowed
 
-Both `core-v9` (the upstream library this module depends on) and `enum-v8` (this module) are **pure Go enum/primitive libraries**. Their job is to provide reusable types that downstream applications import — not to ship binaries.
+Both `core-v9` (the upstream library this module depends on) and `enum-v9` (this module) are **pure Go enum/primitive libraries**. Their job is to provide reusable types that downstream applications import — not to ship binaries.
 
 **Upstream `core-v9`** intentionally has:
 
@@ -26,7 +26,7 @@ Both `core-v9` (the upstream library this module depends on) and `enum-v8` (this
 - No `main` package.
 - No produced binary artefacts.
 
-**This module (`enum-v8`)** ships a single, narrowly-scoped exception: `cmd/main/main.go` (see [`/cmd/README.md`](../../cmd/README.md)). It exists purely as a developer **smoke-test harness** — invoked locally via `make` to compile to `bin/main` and exercise a handful of enums (`brackets`, `dbaction`, `instructiontype`, `osdetect`, `strtype`) end-to-end. It is **not** a shipped CLI, is not referenced by any consumer, and is not produced by CI release artefacts.
+**This module (`enum-v9`)** ships a single, narrowly-scoped exception: `cmd/main/main.go` (see [`/cmd/README.md`](../../cmd/README.md)). It exists purely as a developer **smoke-test harness** — invoked locally via `make` to compile to `bin/main` and exercise a handful of enums (`brackets`, `dbaction`, `instructiontype`, `osdetect`, `strtype`) end-to-end. It is **not** a shipped CLI, is not referenced by any consumer, and is not produced by CI release artefacts.
 
 Putting a real `main` package in either module would:
 

@@ -4,7 +4,7 @@
 **Auditor:** AI agent (Lovable)
 **Trigger:** Task **AA** Cycle 19 — last unaudited spec subdirectory.
 **Spec target:** `spec/05-failing-tests/` (25 files, 852 lines total)
-**Scope dimension:** provenance + frame-of-reference + status-currency. **Not** a per-claim AB audit (these are upstream post-mortems with zero `enum-v8` consumers).
+**Scope dimension:** provenance + frame-of-reference + status-currency. **Not** a per-claim AB audit (these are upstream post-mortems with zero `enum-v9` consumers).
 
 ---
 
@@ -38,7 +38,7 @@
 | 24-variant-onlysupportederr-subset.md | — | none | — | 0 |
 | 25-rangenameswithvaluesindexes-format.md | — | none | — | 0 |
 
-**Totals:** 25 files · 5 RESOLVED · 20 no-status · 14 files contain 16 `integratedtests/` references · 0 files reference any `enum-v8`-local package.
+**Totals:** 25 files · 5 RESOLVED · 20 no-status · 14 files contain 16 `integratedtests/` references · 0 files reference any `enum-v9`-local package.
 
 ---
 
@@ -53,7 +53,7 @@ $ ls /dev-server/{corepayload,corejson,coredynamic,corestr,errcore,corevalidator
 ls: cannot access ...: No such file or directory   # all 13
 ```
 
-✅ **Confirmed:** zero referenced packages exist inside `enum-v8`. All 25 documents describe upstream `core-v9` (or earlier) test infrastructure. The `tests/integratedtests/<pkg>tests/` paths are the upstream consumer layout, not this repository.
+✅ **Confirmed:** zero referenced packages exist inside `enum-v9`. All 25 documents describe upstream `core-v9` (or earlier) test infrastructure. The `tests/integratedtests/<pkg>tests/` paths are the upstream consumer layout, not this repository.
 
 ---
 
@@ -65,17 +65,17 @@ This is a deliberately advisory-only directory. Per Task **AH** policy (PI-002),
 
 ### 3.2 No contradiction findings spawned
 
-There is nothing inside `enum-v8` to contradict. Cross-references all point at upstream symbols, none of which are mirrored locally.
+There is nothing inside `enum-v9` to contradict. Cross-references all point at upstream symbols, none of which are mirrored locally.
 
 ### 3.3 Cleanup applied
 
 Added `spec/05-failing-tests/README.md` documenting:
-1. Scope = upstream `core-v9` post-mortems (not `enum-v8` action items).
+1. Scope = upstream `core-v9` post-mortems (not `enum-v9` action items).
 2. Status legend (5 RESOLVED, 20 historical).
 3. Frame-of-reference disclaimer for `tests/integratedtests/` paths.
 4. Audit-history pointer back to this cycle file.
 
-This README closes the long-standing gap where future AI cycles could mistake these files for active `enum-v8` issues.
+This README closes the long-standing gap where future AI cycles could mistake these files for active `enum-v9` issues.
 
 ---
 

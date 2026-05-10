@@ -54,14 +54,14 @@ errcore.UnMarshallingFailedType                // "Failed to unmarshal or deseri
 errcore.OutOfRangeType                         // "Out of range : given value, cannot process it."
 errcore.FailedToConvertType                    // "Failed to convert : input shape cannot be parsed."
 
-// Additional categories exercised by enum-v8 (see audit cycle 2):
+// Additional categories exercised by enum-v9 (see audit cycle 2):
 errcore.NotSupportedType                       // "Operation not supported on this variant."
 errcore.PathInvalidErrorType                   // "Path invalid: cannot resolve / open."
 errcore.FailedToExecuteType                    // "Execution failed."
 errcore.ComparatorShouldBeWithinRangeType      // "Comparator value out of allowed range."
 ```
 
-> The full enumeration (80+ values) lives in `errcore/RawErrorType.go` upstream. The list above shows the categories most often used by `enum-v8`; consult the upstream file for the exhaustive set.
+> The full enumeration (80+ values) lives in `errcore/RawErrorType.go` upstream. The list above shows the categories most often used by `enum-v9`; consult the upstream file for the exhaustive set.
 
 ### 1.2 Constructor Methods on `RawErrorType`
 

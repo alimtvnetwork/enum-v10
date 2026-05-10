@@ -2,7 +2,7 @@
 
 ## Description
 
-`enum-v8` source imports `github.com/alimtvnetwork/core-v9/...` but the upstream `core-v9` repository's own `go.mod` declared `module github.com/alimtvnetwork/core-v8`. A `replace` bridge in `enum-v8/go.mod` redirected resolution to the cached `core-v8` artifact, but Go 1.25 rejected this with `used for two different module paths`, and Go's `internal/` rule rejected any `enum-v8` consumer reaching into `core-v9/.../internal/...` because it saw the cached path as `core-v8`.
+`enum-v9` source imports `github.com/alimtvnetwork/core-v9/...` but the upstream `core-v9` repository's own `go.mod` declared `module github.com/alimtvnetwork/core-v8`. A `replace` bridge in `enum-v9/go.mod` redirected resolution to the cached `core-v8` artifact, but Go 1.25 rejected this with `used for two different module paths`, and Go's `internal/` rule rejected any `enum-v9` consumer reaching into `core-v9/.../internal/...` because it saw the cached path as `core-v8`.
 
 ## Root Cause
 
@@ -10,7 +10,7 @@ Upstream `core-v9` repo had not yet had its `go.mod` rewritten to `module github
 
 ## Solution
 
-Upstream `core-v9` repo was updated: `go.mod` now declares `module github.com/alimtvnetwork/core-v9` and was tagged `v1.5.8`. The `replace` directive in `enum-v8/go.mod` was removed. `go.mod` now carries a clean `require github.com/alimtvnetwork/core-v9 v1.5.8`.
+Upstream `core-v9` repo was updated: `go.mod` now declares `module github.com/alimtvnetwork/core-v9` and was tagged `v1.5.8`. The `replace` directive in `enum-v9/go.mod` was removed. `go.mod` now carries a clean `require github.com/alimtvnetwork/core-v9 v1.5.8`.
 
 ## Iteration Count
 

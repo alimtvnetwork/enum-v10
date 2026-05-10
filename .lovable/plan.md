@@ -1,4 +1,4 @@
-# Active Plan — enum-v8
+# Active Plan — enum-v9
 
 > Single source of truth for the project roadmap. Letter IDs are stable across sessions.
 > Last updated: 2026-05-06 (Cycle 19 — AB pass 1 done; AJ-01..03 spawned, blocked by `spec/01-app/` freeze).
@@ -19,7 +19,7 @@
 ### AM. Fix broken `core-v9` API calls (converter + coredynamic migration)
 
 - **Status:** ✅ Done for reported blocker — `tests/creationtests` compile check passes in sandbox
-- **Objective:** Update all `enum-v8` source files that use old `core-v8`-era function signatures (`converters.AnyToValueString`, `coredynamic.TypeName`, etc.) to the new struct-namespace API (`converters.AnyTo.ValueString`, `coredynamic.SafeTypeName`, etc.).
+- **Objective:** Update all `enum-v9` source files that use old `core-v8`-era function signatures (`converters.AnyToValueString`, `coredynamic.TypeName`, etc.) to the new struct-namespace API (`converters.AnyTo.ValueString`, `coredynamic.SafeTypeName`, etc.).
 - **Dependencies:** None for the reported `creationtests` compile blocker.
 - **Expected outputs:** All affected `.go` files updated, `go build ./...` passes.
 - **Acceptance criteria:** `go build ./...` succeeds with `core-v9 v1.5.8`.
@@ -31,7 +31,7 @@
 
 ### AA. Continue spec-audit cycles
 
-- **Status:** ✅ DONE (2026-05-07, Cycle 20, `spec-v0.55.0` / enum-v8 v0.70.0)
+- **Status:** ✅ DONE (2026-05-07, Cycle 20, `spec-v0.55.0` / enum-v9 v0.70.0)
 - **Result:** All 6 walk-through targets audited. Final cycle (20) verified `spec/00-llm-integration-guide.md` against upstream `core-v9 v1.5.8` — zero drift, zero D-CVS/C-CVS findings.
 - **Cycle plan (closed):**
 
@@ -63,7 +63,7 @@
 
 ### AC. Re-audit §07 and §09
 
-- **Status:** ✅ DONE (2026-05-10, Cycle 49, `spec-v0.57.0` / enum-v8 v1.26.0)
+- **Status:** ✅ DONE (2026-05-10, Cycle 49, `spec-v0.57.0` / enum-v9 v1.26.0)
 - **Result:** AC dimension applied to advisory carry-overs from Cycles 19/20/43/44. 3 ❓→✅ + 1 ❓→❌ NEW C-CVS-65 HIGH (`errcore.OverflowType.Fmt` fabricated → AJ-45) + 4 ❓ retained out-of-AC-scope (rows 99-107/119/130 → AJ-46 contract pass; row 172 → ⓘ advisory). AB+AC ❌ 53 → 54. **AC umbrella complete.**
 - **Spawned:** AJ-45 (purge fabricated symbol, freeze-blocked), AJ-46 (converter behavioural contract pass), S-002 (LOW wording tweak).
 

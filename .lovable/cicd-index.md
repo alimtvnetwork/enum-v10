@@ -5,7 +5,7 @@
 | # | File | Title | Status |
 |---|---|---|---|
 | 01 | [`cicd-issues/01-go-mod-rename-bridge.md`](./cicd-issues/01-go-mod-rename-bridge.md) | `core-v9` ⇄ `core-v8` `go.mod` rename bridge breaks Go 1.25 builds | ✅ Resolved — Task W done, bridge removed |
-| 02 | [`cicd-issues/02-internal-package-rule.md`](./cicd-issues/02-internal-package-rule.md) | Go's `internal/` rule rejects consumers under `enum-v8/...` due to declared module path mismatch | ✅ Resolved — root cause (#01) fixed |
+| 02 | [`cicd-issues/02-internal-package-rule.md`](./cicd-issues/02-internal-package-rule.md) | Go's `internal/` rule rejects consumers under `enum-v9/...` due to declared module path mismatch | ✅ Resolved — root cause (#01) fixed |
 | 03 | [`cicd-issues/03-pseudo-version-rejected.md`](./cicd-issues/03-pseudo-version-rejected.md) | Pseudo-version `v1.5.6-0.<date>-<sha>` rejected — needs non-existent `v1.5.5` predecessor tag | ✅ Documented; do not re-attempt |
 | 04 | [`cicd-issues/04-no-email-notifications.md`](./cicd-issues/04-no-email-notifications.md) | Constraint: never configure email-based CI notifications | 🚫 Permanent constraint |
 | 05 | [`cicd-issues/05-cross-repo-mirror-drift.md`](./cicd-issues/05-cross-repo-mirror-drift.md) | `cross-repo/core-v9/` can drift if main-repo CI changes aren't mirrored | 🔄 Procedural — handled per-change |

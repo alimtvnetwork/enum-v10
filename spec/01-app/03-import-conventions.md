@@ -70,7 +70,7 @@ import (
 )
 ```
 
-For the full inventory of public packages, see [`01-package-map.md`](./01-package-map.md). Not every consumer uses every package — `enum-v8`, for example, currently uses 8 of the 11 listed canonical imports.
+For the full inventory of public packages, see [`01-package-map.md`](./01-package-map.md). Not every consumer uses every package — `enum-v9`, for example, currently uses 8 of the 11 listed canonical imports.
 
 ### Root package usage
 
@@ -118,7 +118,7 @@ Test packages that live in **the same module** as an `internal/` package may imp
 import "github.com/alimtvnetwork/core-v9/internal/reflectinternal"
 ```
 
-> **Note (consumer repos like `enum-v8`):** This `internal/` access does **not** cross modules. A consumer (e.g. `enum-v8`) cannot import `core-v9/internal/...` because Go's `internal/` rule is enforced at module boundaries, not just package boundaries. Consumer-side tests should depend only on `core-v9`'s public API. See the upstream `core-v9` repo for examples of in-module `internal/` test imports.
+> **Note (consumer repos like `enum-v9`):** This `internal/` access does **not** cross modules. A consumer (e.g. `enum-v9`) cannot import `core-v9/internal/...` because Go's `internal/` rule is enforced at module boundaries, not just package boundaries. Consumer-side tests should depend only on `core-v9`'s public API. See the upstream `core-v9` repo for examples of in-module `internal/` test imports.
 
 > **Rule**: If you are tempted to add a re-export wrapper "to expose an internal helper", **don't**. Either move the helper to a public package, or accept that external consumers don't need it.
 
@@ -126,7 +126,7 @@ import "github.com/alimtvnetwork/core-v9/internal/reflectinternal"
 
 ## 4. Test-Package Imports (`*tests` Suffix)
 
-Test packages live under the repo's `tests/` directory in a sub-folder named after the test suite. In **`enum-v8`**, the layout is:
+Test packages live under the repo's `tests/` directory in a sub-folder named after the test suite. In **`enum-v9`**, the layout is:
 
 ```
 tests/

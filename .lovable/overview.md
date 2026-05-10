@@ -1,8 +1,8 @@
-# Project Overview — enum-v8
+# Project Overview — enum-v9
 
 ## Identity
 
-- **Module path:** `github.com/alimtvnetwork/enum-v8` (renamed from `enum-v1`)
+- **Module path:** `github.com/alimtvnetwork/enum-v9` (renamed from `enum-v1`)
 - **Type:** Go enum library with PowerShell + Python tooling
 - **Frontend:** A React/Vite shell exists but is incidental — all real work happens in Go packages, PowerShell scripts, and Python CI guards.
 
@@ -14,7 +14,7 @@
 
 ## Directories the AI must respect
 
-- `cross-repo/core-v9/` — mirror of a separate upstream repo. **Never** rename `core-v8` → `core-v9` here. **Never** rewrite `enum-v1` → `enum-v8` here.
+- `cross-repo/core-v9/` — mirror of a separate upstream repo. **Never** rename `core-v8` → `core-v9` here. **Never** rewrite `enum-v1` → `enum-v9` here.
 - `tests/creationtests/` — actual test layout. The string `tests/integratedtests/` in any spec file is **stale** (audit finding C-CVS-01).
 
 ## Hard prohibitions

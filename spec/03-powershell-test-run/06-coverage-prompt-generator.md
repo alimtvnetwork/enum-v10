@@ -68,7 +68,7 @@ data/prompts/
 
 Please improve the code coverage to 100% for these functions.
 Each function lists its current coverage and the specific uncovered lines.
-Write tests in tests/integratedtests/{pkg}tests/ (upstream `core-v9`) — or `tests/creationtests/` for `enum-v8` — using the AAA pattern with args.Map + ShouldBeEqual.
+Write tests in tests/integratedtests/{pkg}tests/ (upstream `core-v9`) — or `tests/creationtests/` for `enum-v9` — using the AAA pattern with args.Map + ShouldBeEqual.
 
 ─────────────────────────────────────────────────────────────
 

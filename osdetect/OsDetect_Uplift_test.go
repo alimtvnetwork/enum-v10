@@ -4,10 +4,10 @@ import (
 	"encoding/json"
 	"testing"
 
-	"github.com/alimtvnetwork/enum-v8/inttype"
-	"github.com/alimtvnetwork/enum-v8/osarchs"
-	"github.com/alimtvnetwork/enum-v8/osdetect"
-	"github.com/alimtvnetwork/enum-v8/strtype"
+	"github.com/alimtvnetwork/enum-v9/inttype"
+	"github.com/alimtvnetwork/enum-v9/osarchs"
+	"github.com/alimtvnetwork/enum-v9/osdetect"
+	"github.com/alimtvnetwork/enum-v9/strtype"
 )
 
 // AL2-08 follow-up uplift for osdetect using only `testing`. Targets
