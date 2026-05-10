@@ -16,6 +16,13 @@
 
 ## Open Suggestions
 
+### BC: CI lint guard — fail on new hardcoded `tests/integratedtests/` strings (NEW, surfaced 2026-05-10)
+
+- **Status:** ✅ DONE (v1.48.0).
+- **Source:** Locks Task BB. Without a static guard, future PRs can silently reintroduce hardcoded `tests/integratedtests/` paths in scripts/tools/CI, regressing the Core-memory rule and the S-114 + BB refactors.
+- **Done:** Added `scripts/ci/check-no-new-integratedtests.py` — scans `scripts/`, `tests/`, `osdetect/`, `.github/`, `Cmd/` for the token `integratedtests` across PowerShell/Go/YAML/Python/Markdown/JSON sources (skips `.git`, `node_modules`, `__pycache__`, and the always-out-of-scope `spec/` / `.lovable/` / `cross-repo/` / `.release/` trees). Per-file ALLOWLIST with occurrence baselines and one-line rationales for each of the 12 intentional callsites (CoverageRunner dual-root array, regex strippers in CoverageCompileCheck/ProfileMerger/SplitRecovery, Resolve-TestSuiteRoot helper itself, user-facing diagnostic strings in Help/PackageCoverage/PreCommitCheck/TestRunner, the smoke test for the legacy branch, plus the guard + its tests). Fails on (a) a NEW non-allowlisted file containing the token, or (b) an allowlisted file's count growing beyond baseline. Shrinkage is allowed (e.g. when BE removes the stale `CoverageReportHtml.psm1:55` string the baseline can be tightened in a follow-up). Self-tests at `scripts/ci/test_check_no_new_integratedtests.py` (7 unittest cases, picked up by the existing `python-tests` discovery: clean / new-file-fails / at-baseline / above-baseline-fails / shrinkage-passes / docs-cross-repo-ignored / live-repo-passes). Wired into `.github/workflows/ci-guards.yml` as new job `no-new-integratedtests` (depends on `python-tests`, runs the live check). Full suite now 81 tests, all green; live guard passes against HEAD.
+- **Acceptance:** ✅ Static guard runs on every PR. ✅ Self-tests cover the four key paths (new file / above baseline / below baseline / docs-ignored). ✅ Live HEAD passes. ✅ Allowlist documents WHY each callsite legitimately mentions the legacy layout, so reviewers can audit any future allowlist additions.
+
 ### BB: Finish S-114 — purge residual `tests/integratedtests` hardcodes (NEW, surfaced 2026-05-10)
 
 - **Status:** ✅ DONE (v1.47.0).
