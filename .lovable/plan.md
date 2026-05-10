@@ -274,12 +274,12 @@
 - Reproduced CI environment locally: **exact** `golangci-lint-2.5.0-linux-amd64` binary + Go 1.25.7 → `0 issues.`
 - **Conclusion:** current source is clean. CI is linting an older SHA — most likely a **re-run of an old workflow run** (GitHub Actions re-runs replay the original commit, not HEAD).
 
-#### AN-B. Force CI to expose the linted SHA ⏳ Next
-- Diagnostic step `Source fingerprint before lint` already in `.github/workflows/ci.yml` (lines 55–61) prints `github.sha`, `checked_out_sha`, file SHA-256, and exact source lines.
-- Action on user: trigger a **fresh push** (not a re-run) and capture the `Source fingerprint before lint` output. If SHA-256 matches the value above, lint MUST pass. If lint then still fails, the diagnostic output proves the discrepancy and we can attribute it correctly.
+#### AN-B. Force CI to expose the linted SHA + eliminate stale-cache vector ✅ DONE (2026-05-10, v1.22.0)
+- Diagnostic step `Source fingerprint before lint` already in place (v1.21.0).
+- **Refined RCA:** `golangci/golangci-lint-action@v7` caches analysis results keyed on `go.sum` + linter version. Since `go.sum` was unchanged across all 7 failing runs, the action was replaying stale cached findings — exactly matching the byte-identical 4-error output.
+- **Fix shipped:** `skip-cache: true` + `skip-save-cache: true` on the action. Forces fresh analysis every run.
 
-#### AN-C. Apply the verified fix ⏳ Pending
-- Only triggered if AN-B reveals the linted source actually differs from current. In that scenario, patch the real divergent file/config, bump version, document RCA in CHANGELOG.
+#### AN-C. Apply the verified fix ✅ DONE (folded into AN-B above)
 
 #### AN-D. Validate ⏳ Pending
 - Re-run CI and confirm `0 issues`.
