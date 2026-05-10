@@ -76,8 +76,6 @@ func TestServiceState_Uplift(t *testing.T) {
 	if err := json.Unmarshal(data, &got); err != nil || got != a {
 		t.Errorf("roundtrip: %v %v", got, err)
 	}
-	_ = a.Json()
-	_ = a.JsonPtr()
 	if _, err := a.UnmarshallEnumToValue(data); err != nil {
 		t.Errorf("UnmarshallEnumToValue: %v", err)
 	}
