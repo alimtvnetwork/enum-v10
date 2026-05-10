@@ -201,7 +201,7 @@ jobs:
 
       - name: Download test artifacts
         if: needs.sha-check.outputs.already-built != 'true'
-        uses: actions/download-artifact@v4
+        uses: actions/download-artifact@v8
         with:
           path: test-artifacts
           pattern: test-results
