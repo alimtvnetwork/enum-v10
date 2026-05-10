@@ -64,7 +64,7 @@ func TestQuotes_Uplift(t *testing.T) {
 		_ = candidate.GetOther()
 		_ = candidate.WrapSkipOnExist("\"hi\"")
 		_ = candidate.WrapRegardless("hi")
-		_ = candidate.WrapFmtString("v=%d", 1)
+		_ = candidate.WrapFmtString("prefix {wrapped} suffix", "hi")
 		_ = candidate.WrapAnySkipOnExist(456)
 	}
 }
