@@ -8,6 +8,17 @@ Baseline of accepted `golangci-lint` findings. The lint gate
 (`scripts/ci/lint-baseline-diff.py`) compares a fresh report against
 this file and fails only on **new** findings.
 
+## `package-coverage.json`
+
+Per-package coverage snapshot `{importPath: percent}` used by the
+trend gate (`scripts/ci/check-package-coverage-trend.py`). Warning-only:
+emits one `::warning::` per package whose coverage drops more than
+`--tolerance` percentage points (default 1.0) vs the baseline. Refreshed
+automatically on `main` pushes by the `Refresh per-package coverage
+baseline` step in `.github/workflows/ci.yml`. Seed value is `{}` —
+the script auto-detects seeding mode and only prints the current
+snapshot until a real baseline is committed.
+
 ## Seed-Then-Gate Workflow
 
 The baseline operates in two modes — driven entirely by whether
