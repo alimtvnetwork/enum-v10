@@ -39,7 +39,7 @@ ALLOWLIST: dict[str, int] = {
     "scripts/Utilities.psm1": 4,               # Resolve-TestSuiteRoot doc + candidate list
     # User-facing diagnostics / doc strings (display-only):
     "scripts/CoveragePreChecks.psm1": 1,       # Write-Fail message text
-    "scripts/CoverageReportHtml.psm1": 1,      # BE will remove this; baseline locks it for now
+    # CoverageReportHtml.psm1: stale instruction string removed in BE — must stay at 0.
     "scripts/Help.psm1": 3,                    # `it` cmdlet help text + legacy ./integratedtests/... fallback
     "scripts/PackageCoverage.psm1": 3,         # comment + warning message text
     "scripts/PreCommitCheck.psm1": 3,          # Core-memory comment + 2 regex strips
