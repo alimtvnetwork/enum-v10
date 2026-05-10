@@ -236,13 +236,20 @@
 - AB residual for §06 ✅ (Cycle 62, 10 deferred ❓ → 10 ✅ via `/tmp/core-v9-upstream` v1.5.8; zero new findings)
 - Cycle 63 ✅ (3 test failures fixed: osdetect lowerCaseNames gap, sqliteconnpathtype StringMin fixture drift, sqliteconnpathtype RangesDynamicMap upstream lazy-init defect; 4th "failure" was Goconvey log-conflation phantom; RCA pattern catalogue saved to `.lovable/memory/07-test-failure-rca-patterns.md`)
 
-### AO. Coverage probe + uplift remaining sub-75% packages (NEW)
+### AO. Coverage probe + uplift remaining sub-75% packages
 
-- **Status:** 📋 Planned
-- **Objective:** Run `./run.ps1 -tc` (or `go test ./... -coverprofile=coverage.out`), identify every package below the 75% CI gate, ship targeted uplift tests.
-- **Dependencies:** None.
-- **Approach:** (1) Run coverage. (2) Sort `go tool cover -func=coverage.out` ascending. (3) For each package <75%, write a focused `*_Uplift_test.go` covering the uncovered statements. (4) Re-run, confirm all ≥75%.
-- **Acceptance:** Coverage gate passes cleanly with no per-package outlier <75%.
+- **Status:** 🔄 In Progress (pass 1 done)
+- **Pass 1 ✅ DONE (2026-05-10, v1.23.0):** cmdenumtypes sweep — 27 sub-packages 34.8% → 94.2% (+59.4pp each). One generated `<Pkg>_Uplift_test.go` per package exercising ~45 Variant methods.
+- **Remaining sub-75% packages (from probe 2026-05-10):**
+  - `sitestatetype` 17.6%
+  - `taskcategory` 39.1%
+  - `conntrackstate` 38.8%
+  - `servicestate` 45.0%
+  - `quotes` 55.4%
+  - `osdetect` 73.2% (+ 2 pre-existing test failures, host-detection fragility)
+  - `pathpatterntype` 72.4%
+  - `packageinstallmethod` 73.5%
+- **Pass 2 target (next):** `sitestatetype`, `taskcategory`, `conntrackstate`, `servicestate`, `quotes` — write per-package uplift tests.
 
 **Done — full AL umbrella:**
 - AL-01 ✅ (Cycle 49, 15.5% → 21.6%, +6.1pp)
