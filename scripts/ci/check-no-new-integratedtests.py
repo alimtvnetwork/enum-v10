@@ -49,6 +49,8 @@ ALLOWLIST: dict[str, int] = {
     # The guard itself + its self-tests must mention the token:
     "scripts/ci/check-no-new-integratedtests.py": 13,
     "scripts/ci/test_check_no_new_integratedtests.py": 9,
+    # The CI workflow that wires the guard names the token in its job id + comments:
+    ".github/workflows/ci-guards.yml": 4,
 }
 
 # Directories scanned (relative to repo root). `cross-repo/` mirrors a separate
