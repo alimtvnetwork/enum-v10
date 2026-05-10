@@ -1,6 +1,9 @@
 package compresslevels
 
-import "testing"
+import (
+	"encoding/json"
+	"testing"
+)
 
 // TestDirectMethods_CompressLevels covers methods with non-nullary signatures
 // the reflective Uplift sweep cannot reach (BA: per-package coverage uplift).
