@@ -16,15 +16,16 @@
 
 ## Open Suggestions
 
-### BA: Per-package coverage uplift — restore floor on 7 library packages
+### BA: Per-package coverage uplift — restore floor on remaining 6 library packages
 
-- **Status:** open (HIGH priority — every entry temporarily ignored in `.github/workflows/ci.yml` per-package gate as of v1.33.0).
+- **Status:** in-progress (1/7 done as of v1.34.0).
 - **Created:** 2026-05-10 (post-remix CI failure on per-package coverage gate).
 - **Source:** Lovable / CI failure.
-- **Affected:** `compressformats` 69.5%, `compresslevels` 71.2%, `dbdrivertype` 58.8%, `httpstatusfamily` 73.0%, `instructiontype` 68.4%, `inttype` 66.4%, `osarchs` 72.5%.
-- **Description:** The per-package gate was wired in (Task AS) at the same threshold the AO uplift had reached. Either subsequent code changes drifted these 7 packages back below 75 %, or AO never actually crossed 75 % for these packages and the gate was set too high. Remove each `--ignore <pkg>` from `.github/workflows/ci.yml` as its tests are extended back above the 75 % floor.
-- **Acceptance:** All 7 `--ignore` entries removed; CI green with the bare `--threshold 75`.
-- **Notes:** `dbdrivertype` is the worst offender (58.8 %); likely needs Connection-string template tests per `Connection.go` driver Variant. The other 6 are 1–7 pp short — small, targeted `*_Uplift_test.go` files should suffice.
+- **Affected (still ignored):** `compressformats` 69.5%, `compresslevels` 71.2%, `dbdrivertype` 58.8%, `instructiontype` 68.4%, `inttype` 66.4%, `osarchs` 72.5%.
+- **Done:** ✅ `httpstatusfamily` 73.0% → **100.0%** (v1.34.0, new `HttpStatusFamily_DirectMethods_test.go`).
+- **Description:** The reflective `Uplift` sweep skips methods with non-nullary signatures (`IsEqual(Variant)`, `IsAnyOf(...Variant)`, `Format(string)`, `OnlySupportedErr(...string)`, `JsonParseSelfInject(*corejson.Result)`, etc.) plus top-level helpers (`Ranges`, `RangesInvalidErr`, `Is`, `ValidationError`, `StringMustBe`). Each remaining package needs a `<Pkg>_DirectMethods_test.go` modelled on the `httpstatusfamily` template — typically pushes to ≥95% in 60 LOC.
+- **Acceptance:** All 6 `--ignore` entries removed from `.github/workflows/ci.yml`; CI green with the bare `--threshold 75`.
+- **Notes:** `dbdrivertype` is the worst offender (58.8 %); its low score comes from `Connection.go`/`ConnectionOptions.go`/`connectionStringCompiler.go` business logic that needs bespoke driver-by-driver DSN tests, not just the template.
 
 ### S-115: Harden `Get-UpstreamPackages` to recursively walk `coredata/`
 
