@@ -213,11 +213,11 @@
 
 **Recommended next task:** Pick from this list (in order):
 
-1. **AO** — Coverage probe + uplift any package still <75% (gate threshold) ⭐ **NEXT**
-2. **AN-D** — Validate `0 issues` on next CI run (awaiting fresh push) ⏳
-3. **AC** — Re-audit §07 / §09 spec dimensions
-4. **AB residual** — Continue ❓ promotion in §03/§04 (PI-003, LOW)
-5. **A** — Manual `cross-repo/core-v9/` push ⏭️
+1. **AC** — Re-audit §07 / §09 spec dimensions ⭐ **NEXT**
+2. **AB residual** — Continue ❓ promotion in §03/§04 (PI-003, LOW)
+3. **A** — Manual `cross-repo/core-v9/` push ⏭️
+
+**Recently closed:** AO ✅ (v1.25.0, all 3 passes), AN-D ✅ (sandbox lint dry-run = `0 issues.`).
 
 **Done from this list (reconciled 2026-05-10):**
 - AL2-02 ✅ (Cycles 68–69, v0.40.0/v0.41.0 — DB family Coverage_test files in all 6 packages)
@@ -290,8 +290,10 @@
 
 #### AN-C. Apply the verified fix ✅ DONE (folded into AN-B above)
 
-#### AN-D. Validate ⏳ Pending
-- Re-run CI and confirm `0 issues`.
+#### AN-D. Validate ✅ DONE (2026-05-10, sandbox dry-run)
+- Local `golangci-lint v2.6.2 run --timeout=5m ./...` against the entire repo with `core-v9 v1.5.8`: **`0 issues.`**
+- Confirms the original 4 errors (`osdetect/generate.go:312` errcheck on `defaultLinuxReleaseFile.Close`, `:358`/`:366` ineffassign on `release`) are no longer present in the source. The CI cache fix (AN-B/AN-C) will surface this same clean result on the next push.
+- No version bump (validation only, no source change).
 
 ---
 
