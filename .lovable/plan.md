@@ -260,6 +260,32 @@
 
 ---
 
+## Phase 5: CI Lint RCA (AN)
+
+### AN. Recurring CI lint "errcheck/ineffassign in osdetect/generate.go" failures
+
+- **Status:** 🔄 In Progress
+- **Symptom:** CI reports 4 issues at `osdetect/generate.go:98,312,358,366` across ≥7 consecutive runs; identical byte-for-byte each time.
+- **Sub-tasks:**
+
+#### AN-A. Confirm CI source mismatch ✅ DONE (2026-05-10)
+- Local `osdetect/generate.go` SHA-256 = `42027f133fb3e751d9f0139e34e5223ec5860e9fec9021762f6572873ed7550f`.
+- Lines 98 / 312 carry the `_ =` errcheck ignores; lines 358 / 366 sit inside `if rel := …; rel != ""` shadow-blocks.
+- Reproduced CI environment locally: **exact** `golangci-lint-2.5.0-linux-amd64` binary + Go 1.25.7 → `0 issues.`
+- **Conclusion:** current source is clean. CI is linting an older SHA — most likely a **re-run of an old workflow run** (GitHub Actions re-runs replay the original commit, not HEAD).
+
+#### AN-B. Force CI to expose the linted SHA ⏳ Next
+- Diagnostic step `Source fingerprint before lint` already in `.github/workflows/ci.yml` (lines 55–61) prints `github.sha`, `checked_out_sha`, file SHA-256, and exact source lines.
+- Action on user: trigger a **fresh push** (not a re-run) and capture the `Source fingerprint before lint` output. If SHA-256 matches the value above, lint MUST pass. If lint then still fails, the diagnostic output proves the discrepancy and we can attribute it correctly.
+
+#### AN-C. Apply the verified fix ⏳ Pending
+- Only triggered if AN-B reveals the linted source actually differs from current. In that scenario, patch the real divergent file/config, bump version, document RCA in CHANGELOG.
+
+#### AN-D. Validate ⏳ Pending
+- Re-run CI and confirm `0 issues`.
+
+---
+
 ## Completed
 
 ### Cycles 1–14 — `spec/01-app/` directory audit
