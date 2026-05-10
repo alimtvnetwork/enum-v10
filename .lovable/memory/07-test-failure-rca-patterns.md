@@ -14,6 +14,8 @@
 
 **Manifested as:** 16 cross-file false positives + 1 intra-file false positive across the test suite (v1.15.0 fix).
 
+**Regression-locked (2026-05-10, v1.41.0):** `scripts/ci/test_check_collisions.py::TestParseDecls::test_p10_function_local_var_inside_trun_is_ignored` and `::test_p10_braces_inside_strings_do_not_shift_depth` exercise both the `t.Run` body case and the string-literal brace-decoy case. Any future regression of `parse_decls` brace tracking will fail these tests.
+
 ---
 
 ## Pattern 9 — `Stringer` infinite recursion via `converters.AnyTo.ValueString(self)` (added 2026-05-07)
