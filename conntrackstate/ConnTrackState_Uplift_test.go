@@ -87,10 +87,7 @@ func TestConnTrackState_Uplift(t *testing.T) {
 	if _, err := v.UnmarshallEnumToValue(data); err != nil {
 		t.Errorf("UnmarshallEnumToValue: %v", err)
 	}
-	{
-		var p Variant
-		_ = p.JsonParseSelfInject(data)
-	}
+
 
 	for _, n := range v.IntegerEnumRanges() {
 		x := Variant(byte(n))
