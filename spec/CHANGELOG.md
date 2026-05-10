@@ -9,6 +9,19 @@
 
 ---
 
+## [spec-v0.57.0] — 2026-05-10 (Cycle 49 — Task **AC**: spec-internal-consistency probe of §07 + §09 advisory carry-overs — **AC CLOSED**)
+
+### Added — `spec/07-code-vs-spec-audits/40-cycle49-AC-spec01-converters-conditional-advisory.md`
+- 3 ❓ → ✅: §09 row 64 (`PrettyJson` namespace ↔ `corejson` overlap, structurally consistent — `converters/vars.go:35` + `coredata/corejson/PrettyJsonStringer.go:25`); §07 row 142 (`issetter.Value` "not a drop-in for `bool`" advisory — entailed by 6-state byte enum at `issetter/Value.go:51-58`); §07 row 173 (already promoted in Cycle 44).
+- 1 ❓ → ❌ NEW **C-CVS-65 (HIGH)** — `errcore.OverflowType.Fmt(...)` on §09 line 161 is fabricated; `grep -rln Overflow /tmp/core-v9-upstream/errcore/` returns zero matches. Suggested replacement: `errcore.Expected.MessageVarMap(...)`. Spawned **AJ-45** (purge from spec, blocked by `spec/01-app/` freeze).
+- 4 ❓ retained as out-of-AC-scope: rows 99-107 (no-panic / errcore-wrapped / locale-independent claims), 119, 130 (behavioural traces) consolidated under new **AJ-46** (converter behavioural contract pass). Row 172 (`*WithDefault` re-validation hides malformed input) reclassified ❓ → ⓘ "advisory by design" — not a measurable code property; removed from open ❓ pool.
+- AB-residual `spec/01-app/` ❓ pool: 6 → **3** (Cycle-19 cluster + row 130 under AJ-46, plus 1 retained-advisory). Cumulative AB+AC ❌: 53 → **54** (CRITICAL unchanged at 23, HIGH +1).
+- **AC umbrella complete** for all currently-loaded spec sections. AC dimension closed; future spec additions may re-open AC-class items per cycle.
+
+### Notes
+- Read-only audit promotion only. No `spec/01-app/` rewrites (under freeze). Spawned tasks (AJ-45, AJ-46, S-002) all blocked by the freeze.
+- Editorial: the §09 row 64 "duplicates" → "delegates to" wording suggestion is filed as **S-002 (LOW)** in `.lovable/memory/suggestions/01-suggestions-tracker.md`.
+
 ## [spec-v0.56.0] — 2026-05-07 (Recipe-distillation pass — `00-llm-integration-guide.md` §10 lessons-learned)
 
 ### Added
