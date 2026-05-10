@@ -46,6 +46,22 @@ jobs:
       - name: Cross-file identifier collision audit
         run: python3 scripts/ci/check-collisions.py .
 
+  stringer-recursion-guard:
+    # AX (Cycle 54): static guard for RCA Pattern P9 — flags any
+    # `String() string` method body that calls `converters.AnyTo.ValueString`
+    # (Stringer recursion bomb). See .lovable/memory/07-test-failure-rca-patterns.md.
+    needs: python-tests
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Stringer recursion guard (RCA P9)
+        run: python3 scripts/ci/check-stringer-recursion.py .
+
   issues-index-drift:
     # S-105: fail CI if spec/02-app-issues/README.md and 00-issues-index.md
     # disagree on the set of issue IDs they list.

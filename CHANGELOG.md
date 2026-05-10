@@ -8,6 +8,15 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 The release pipeline extracts the matching `## [vX.Y.Z]` section as the
 GitHub Release body — keep entries small, sectioned, and human-readable.
 
+## [v1.31.0] - 2026-05-10
+### Added — AX RCA P9 static guard (Cycle 54)
+- `scripts/ci/check-stringer-recursion.py` — scans all non-test, non-vendor `.go` files; brace-depth tracks each `String() string` method body and fails CI if any contains `converters.AnyTo.ValueString` (the documented Pattern P9 recursion bomb).
+- `scripts/ci/test_check_stringer_recursion.py` — 8 unittest cases covering clean source, value-receiver detection, pointer-receiver detection, `_test.go` exclusion, calls outside `String()` (allowed), brace-in-string-literal robustness, missing root, no-Go-files. All 8 pass; full `unittest discover` count: 48 → **56 OK**.
+- `.github/workflows/ci-guards.yml` — new `stringer-recursion-guard` job runs after `python-tests`.
+
+### Fixed — Real Pattern P9 violation surfaced by the new guard
+- `scripttype/ScriptDefault.go`: `(*ScriptDefault).String()` previously called `converters.AnyTo.ValueString(*it)`. Although Go's `%v` would not recurse here (value type does not satisfy `Stringer` because the method has a pointer receiver), this matches the forbidden P9 template. Replaced with explicit per-field `fmt.Sprintf` and a `nil`-receiver guard. `go build ./scripttype/...` and `go test ./scripttype/... -count=1` both pass.
+
 ## [v1.30.0] - 2026-05-10
 ### Added — AS per-package coverage gate (Cycle 53)
 - `scripts/ci/check-package-coverage.py` — parses a Go cover profile, aggregates per-package statement coverage, fails non-zero if any package falls below `--threshold` (default 75.0). Supports `--ignore <pkg>` for opt-out paths.

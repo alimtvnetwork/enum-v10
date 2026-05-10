@@ -216,7 +216,7 @@
 2. **A** — Manual `cross-repo/core-v9/` push ⏭️ (user-only)
 3. **AP / AQ / AS** — Proactive candidates (thaw-cycle, osdetect Linux-branch coverage, per-package CI gate). See chat suggestions.
 
-**Recently closed:** AO ✅ (v1.25.0), AN-D ✅ (sandbox lint = `0 issues.`), AC ✅ (v1.26.0, Cycle 49), AJ-46 ✅ (v1.27.0, Cycle 50), AR ✅ (v1.28.0, Cycle 51 — PI-003 closed), AT ✅ (v1.29.0, Cycle 52 — RCA P8/P9/P10 re-verified), **AS ✅ (v1.30.0, Cycle 53 — per-package 75% CI gate live in `.github/workflows/ci.yml`, 6 new unittest cases in `scripts/ci/test_check_package_coverage.py`).**
+**Recently closed:** AO ✅ (v1.25.0), AC ✅ (v1.26.0), AJ-46 ✅ (v1.27.0), AR ✅ (v1.28.0 — PI-003 closed), AT ✅ (v1.29.0 — RCA P8/P9/P10 re-verified), AS ✅ (v1.30.0 — per-package 75% CI gate), **AX ✅ (v1.31.0, Cycle 54 — RCA P9 static guard live in `ci-guards.yml`; surfaced + fixed real violation in `scripttype/ScriptDefault.go`).**
 
 **Done from this list (reconciled 2026-05-10):**
 - AL2-02 ✅ (Cycles 68–69, v0.40.0/v0.41.0 — DB family Coverage_test files in all 6 packages)
