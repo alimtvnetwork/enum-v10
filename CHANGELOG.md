@@ -8,6 +8,18 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 The release pipeline extracts the matching `## [vX.Y.Z]` section as the
 GitHub Release body — keep entries small, sectioned, and human-readable.
 
+## [v1.27.0] - 2026-05-10
+### Added — AJ-46 converter behavioural contract pass (Cycle 50)
+- New test directory `tests/contracttests/` with `converters_test.go` (5 tests, all PASS in 0.005s):
+  - `TestConverters_NoPanics_OnBadInput` — 30 calls (3 funcs × 10 hostile inputs) wrapped in `recover()`; pins spec rows 99-107 "no panics" claim.
+  - `TestConverters_ErrorsAreErrcoreTyped` — pins `errcore.ParsingFailedType` and `errcore.FailedToConvertType` as the public failure surface for `StringTo.Integer`; spec rows 99-107 "errcore wrapped" claim.
+  - `TestConverters_Float64_LocaleIndependent` — `"3.14"` succeeds, `"3,14"` (comma-decimal) MUST fail; pins spec rows 99-107 "locale-independent" claim by asserting Go's C-locale `strconv.ParseFloat` boundary.
+  - `TestConverters_IntegerWithDefault_FallbackContract` — happy / bad-input / empty-input cases; pins spec row 119 fallback contract.
+  - `TestConverters_ParsePagination_EndToEnd` — 4-case worked example matching the spec's `parsePagination` shape; pins spec row 130.
+- Audit cycle: `spec/07-code-vs-spec-audits/41-cycle50-AJ46-converter-contract-pass.md` — promotes 3 ❓→✅ in `spec/01-app/09-converters.md` (rows 99-107 cluster, 119, 130). Net §09 ❓ pool: 0 active remaining (1 ⓘ advisory only). AB+AC ❌ unchanged at 54 (no new contradictions).
+- AJ-46 ✅ DONE. AB-residual `spec/01-app/` ❓ pool: 3 → **0 active**.
+- Spec changelog bumped to `spec-v0.58.0`.
+
 ## [v1.26.0] - 2026-05-10
 ### Added — AC dimension audit (Cycle 49) — closes the AC umbrella
 - `spec/07-code-vs-spec-audits/40-cycle49-AC-spec01-converters-conditional-advisory.md` — spec-internal-consistency probe of advisory carry-overs from Cycles 19/20/43/44 (`spec/01-app/09-converters.md` rows 64/99-107/119/130/161/172 and `spec/01-app/07-conditional-and-utilities.md` row 142).
