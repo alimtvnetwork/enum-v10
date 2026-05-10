@@ -238,3 +238,12 @@
 ## Rejected Suggestions
 
 _(none yet)_
+
+---
+
+### BE: CoverageReportHtml.psm1 — drop stale `tests/integratedtests/` instruction
+
+- **completed:** 2026-05-10 (Cycle BE)
+- **source:** Memory scan (Core rule — `tests/creationtests/` is the canonical location)
+- **resolution:** Rewrote the AI-instruction line at `scripts/CoverageReportHtml.psm1:55` to reference `Resolve-TestSuiteRoot` and both layout names instead of hardcoding `tests/integratedtests/{pkg}tests/`. Tightened the BC allowlist baseline for that file from 1 → 0 (now strictly enforced — any future regression fails the `no-new-integratedtests` job). Added `.github/workflows/ci-guards.yml` (4) to the BC allowlist (the workflow file itself names the token in its job id and comments — was missed in BC). Bumped `package.json` 1.48.0 → **1.49.0**.
+- **acceptance criteria:** ✅ `python3 scripts/ci/check-no-new-integratedtests.py` exits 0 on live repo. ✅ All 7 self-tests pass. ✅ Re-introducing the old line would now fail the guard (file baseline = 0).
