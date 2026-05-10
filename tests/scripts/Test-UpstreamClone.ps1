@@ -51,5 +51,37 @@ if (Test-Path (Join-Path $real 'coredata/coregeneric')) {
     Write-Host "  ⊘ Case 3 skipped (no /tmp/core-v9-upstream)" -ForegroundColor Yellow
 }
 
+
+# Case 5 (AV, Cycle 53 — E2E): -AutoClone against a bogus URL must
+# return Reason='clone-failed'. Override the module-private
+# $script:UpstreamCloneUrl in the spec-api-check module session so we
+# don't have to monkey-patch git itself. This locks the documented
+# clone-failure surface that ops scripts (CoveragePreChecks.psm1) rely
+# on for precise skip-reason reporting.
+$mod = Get-Module spec-api-check
+$origUrl = & $mod { $script:UpstreamCloneUrl }
+& $mod { $script:UpstreamCloneUrl = 'file:///definitely/not/a/real/repo' }
+try {
+    $bogusPath = "/tmp/__autoclone_fail_$(Get-Random)"
+    $r5 = Test-UpstreamClone -Path $bogusPath -AutoClone
+    Assert (-not $r5.Ok) "Case 5: Ok=false when AutoClone target unreachable"
+    Assert ($r5.Reason -eq 'clone-failed') "Case 5: Reason='clone-failed' (got '$($r5.Reason)')"
+    Assert ($r5.PackageCount -eq 0) "Case 5: PackageCount=0 on clone failure"
+} finally {
+    & $mod { param($u) $script:UpstreamCloneUrl = $u } $origUrl
+    if (Test-Path $bogusPath) { Remove-Item -Recurse -Force $bogusPath }
+}
+
+# Case 6 (AV, Cycle 53 — E2E): -AutoClone is a no-op when Path already
+# exists with the sentinel. Verifies the auto-clone path doesn't
+# re-clone over a healthy checkout (would be slow + risk corruption).
+if (Test-Path (Join-Path $real 'coredata/coregeneric')) {
+    $r6 = Test-UpstreamClone -Path $real -AutoClone
+    Assert ($r6.Ok) "Case 6: -AutoClone no-op against existing healthy clone"
+    Assert ($r6.Reason -eq 'ok') "Case 6: Reason='ok' (got '$($r6.Reason)')"
+} else {
+    Write-Host "  ⊘ Case 6 skipped (no /tmp/core-v9-upstream)" -ForegroundColor Yellow
+}
+
 if ($failed -gt 0) { Write-Host "`n$failed test(s) failed" -ForegroundColor Red; exit 1 }
 Write-Host "`nAll tests passed" -ForegroundColor Green
