@@ -1,5 +1,7 @@
 # Test Failure RCA Patterns
 
+> **Last audit:** 2026-05-10 (Cycle 52, Task AT). All 3 active patterns (P8/P9/P10) verified still mitigated in current source — see audit log at bottom. Patterns 1–7 are historical (recoverable from git history); see `.lovable/plan.md` cycles 49–63 for original context.
+
 ## Pattern 10 — Brace-unaware Go declaration scanner (added 2026-05-07)
 
 **Symptom:** `scripts/ci/check-collisions.py` (or any similar tooling) reports cross-file "var collisions" for symbols like `got`, `n`, `data`, `sink` across `*_Coverage_test.go` and `*_Uplift_test.go` pairs in many packages, plus intra-file dupes for the same identifier appearing in multiple test functions.
