@@ -9,6 +9,18 @@
 
 ---
 
+## [spec-v0.58.0] — 2026-05-10 (Cycle 50 — Task **AJ-46**: converter behavioural contract pass — **§09 ❓ pool DRAINED**)
+
+### Added — `spec/07-code-vs-spec-audits/41-cycle50-AJ46-converter-contract-pass.md`
+- 3 ❓ → ✅ in `spec/01-app/09-converters.md`: rows 99-107 cluster (no-panic / errcore-wrapped / locale-independent), row 119 (`IntegerWithDefault` fallback contract), row 130 (`parsePagination` worked example).
+- Backed by 5 new tests in `tests/contracttests/converters_test.go` (new package; `nix run nixpkgs#go -- test ./tests/contracttests/...` → all PASS in 0.005s).
+- Direct upstream evidence cited: `converters/stringTo.go:47/73/154/164/203/211/262/274/281/286` and `errcore/RawErrorType.go`.
+- §09 active ❓ pool: 0 remaining (only the 1 ⓘ row-172 advisory carry-over). AB-residual `spec/01-app/` active ❓ pool: 3 → **0**. Cumulative AB+AC ❌ unchanged at **54**.
+- AJ-46 ✅ DONE. AJ-45 still ⏸️ blocked by `spec/01-app/` freeze (pure spec edit).
+
+### Notes
+- New `tests/contracttests/` directory is now the canonical home for cross-boundary spec-behaviour tests; future AJ-* contract tasks should add files here rather than per-package `_test` files.
+
 ## [spec-v0.57.0] — 2026-05-10 (Cycle 49 — Task **AC**: spec-internal-consistency probe of §07 + §09 advisory carry-overs — **AC CLOSED**)
 
 ### Added — `spec/07-code-vs-spec-audits/40-cycle49-AC-spec01-converters-conditional-advisory.md`
