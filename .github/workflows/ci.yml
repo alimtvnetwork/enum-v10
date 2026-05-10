@@ -249,7 +249,7 @@ jobs:
             --ignore compressformats \
             --ignore compresslevels \
             --ignore dbdrivertype \
-            --ignore httpstatusfamily \
+            
             --ignore instructiontype \
             --ignore inttype \
             --ignore osarchs
