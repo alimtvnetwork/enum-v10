@@ -16,6 +16,12 @@
 
 ## Open Suggestions
 
+### AW: Per-package coverage trend warning
+
+- **Status:** ✅ DONE (v1.44.0).
+- **Source:** `.lovable/plan.md` AW.
+- **Done:** Added `scripts/ci/check-package-coverage-trend.py` (warning-only) + 16-test `test_check_package_coverage_trend.py` (snapshot rounding, baseline load edge cases, diff classification, seeding/gating/--write end-to-end). Seeded `.ci-baselines/package-coverage.json` with `{}` (script auto-detects seeding mode). Wired two new steps into `.github/workflows/ci.yml`: warning-only trend check on every PR + baseline refresh on `main` pushes (mirrors the `lint-baseline-diff` cadence). Documented in `.ci-baselines/README.md`. Complements the AS floor gate by surfacing relative drops between PRs (e.g. 95% → 80%) that stay above the 75% absolute floor. Tolerance configurable, default 1.0pp.
+
 ### AQ: `osdetect` Linux-branch coverage uplift
 
 - **Status:** ✅ DONE (v1.43.0).
