@@ -52,12 +52,17 @@ function Invoke-PreCommitCheck {
     if (-not $preCheckOk) { exit 1 }
 
     # ── Discover Coverage* packages ──
-    $testBaseDir = Join-Path $global:ProjectRoot "tests" "integratedtests"
+    # BB (Cycle 53): Resolve-TestSuiteRoot honours the Core-memory rule
+    # that tests live under tests/creationtests/, NOT tests/integratedtests/.
+    # Per-package: prefer the root that actually contains $singlePkg so a
+    # mixed-layout repo still works.
+    $suiteRoot   = if ($singlePkg) { Resolve-TestSuiteRoot -Package $singlePkg } else { Resolve-TestSuiteRoot }
+    $testBaseDir = Join-Path (Join-Path $global:ProjectRoot 'tests') $suiteRoot
     if ($singlePkg) {
         $targetDirs = @(Join-Path $testBaseDir $singlePkg)
-        if (-not (Test-Path $targetDirs[0])) { $s = Get-CallerSource; Write-Fail "Package not found: $singlePkg (source: $s)"; return }
+        if (-not (Test-Path $targetDirs[0])) { $s = Get-CallerSource; Write-Fail "Package not found: $singlePkg under tests/$suiteRoot/ (source: $s)"; return }
     } else {
-        $targetDirs = @(Get-ChildItem -Path $testBaseDir -Directory | ForEach-Object { $_.FullName })
+        $targetDirs = @(Get-ChildItem -Path $testBaseDir -Directory -ErrorAction SilentlyContinue | ForEach-Object { $_.FullName })
     }
 
     $pkgsWithCoverage = [System.Collections.Generic.List[string]]::new()
