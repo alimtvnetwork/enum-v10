@@ -52,6 +52,14 @@ jobs:
           go-version-file: go.mod
           cache: true
 
+      - name: Source fingerprint before lint
+        if: needs.sha-check.outputs.already-built != 'true'
+        run: |
+          echo "github.sha=${{ github.sha }}"
+          echo "checked_out_sha=$(git rev-parse HEAD)"
+          echo "osdetect/generate.go sha256=$(sha256sum osdetect/generate.go | cut -d ' ' -f 1)"
+          sed -n '94,100p;308,314p;354,368p' osdetect/generate.go
+
       - name: go vet
         if: needs.sha-check.outputs.already-built != 'true'
         run: go vet ./...

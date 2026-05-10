@@ -8,6 +8,17 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 The release pipeline extracts the matching `## [vX.Y.Z]` section as the
 GitHub Release body — keep entries small, sectioned, and human-readable.
 
+## [v1.21.0] - 2026-05-10
+### Fixed — CI RCA fingerprint for repeated stale lint output
+- **Root cause:** the repeated `osdetect/generate.go` lint log shows source
+  lines that no longer exist in the current checkout. Local validation with
+  Go 1.25 and golangci-lint reports `0 issues`, so the failing run is using
+  an older commit or stale checkout/log.
+- **Fix:** `.github/workflows/ci.yml` now prints `github.sha`, the checked-out
+  Git SHA, `osdetect/generate.go` SHA-256, and the exact lint-relevant source
+  lines immediately before `go vet` and `golangci-lint`. Future failures will
+  prove whether CI is linting the fixed source or an old revision.
+
 ## [v1.20.1] - 2026-05-10
 ### Fixed — 4 real lint findings in `osdetect/generate.go`
 - **errcheck (2):** `os.RemoveAll` and `defaultLinuxReleaseFile.Close`
