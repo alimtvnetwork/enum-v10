@@ -250,8 +250,7 @@ jobs:
             
             --ignore dbdrivertype \
             --ignore instructiontype \
-            --ignore inttype \
-            --ignore osarchs
+            --ignore inttype
 
       - uses: actions/upload-artifact@v4
         if: always() && needs.sha-check.outputs.already-built != 'true'
