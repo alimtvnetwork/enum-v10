@@ -8,6 +8,12 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 The release pipeline extracts the matching `## [vX.Y.Z]` section as the
 GitHub Release body — keep entries small, sectioned, and human-readable.
 
+## [v1.23.0] - 2026-05-10
+### Added — AO pass 1: cmdenumtypes uplift sweep (27 packages)
+- New `<Pkg>_Uplift_test.go` per cmdenumtypes sub-package (compresscmdnames, configcmdnames, crontabscmdnames, decompresscmdnames, dnscmdnames, dockercmdnames, downloadcmdnames, envpathcmdnames, envvarscmdnames, ethernetcmdnames, fail2bancmdnames, firewallcmdnames, ftpcmdnames, hostingplancmdnames, macrocmdnames, operatingsystemcmdnames, packagecmdnames, servicescmdnames, snapshotcmdnames, sshcmdnames, sslcmdnames, sysgroupcmdnames, toolingcmdnames, usercmdnames, userrolecmdnames, webservercmdnames). Each test exercises ~45 of the 51 Variant methods: New/NewMust round-trip, Min/Max, AllNameValues/IntegerEnumRanges/RangesByte/RangeNamesCsv/TypeName/RangesDynamicMap, full string-conversion suite (String/ValueString/ToNumberString/NameValue/Format/Min-MaxValueString/FullName/HyphenName/ToNameLower), full numeric-width sweep (MinByte/MaxByte/ValueByte/MinInt/MaxInt/ValueInt/ValueInt8-16-32/Value/ValueUInt16/MinMaxAny), every IsX predicate (IsValid/IsInvalid/Is/IsAnyOf/IsNameEqual/IsValueEqual/IsByteValueEqual/IsAnyValuesEqual/IsAnyNamesOf), error helpers (OnlySupportedErr/OnlySupportedMsgErr), all As*-binder accessors, JSON round-trip via Marshal/Unmarshal/Json/JsonPtr/UnmarshallEnumToValue, and per-Variant byte-iteration sweep through IntegerEnumRanges.
+- **Coverage delta:** all 27 sub-packages **34.8% → 94.2%** (+59.4pp each). rootcmdnames already had a comprehensive suite (93.3%) — duplicate generated file removed to avoid case-insensitive filename collision on Windows runners.
+- **Why IntegerEnumRanges, not AllNameValues, for iteration:** `AllNameValues()` returns formatted `"Name(value)"` strings which `New()` does not accept; iterating via `IntegerEnumRanges()` avoids that footgun and is the pattern the rest of the codebase uses.
+
 ## [v1.22.0] - 2026-05-10
 ### Fixed — Disable golangci-lint-action result cache (AN-B)
 - **Root cause (refined):** `golangci/golangci-lint-action@v7` caches analysis
