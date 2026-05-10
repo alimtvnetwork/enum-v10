@@ -66,7 +66,7 @@ func TestDirectMethods_OsArchs(t *testing.T) {
 
 	bs, _ := a.MarshalJSON()
 	var got Architecture
-	if err := got.UnmarshallEnumToValue(bs); err != nil {
+	if _, err := got.UnmarshallEnumToValue(bs); err != nil {
 		t.Errorf("UnmarshallEnumToValue: %v", err)
 	}
 }
