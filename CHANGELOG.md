@@ -8,6 +8,23 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 The release pipeline extracts the matching `## [vX.Y.Z]` section as the
 GitHub Release body — keep entries small, sectioned, and human-readable.
 
+## [v1.22.0] - 2026-05-10
+### Fixed — Disable golangci-lint-action result cache (AN-B)
+- **Root cause (refined):** `golangci/golangci-lint-action@v7` caches analysis
+  results keyed on `go.sum` + linter version. When source changes but `go.sum`
+  does not (which is the case for every fix in `osdetect/generate.go`), the
+  action can replay stale cached findings — producing errors at line numbers
+  that no longer exist in the checked-out source. This matches the observed
+  symptom: byte-identical 4-error output across ≥7 consecutive runs while
+  local lint with the exact CI binary (`golangci-lint v2.5.0` + Go 1.25.7)
+  reports `0 issues.`
+- **Fix:** `.github/workflows/ci.yml` lint step now sets `skip-cache: true`
+  and `skip-save-cache: true`, forcing every CI run to perform a fresh
+  analysis against the actual checked-out source. Adds ~30s per run; trades
+  cache speed for correctness.
+- **Diagnostic kept:** the `Source fingerprint before lint` step (added in
+  v1.21.0) remains in place to attribute any future failure to its real SHA.
+
 ## [v1.21.0] - 2026-05-10
 ### Fixed — CI RCA fingerprint for repeated stale lint output
 - **Root cause:** the repeated `osdetect/generate.go` lint log shows source
