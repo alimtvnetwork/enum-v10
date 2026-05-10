@@ -16,6 +16,12 @@
 
 ## Open Suggestions
 
+### AU: Sweep §09 ⓘ advisory rows into `tests/contracttests/`
+
+- **Status:** ✅ DONE (v1.46.0).
+- **Source:** `.lovable/suggestions.md` AU; mirrors AJ-46 pattern (Cycle 50).
+- **Done:** Added `tests/contracttests/converters_with_default_advisory_test.go` pinning the code-level invariant under the row-172 advisory ("re-validating after `*WithDefault` hides malformed input"). Three tests: (1) `IntegerWithDefault` — `ok` is the SOLE discriminator between legit-input-equals-default and malformed-substitution (covers `""`, `"abc"`, `"1.2.3"`, `"++1"`, `" 42"`, overflow); (2) same invariant on `ByteWithDefault` (covers `""`, `"abc"`, `"-1"`, `"256"`, `"1.5"`); (3) explicit hazard scenario — legit `"0"` parse and `"not-a-number"` substitution yield identical values, so value-only re-validation is provably blind. If any assertion ever flips, row-172 should be promoted from ⓘ-advisory to ✅. AB-residual `spec/01-app/` ❓-pool now includes row-172 as code-pinned (was: only ⓘ, no test backing).
+
 ### AV: E2E test for `Test-UpstreamClone` (S-115)
 
 - **Status:** ✅ DONE (v1.45.0).
