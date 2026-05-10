@@ -163,6 +163,41 @@ class TestParseDecls(unittest.TestCase):
         funcs = {n for k, n, _ in decls if k == "func"}
         self.assertEqual(funcs, {"Real"})
 
+    # --- Regression-lock for RCA Pattern 10 (brace-unaware decl scanner) ---
+    # See `.lovable/memory/07-test-failure-rca-patterns.md` §"Pattern 10".
+    # Function-local `var got Variant` declarations inside `t.Run` bodies
+    # MUST be ignored — they are not top-level decls.
+
+    def test_p10_function_local_var_inside_trun_is_ignored(self):
+        decls = self._decls(
+            "package p\n"
+            "import \"testing\"\n"
+            "func TestX(t *testing.T) {\n"
+            "    t.Run(\"a\", func(t *testing.T) {\n"
+            "        var got Variant\n"
+            "        _ = got\n"
+            "    })\n"
+            "    t.Run(\"b\", func(t *testing.T) {\n"
+            "        var got Variant\n"
+            "        _ = got\n"
+            "    })\n"
+            "}\n"
+            "var TopLevel = 1\n"
+        )
+        var_names = [n for k, n, _ in decls if k == "var"]
+        self.assertNotIn("got", var_names)
+        self.assertIn("TopLevel", var_names)
+
+    def test_p10_braces_inside_strings_do_not_shift_depth(self):
+        decls = self._decls(
+            "package p\n"
+            "var Decoy = \"{ this is not a real brace { { {\"\n"
+            "var Real = 1\n"
+        )
+        var_names = {n for k, n, _ in decls if k == "var"}
+        self.assertIn("Decoy", var_names)
+        self.assertIn("Real", var_names)
+
 
 class TestMainEndToEnd(unittest.TestCase):
     def _run(self, root: Path) -> tuple[int, str, str]:
