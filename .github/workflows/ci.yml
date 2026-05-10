@@ -43,7 +43,7 @@ jobs:
         if: needs.sha-check.outputs.already-built == 'true'
         run: echo "✅ SHA ${{ github.sha }} already passed CI — skipping lint"
 
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v6
         if: needs.sha-check.outputs.already-built != 'true'
 
       - uses: actions/setup-go@v5
@@ -91,7 +91,7 @@ jobs:
         if: needs.sha-check.outputs.already-built == 'true'
         run: echo "✅ SHA ${{ github.sha }} already passed CI — skipping vulncheck"
 
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v6
         if: needs.sha-check.outputs.already-built != 'true'
 
       - uses: actions/setup-go@v5
@@ -134,7 +134,7 @@ jobs:
         if: needs.sha-check.outputs.already-built == 'true'
         run: echo "✅ SHA ${{ github.sha }} already passed CI — skipping tests"
 
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v6
         if: needs.sha-check.outputs.already-built != 'true'
 
       - uses: actions/setup-go@v5
@@ -191,7 +191,7 @@ jobs:
           echo "::error::test job result = ${{ needs.test.result }}"
           exit 1
 
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v6
         if: needs.sha-check.outputs.already-built != 'true'
 
       - uses: actions/setup-go@v5
@@ -300,7 +300,7 @@ jobs:
         if: needs.sha-check.outputs.already-built == 'true'
         run: echo "✅ SHA ${{ github.sha }} already passed CI — skipping build-check"
 
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v6
         if: needs.sha-check.outputs.already-built != 'true'
 
       - uses: actions/setup-go@v5
