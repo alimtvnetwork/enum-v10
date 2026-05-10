@@ -16,7 +16,14 @@
 
 ## Open Suggestions
 
+### AY: Regression-lock for RCA Pattern 10 (brace-unaware decl scanner)
+
+- **Status:** ✅ DONE (v1.41.0).
+- **Source:** `.lovable/memory/07-test-failure-rca-patterns.md` §"Pattern 10".
+- **Done:** Added two `TestParseDecls` cases in `scripts/ci/test_check_collisions.py`: (1) `var got Variant` inside `t.Run` bodies must be ignored; (2) `{` inside string literals must not shift `brace_depth`. All 24 tests pass via `python3 -m unittest scripts.ci.test_check_collisions`.
+
 ### BA: Per-package coverage uplift — restore floor on remaining library packages
+
 
 - **Status:** ✅ DONE (7/7 as of v1.40.0). All `--ignore` entries for library packages removed; only structural ignores remain (`cmd/main`, `tests/creationtests`, `scripts/autofix|bracecheck|specapisig`, `cross-repo/core-v9/scripts/*`).
 - **Created:** 2026-05-10 (post-remix CI failure on per-package coverage gate).
