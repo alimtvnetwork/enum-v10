@@ -8,6 +8,15 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 The release pipeline extracts the matching `## [vX.Y.Z]` section as the
 GitHub Release body — keep entries small, sectioned, and human-readable.
 
+## [v1.29.0] - 2026-05-10
+### Verified — AT RCA pattern audit (Cycle 52)
+- Re-validated all 3 active RCA patterns (P8/P9/P10) in `.lovable/memory/07-test-failure-rca-patterns.md` against current source. All mitigations intact:
+  - **P8:** `Test-IsCoverpkgWarningOnlyOutput` still exported from `scripts/Utilities.psm1` and wired into `CoverageRunner.psm1` + `CoverageCompileCheck.psm1`.
+  - **P9:** `rg "converters\.AnyTo\.ValueString" --type go -g '!*_test.go'` returns zero hits — no `Stringer` recursion bombs.
+  - **P10:** `scripts/ci/check-collisions.py` retains brace-depth accounting at lines 103/147/155/160/165/176.
+- Added audit log section to the RCA doc with timestamps and detection-sweep evidence; preamble now states the doc covers 3 active patterns with P1–P7 archived in git history.
+- No source code changes — pure verification + documentation.
+
 ## [v1.28.0] - 2026-05-10
 ### Changed — AR bookkeeping (Cycle 51)
 - `.lovable/memory/pending-issues/01-all-pending-issues.md`: PI-003 (148 ❓ claims unresolved / Task AB) marked ✅ RESOLVED. All active probes drained across `spec/01-app/`, `spec/06-testing-guidelines/`, and §07/§09 advisory carry-overs (Cycles 19–25, 41–50, 62). Remaining ❓ marks are out-of-scope ⓘ advisories that intentionally cannot be resolved without spec thaw.
