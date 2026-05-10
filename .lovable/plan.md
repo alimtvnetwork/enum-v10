@@ -238,18 +238,10 @@
 
 ### AO. Coverage probe + uplift remaining sub-75% packages
 
-- **Status:** 🔄 In Progress (pass 1 done)
-- **Pass 1 ✅ DONE (2026-05-10, v1.23.0):** cmdenumtypes sweep — 27 sub-packages 34.8% → 94.2% (+59.4pp each). One generated `<Pkg>_Uplift_test.go` per package exercising ~45 Variant methods.
-- **Remaining sub-75% packages (from probe 2026-05-10):**
-  - `sitestatetype` 17.6%
-  - `taskcategory` 39.1%
-  - `conntrackstate` 38.8%
-  - `servicestate` 45.0%
-  - `quotes` 55.4%
-  - `osdetect` 73.2% (+ 2 pre-existing test failures, host-detection fragility)
-  - `pathpatterntype` 72.4%
-  - `packageinstallmethod` 73.5%
-- **Pass 2 target (next):** `sitestatetype`, `taskcategory`, `conntrackstate`, `servicestate`, `quotes` — write per-package uplift tests.
+- **Status:** 🔄 In Progress (passes 1+2 done)
+- **Pass 1 ✅ DONE (v1.23.0):** cmdenumtypes — 27 sub-packages 34.8% → 94.2% each.
+- **Pass 2 ✅ DONE (v1.24.0):** sitestatetype 17.6→89.7, taskcategory 39.1→92.2, conntrackstate 38.8→96.2, servicestate 45.0→83.8, quotes 55.4→93.4.
+- **Pass 3 remaining sub-75%:** `pathpatterntype` 72.4%, `packageinstallmethod` 73.5%, `osdetect` 73.2% (+ 2 pre-existing host-fragility test failures).
 
 **Done — full AL umbrella:**
 - AL-01 ✅ (Cycle 49, 15.5% → 21.6%, +6.1pp)
