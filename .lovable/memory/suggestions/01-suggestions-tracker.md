@@ -16,6 +16,12 @@
 
 ## Open Suggestions
 
+### BB: Finish S-114 — purge residual `tests/integratedtests` hardcodes (NEW, surfaced 2026-05-10)
+
+- **Status:** ✅ DONE (v1.47.0).
+- **Source:** `mem://` scan after active backlog drained — grep surfaced two real Core-memory rule violations that S-114 missed: `scripts/PreCommitCheck.psm1:55` (`$testBaseDir = Join-Path … "tests" "integratedtests"`) and `scripts/TestRunner.psm1:35,42,44` (`Get-ChildItem -Path tests/integratedtests`, `./integratedtests/$pkg/...` x2). Both run on every PC / TP invocation, silently looking in the wrong dir on a creationtests-only checkout.
+- **Done:** Refactored both callsites to use the existing `Resolve-TestSuiteRoot` helper from `scripts/Utilities.psm1` (same pattern S-114 applied to the four other callsites). PC: per-package resolution via `Resolve-TestSuiteRoot -Package $singlePkg`, error message now names the resolved suite root. TP: lists packages from whichever root exists; per-package resolution before `Invoke-BuildCheck` and `go test`. All other surviving `integratedtests` references (CoverageRunner.psm1 array, CoverageSplitRecovery.psm1 regex matchers, error-message text, doc comments) are intentional dual-layout handling per S-114 and left untouched.
+
 ### AU: Sweep §09 ⓘ advisory rows into `tests/contracttests/`
 
 - **Status:** ✅ DONE (v1.46.0).
