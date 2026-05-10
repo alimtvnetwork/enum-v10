@@ -21,5 +21,6 @@ User workflow: incremental "next" commands, expects the remaining-task list show
 - [Test layout](mem://04-test-layout) — tests/creationtests/ not integratedtests/
 - [Cross-repo mirror](mem://05-cross-repo-mirror) — cross-repo/core-v9/ rules
 - [core-v9 API migration](mem://06-core-v9-api-migration) — Converter/coredynamic function→struct namespace mapping
+- [Test failure RCA patterns](mem://07-test-failure-rca-patterns) — Active patterns P8/P9/P10 (warning-only false-positives, Stringer recursion, brace-unaware scanners). Audit log section refreshed Cycle 52.
 - [Workflow conventions](mem://workflow/01-state) — Current workflow state snapshot
 - [Task letter scheme](mem://workflow/02-task-letter-scheme) — Letter IDs, "next" loop, remaining-task list

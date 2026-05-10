@@ -1,6 +1,28 @@
 # Workflow State
 
 > Snapshot of where the project stands. Update at the end of every "Write memory" run.
+> **Last updated:** 2026-05-10 (Cycles 49–54 batch — Write-Memory checkpoint).
+>
+> ## Latest cycles (49 → 54, all green)
+>
+> | Cycle | Task | Version | Outcome |
+> |---|---|---|---|
+> | 49 | **AC** — Re-audit §07/§09 spec dimensions | v1.26.0 | 3 ❓→✅ + 1 ❓→❌ NEW HIGH C-CVS-65 (`errcore.OverflowType.Fmt` fabricated → spawned AJ-45). Spawned AJ-46 + S-002. AC umbrella complete. |
+> | 50 | **AJ-46** — Converter behavioural contract pass | v1.27.0 | New `tests/contracttests/converters_test.go` — 5/5 PASS. §09 active ❓ pool drained. |
+> | 51 | **AR** — Bookkeeping (PI-003 closure) | v1.28.0 | PI-003 marked ✅ RESOLVED. AB-residual entry retired from plan's Next Task list. |
+> | 52 | **AT** — RCA pattern audit | v1.29.0 | All 3 active patterns (P8/P9/P10) re-verified mitigated. Audit log appended to `07-test-failure-rca-patterns.md`. Zero new patterns. |
+> | 53 | **AS** — Per-package coverage gate | v1.30.0 | New `scripts/ci/check-package-coverage.py` + 6 unittest cases. Wired into `.github/workflows/ci.yml` `test-summary` job at 75% floor. Locks in AO uplift. |
+> | 54 | **AX** — RCA P9 static guard | v1.31.0 | New `scripts/ci/check-stringer-recursion.py` + 8 unittest cases. Wired into `.github/workflows/ci-guards.yml` as `stringer-recursion-guard` job. **Surfaced + fixed real violation** in `scripttype/ScriptDefault.go`. CI-guard test count: 42 → 48 → **56 OK**. |
+>
+> **Open / blocked:** AJ-45 + S-002 (both blocked by `spec/01-app/` freeze), A (manual `cross-repo/core-v9/` push). All non-blocked queue items drained.
+>
+> **Proactive candidates surfaced this batch:** AP (brief spec/01 thaw), AQ (osdetect Linux-branch coverage), AU (sweep §09 ⓘ rows into contract tests), AV (Test-UpstreamClone E2E), AW (per-package coverage trend warn), AY (RCA P10 regression-lock test), AZ (RCA P8 unittest mitigation lock).
+>
+> ---
+>
+> **Historical entries (preserved verbatim) below — do NOT delete.**
+>
+
 > **Last updated:** 2026-05-06 (Cycle 65 — **REPO RENAME `enum-v5` → `enum-v8`**. User renamed the GitHub repo a second time the same day. Bulk `sed` rewrite across ~120 files in main tree + 1 file in `cross-repo/core-v9/README.md` (per established one-time exception). `.release/` and `cross-repo/core-v9/` directory **name** preserved. `go.mod` module path now `github.com/alimtvnetwork/enum-v8`. Verification: zero `enum-v5` hits outside `.release/`. `package.json` 0.36.0 → 0.37.0. **No code logic changed.** AL2-02 (Batch B coverage uplift — DB family) remains the next `next` task.
 > **Last updated:** 2026-05-06 (Cycle 48 — **S-115 SHIPPED** as audit-probe correctness guardrails. Empirically falsified the original framing: indexing `coredata/*` already worked recursively (live run: 177 pkgs, `coreonce.NewAnyErrorOnce` resolved). Real defect was operator-side — when `/tmp/core-v9-upstream` is missing, `rg`/`grep` probes return 0 hits and produce false fabrications (R-CVS-01/02/03 same class). Built two guardrails in `scripts/spec-api-check.psm1` v1.2.0: (1) **`Test-UpstreamClone`** exported helper returning `{Ok;Path;Reason;PackageCount}` with `-AutoClone`; sentinel = `coredata/coregeneric`; reasons `missing`/`sentinel-missing`/`clone-failed`/`ok`. (2) **Sentinel warning** inside `Get-UpstreamPackages`. Wired into `scripts/CoveragePreChecks.psm1` "Spec-API Lint" phase (replaces plain Test-Path skip). Smoke test `tests/scripts/Test-UpstreamClone.ps1` — 7/7 assertions pass. `package.json` 0.17.0 → 0.18.0. Recent prior cycles: **47** (AB-residual reflection sweep complete; 2 new HIGH findings + R-CVS-03), **46** (spec/01 §08 6❓ classified, no new findings), **45** (spec/01 §11 ❌ C-CVS-62 HIGH), **44** (spec/01 §07 2✅ + D-CVS-66 LOW), **43** (spec/01 §09 ❌ C-CVS-61 CRITICAL). Open suggestions: S-002 only (deferred to AC). 🎉 AB-RESIDUAL DEEP-PROBE SWEEP COMPLETE for spec/01-app/.
 

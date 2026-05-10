@@ -2,6 +2,55 @@
 
 ## Active Suggestions
 
+### AP — Brief `spec/01-app/` thaw to clear AJ-45 + S-002
+
+- **Status:** Pending — needs explicit user authorisation to thaw the freeze.
+- **Priority:** Medium (eliminates the only HIGH-severity finding still on the scoreboard, C-CVS-65).
+- **Description:** Thaw `spec/01-app/` for one cycle, apply (a) AJ-45 — purge fabricated `errcore.OverflowType.Fmt` from `spec/01-app/09-converters.md:161`, replace with `errcore.Expected.MessageVarMap`; (b) S-002 — change "duplicates" → "delegates to" in §09 row 64. Re-freeze immediately. Both are verbatim spec-text edits with zero source/code impact.
+- **Added:** 2026-05-10 (Cycle 49).
+
+### AQ — Lift `osdetect` past 77.4% with Linux-branch probes
+
+- **Status:** Pending.
+- **Priority:** Low (currently above the per-package CI floor; this is opportunistic).
+- **Description:** AL-08 deliberately skipped platform-specific paths in `osdetect/`. Add `runtime.GOOS == "linux"`-guarded test probes for `linux.go`'s `defaultLinuxReleaseFile` parsing branches (lines 312/358/366) to push coverage from 77.4% toward ≥90%.
+- **Added:** 2026-05-10 (Cycle 53).
+
+### AU — Sweep §09 ⓘ advisory rows into `tests/contracttests/`
+
+- **Status:** Pending.
+- **Priority:** Low (remaining items are advisory, not active findings).
+- **Description:** Row-172 carry-over and any other drained-but-untested behavioural claims in §09 should get pinned by contract tests in `tests/contracttests/`, mirroring the AJ-46 pattern. Locks the spec narrative against silent upstream behavioural drift.
+- **Added:** 2026-05-10 (Cycle 50).
+
+### AV — End-to-end test for `Test-UpstreamClone` (S-115)
+
+- **Status:** Pending.
+- **Priority:** Low (S-115 has unit smoke test; this would add an integration scenario).
+- **Description:** Drive `Test-UpstreamClone` against a deliberately broken clone (sentinel-missing) inside CI to confirm the documented `{Ok, Path, Reason, PackageCount}` shape and that `Reason == "sentinel-missing"` is surfaced precisely.
+- **Added:** 2026-05-10 (Cycle 53).
+
+### AW — Per-package coverage trend warning
+
+- **Status:** Pending.
+- **Priority:** Medium (improves the AS gate without adding hard failures).
+- **Description:** Companion to AS. Compare current per-package coverage to the previous green main build's profile and emit a CI warning (not failure) if any package drops by >5pp even when still ≥75%. Catches gradual erosion before it crosses the floor.
+- **Added:** 2026-05-10 (Cycle 53).
+
+### AY — Regression-lock test for RCA Pattern P10 (brace-tracking)
+
+- **Status:** Pending.
+- **Priority:** Medium (completes the static-guard trifecta with AS+AX).
+- **Description:** Add a synthetic fixture under `scripts/ci/test_check_collisions.py` containing `var got` inside `t.Run(...)` body. Assert no false positive. Locks in the brace-depth tracking fix from RCA Pattern P10 (v1.15.0).
+- **Added:** 2026-05-10 (Cycle 54).
+
+### AZ — Unittest mitigation lock for RCA Pattern P8
+
+- **Status:** Pending.
+- **Priority:** Medium (completes the static-guard trifecta with AS+AX+AY).
+- **Description:** Add Pester or a PowerShell smoke test that feeds `Test-IsCoverpkgWarningOnlyOutput` a representative warning-only blob and asserts `$true`. Locks in the AT-verified mitigation against silent removal.
+- **Added:** 2026-05-10 (Cycle 54).
+
 ### Pin Go toolchain to 1.22 as a stopgap for Task W
 
 - **Status:** Obsolete — Task W is now ✅ Done. This stopgap is no longer needed.
@@ -33,3 +82,33 @@
 
 - **Implemented:** 2026-05-04 → 2026-05-05 (D-CVS-25 in §06, D-CVS-38 in §13, D-CVS-42 in §14).
 - **Notes:** Three sections now carry explicit "this surface has no `enum-v8` consumer; verify via Task AB" callouts so future readers don't assume verified ✅ status incorrectly.
+
+### AS — Per-package coverage gate at 75% (Task AS)
+
+- **Implemented:** 2026-05-10 (Cycle 53, v1.30.0).
+- **Notes:** `scripts/ci/check-package-coverage.py` + `scripts/ci/test_check_package_coverage.py` (6 unittest cases) + new `Coverage gate per-package (75%)` step in `.github/workflows/ci.yml` `test-summary` job. Locks in the AO uplift permanently. See `.lovable/cicd-issues/08-per-package-coverage-gate.md`.
+
+### AX — RCA P9 static guard against `Stringer` recursion bombs (Task AX)
+
+- **Implemented:** 2026-05-10 (Cycle 54, v1.31.0).
+- **Notes:** `scripts/ci/check-stringer-recursion.py` + `scripts/ci/test_check_stringer_recursion.py` (8 unittest cases) + new `stringer-recursion-guard` job in `.github/workflows/ci-guards.yml`. Surfaced + fixed real violation in `scripttype/ScriptDefault.go` during the same cycle. See `.lovable/cicd-issues/09-stringer-recursion-guard.md`.
+
+### AT — Re-audit RCA patterns P8/P9/P10 against current source
+
+- **Implemented:** 2026-05-10 (Cycle 52, v1.29.0).
+- **Notes:** All 3 active patterns confirmed mitigated. Audit log section appended to `.lovable/memory/07-test-failure-rca-patterns.md`. Zero new patterns surfaced this cycle.
+
+### AR — Close PI-003 + retire AB-residual from Next Task list
+
+- **Implemented:** 2026-05-10 (Cycle 51, v1.28.0).
+- **Notes:** Pure tracker hygiene. PI-003 → ✅ RESOLVED in `.lovable/memory/pending-issues/01-all-pending-issues.md`. AB-residual line removed from `.lovable/plan.md` Next Task Selection.
+
+### AJ-46 — Converter behavioural contract pass
+
+- **Implemented:** 2026-05-10 (Cycle 50, v1.27.0).
+- **Notes:** New `tests/contracttests/converters_test.go` with 5 tests, all PASS in 0.005s. Pins §09 rows 99-107 (no panics / errcore-typed / locale-independent) + row 119 (`IntegerWithDefault` fallback) + row 130 (`parsePagination` example).
+
+### AC — Re-audit §07/§09 spec dimensions
+
+- **Implemented:** 2026-05-10 (Cycle 49, v1.26.0).
+- **Notes:** AC umbrella complete. 3 ❓→✅ promotions + 1 ❓→❌ NEW HIGH C-CVS-65 (`errcore.OverflowType.Fmt` fabricated → spawned AJ-45). 4 advisory rows consolidated into AJ-46.
