@@ -16,6 +16,12 @@
 
 ## Open Suggestions
 
+### AQ: `osdetect` Linux-branch coverage uplift
+
+- **Status:** ✅ DONE (v1.43.0).
+- **Source:** `.lovable/plan.md` AQ.
+- **Done:** Added `osdetect/OsDetect_WhatWindows_Internal_test.go` (white-box) covering all 5 branches of unexported `WindowsSystemDetail.whatWindows` (nil receiver, server, win11 via `windows11BuildIdentifier+1`, win10, win8, fallback) plus 2 `initialize` cases (win10 and fallback). These methods were 0% from the public uplift suite because they're unexported. Pure data-driven — no registry/syscall — so runs cleanly on Linux CI.
+
 ### AZ: PS smoke test for RCA Pattern 8 (`-coverpkg` warning-only false-positive)
 
 - **Status:** ✅ DONE (v1.42.0).
