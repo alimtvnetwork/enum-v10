@@ -62,10 +62,11 @@ func TestDirectMethods_CompressLevels(t *testing.T) {
 		t.Errorf("JsonParseSelfInject round-trip: want %v, got %v", a, got)
 	}
 
-	if _, err := a.UnmarshallEnumToValue(jr.SecondaryData); err != nil {
+	bs, _ := json.Marshal(a)
+	if _, err := a.UnmarshallEnumToValue(bs); err != nil {
 		t.Logf("UnmarshallEnumToValue: %v", err)
 	}
-	if _, err := a.UnmarshallEnumToValueInt8(jr.SecondaryData); err != nil {
+	if _, err := a.UnmarshallEnumToValueInt8(bs); err != nil {
 		t.Logf("UnmarshallEnumToValueInt8: %v", err)
 	}
 }
