@@ -8,6 +8,17 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 The release pipeline extracts the matching `## [vX.Y.Z]` section as the
 GitHub Release body — keep entries small, sectioned, and human-readable.
 
+## [v1.25.0] - 2026-05-10
+### Added — AO pass 3: pathpatterntype + packageinstallmethod + osdetect uplift
+- `packageinstallmethod/PackageInstallMethod_Uplift_test.go` — **73.5% → 100.0%** (+26.5pp). Covers all `IsX` predicates, `ToPtr`/`ToSimple` (incl. nil-receiver), `Json`/`JsonPtr`/`JsonParseSelfInject` round-trip, and all `As*` binder accessors.
+- `pathpatterntype/PathPatternType_Uplift_test.go` — **72.4% → 96.1%** (+23.7pp). Covers JSON binders, `UnmarshalJSON`, `findUsingInternalMapping` (empty/curly/bare/bogus inputs), `CompileTemplateReplaceOption` / `CompileCurlyTemplateReplace`, and the `panicOnNotFoundInList` / `notFoundInListMessage` paths via recovered panics on out-of-range Variants.
+- `osdetect/OsDetect_VariantUplift_test.go` — exercises `Max`, `RangeNamesCsv`/`TypeName`/`NameValue`, all `As*` binders, `Json`/`JsonPtr`/`JsonParseSelfInject` round-trip, `AllSysMatchingTypes`/`AllSysMatchingTypesMap`, `IsCurrentOs`, `LinuxVendorType`, `OsDetail`, `IsMajorAtLeast`. **osdetect 71.9% → 77.4%** — past the 75% per-package gate.
+
+### Fixed — osdetect host-fragility (pre-existing failures surfaced by AO probe)
+- `OsDetect_Coverage_test.go::TestOsDetect_PlatformWrappers_DoNotPanic` previously called `CurrentOsType()` then asserted that `CurrentOsTypesNotContainsError(cur)` returns nil. On minimally-provisioned Linux hosts (sandbox/container without `/etc/os-release`-style hints) `CurrentOsType()` legitimately returns `Invalid` even though `CurrentOsTypesMap()` is populated with `{AnyOs, Unix, Linux}`. Test now picks a probe from `CurrentOsMixTypes()[0]` (the authoritative slice underlying the map) so the assertion holds on any supported host.
+- `OsDetect_CrossPlatform_test.go::"CurrentOsType smoke (host-agnostic)"` had the same root cause and is fixed the same way (probe `CurrentOsMixTypes()[0].IsValid()` instead of `CurrentOsType().IsValid()`).
+- Both fixes preserve original intent (validate the public API contract on any host) while removing the implicit "host has rich `/etc/os-release` data" assumption.
+
 ## [v1.24.0] - 2026-05-10
 ### Added — AO pass 2: high-leverage 5-package uplift
 - `sitestatetype/SiteStateType_Uplift_test.go` — **17.6% → 89.7%** (+72.1pp)

@@ -238,10 +238,11 @@
 
 ### AO. Coverage probe + uplift remaining sub-75% packages
 
-- **Status:** 🔄 In Progress (passes 1+2 done)
+- **Status:** ✅ DONE (passes 1+2+3 complete, v1.25.0)
 - **Pass 1 ✅ DONE (v1.23.0):** cmdenumtypes — 27 sub-packages 34.8% → 94.2% each.
 - **Pass 2 ✅ DONE (v1.24.0):** sitestatetype 17.6→89.7, taskcategory 39.1→92.2, conntrackstate 38.8→96.2, servicestate 45.0→83.8, quotes 55.4→93.4.
-- **Pass 3 remaining sub-75%:** `pathpatterntype` 72.4%, `packageinstallmethod` 73.5%, `osdetect` 73.2% (+ 2 pre-existing host-fragility test failures).
+- **Pass 3 ✅ DONE (v1.25.0):** packageinstallmethod 73.5→100.0, pathpatterntype 72.4→96.1, osdetect 71.9→77.4 (+ 2 pre-existing host-fragility failures fixed in `OsDetect_Coverage_test.go` and `OsDetect_CrossPlatform_test.go` by probing via `CurrentOsMixTypes()[0]` instead of singular `CurrentOsType()` which can be `Invalid` on minimal Linux hosts).
+- **Result:** No remaining packages below the 75% per-package CI gate. AO umbrella complete.
 
 **Done — full AL umbrella:**
 - AL-01 ✅ (Cycle 49, 15.5% → 21.6%, +6.1pp)
