@@ -8,6 +8,12 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 The release pipeline extracts the matching `## [vX.Y.Z]` section as the
 GitHub Release body — keep entries small, sectioned, and human-readable.
 
+## [v1.32.0] - 2026-05-10
+### Changed — Module rename enum-v8 → enum-v9
+- Bulk rename of `github.com/alimtvnetwork/enum-v8` → `github.com/alimtvnetwork/enum-v9` across `go.mod`, all Go source imports, spec docs, CI workflows, PowerShell tooling, and `.lovable/` memory.
+- 122 files updated. Per project convention, the rename is also applied inside `cross-repo/` (one-time exception). `cross-repo/core-v8/` directory name is unchanged (mirrors a separate upstream).
+- `core-v9` import path is unaffected.
+
 ## [v1.31.0] - 2026-05-10
 ### Added — AX RCA P9 static guard (Cycle 54)
 - `scripts/ci/check-stringer-recursion.py` — scans all non-test, non-vendor `.go` files; brace-depth tracks each `String() string` method body and fails CI if any contains `converters.AnyTo.ValueString` (the documented Pattern P9 recursion bomb).
