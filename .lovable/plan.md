@@ -212,11 +212,11 @@
 
 **Recommended next task:** Pick from this list (in order):
 
-1. **AC** — Re-audit §07 / §09 spec dimensions ⭐ **NEXT**
-2. **AB residual** — Continue ❓ promotion in §03/§04 (PI-003, LOW)
+1. **AB residual** — Continue ❓ promotion in §03/§04 spec dirs (PI-003, LOW, opportunistic) ⭐ **NEXT**
+2. **AJ-45 / AJ-46 / S-002** — All blocked by `spec/01-app/` freeze; cannot ship until user thaws.
 3. **A** — Manual `cross-repo/core-v9/` push ⏭️
 
-**Recently closed:** AO ✅ (v1.25.0, all 3 passes), AN-D ✅ (sandbox lint dry-run = `0 issues.`).
+**Recently closed:** AO ✅ (v1.25.0, all 3 passes), AN-D ✅ (sandbox lint dry-run = `0 issues.`), AC ✅ (v1.26.0, Cycle 49 — AC umbrella complete).
 
 **Done from this list (reconciled 2026-05-10):**
 - AL2-02 ✅ (Cycles 68–69, v0.40.0/v0.41.0 — DB family Coverage_test files in all 6 packages)
