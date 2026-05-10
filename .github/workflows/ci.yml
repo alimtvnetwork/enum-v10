@@ -247,7 +247,6 @@ jobs:
             --ignore cross-repo/core-v9/scripts/autofix \
             --ignore cross-repo/core-v9/scripts/bracecheck \
             --ignore dbdrivertype \
-            --ignore instructiontype \
             --ignore inttype
 
       - uses: actions/upload-artifact@v4
