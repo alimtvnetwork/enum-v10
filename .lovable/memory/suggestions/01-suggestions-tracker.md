@@ -16,6 +16,12 @@
 
 ## Open Suggestions
 
+### AZ: PS smoke test for RCA Pattern 8 (`-coverpkg` warning-only false-positive)
+
+- **Status:** ✅ DONE (v1.42.0).
+- **Source:** `.lovable/memory/07-test-failure-rca-patterns.md` §"Pattern 8".
+- **Done:** Added `scripts/tests/Test-CoverpkgWarningOnly.ps1` — 8 assertions covering pure-warning streams, PASS/ok/blank noise, `FAIL pkg [build failed]` markers, CRLF endings, empty/null inputs, real compile errors, real `--- FAIL: TestX` test failures, and PASS-without-warnings. Wired into `.github/workflows/ci-guards.yml` as new `coverpkg-warning-smoke` job (runs on `pwsh` after `python-tests`).
+
 ### AY: Regression-lock for RCA Pattern 10 (brace-unaware decl scanner)
 
 - **Status:** ✅ DONE (v1.41.0).

@@ -143,6 +143,19 @@ jobs:
           path: .ci-cache/lint-baseline.json
           key: lint-baseline-v2.5.0-refs/heads/main
 
+  coverpkg-warning-smoke:
+    # AZ (Cycle 53): regression-lock for RCA Pattern P8.
+    # Verifies Test-IsCoverpkgWarningOnlyOutput keeps swallowing pure
+    # `-coverpkg=` warning streams while surfacing real compile / test
+    # failures. See .lovable/memory/07-test-failure-rca-patterns.md.
+    needs: python-tests
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Run Test-IsCoverpkgWarningOnlyOutput smoke test
+        shell: pwsh
+        run: pwsh -NoProfile -File ./scripts/tests/Test-CoverpkgWarningOnly.ps1
+
   spec-api-lint:
     # S-106 fabrication lint — verifies every `package.Symbol` reference in
     # spec/01-app/ resolves to a real package + top-level symbol in the

@@ -63,7 +63,7 @@ Manifested as: `licensetype` 58.9%, `onofftype` 32.1%, `rootcmdnames` 58.1% all 
 
 ### 2026-05-10 (Cycle 52, Task AT) — all patterns ✅ still mitigated
 
-- **P8 (`-coverpkg` warning-only false-positive):** `Test-IsCoverpkgWarningOnlyOutput` exported from `scripts/Utilities.psm1:118` and wired into the four call sites that previously misclassified warnings as failures (`CoverageRunner.psm1:217,236`; `CoverageCompileCheck.psm1:200`). Mitigation intact.
+- **P8 (`-coverpkg` warning-only false-positive):** `Test-IsCoverpkgWarningOnlyOutput` exported from `scripts/Utilities.psm1:118` and wired into the four call sites that previously misclassified warnings as failures (`CoverageRunner.psm1:217,236`; `CoverageCompileCheck.psm1:200`). Mitigation intact. **Regression-locked (v1.42.0, Cycle AZ):** `scripts/tests/Test-CoverpkgWarningOnly.ps1` runs 8 assertions on every PR via the `coverpkg-warning-smoke` job in `.github/workflows/ci-guards.yml` — covers pure-warning streams, PASS/ok/blank noise, `[build failed]` markers, CRLF endings, empty/null input, real compile errors, real `--- FAIL` lines, and PASS-without-warnings.
 - **P9 (`Stringer` infinite recursion via `converters.AnyTo.ValueString(self)`):** Detection sweep `rg "converters\.AnyTo\.ValueString" --type go -g '!*_test.go'` returns **zero hits**. The recursion bombs that motivated this pattern have not regressed.
 - **P10 (Brace-unaware Go declaration scanner):** `scripts/ci/check-collisions.py` retains `brace_depth` accounting (line 103) with `at_top = (brace_depth == 0)` gate (line 147) and per-branch `brace_depth += opens - closes` updates (lines 155, 160, 165, 176). Mitigation intact.
 
