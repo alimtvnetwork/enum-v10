@@ -63,10 +63,9 @@
 
 ### AC. Re-audit §07 and §09
 
-- **Status:** ⏳ Pending — waits on AB
-- **Objective:** Apply spec-internal-consistency dimension to the two baseline-only sections.
-- **Dependencies:** AB
-- **Expected outputs:** Updated audit reports, possible spec fixes.
+- **Status:** ✅ DONE (2026-05-10, Cycle 49, `spec-v0.57.0` / enum-v8 v1.26.0)
+- **Result:** AC dimension applied to advisory carry-overs from Cycles 19/20/43/44. 3 ❓→✅ + 1 ❓→❌ NEW C-CVS-65 HIGH (`errcore.OverflowType.Fmt` fabricated → AJ-45) + 4 ❓ retained out-of-AC-scope (rows 99-107/119/130 → AJ-46 contract pass; row 172 → ⓘ advisory). AB+AC ❌ 53 → 54. **AC umbrella complete.**
+- **Spawned:** AJ-45 (purge fabricated symbol, freeze-blocked), AJ-46 (converter behavioural contract pass), S-002 (LOW wording tweak).
 
 ### AI. Mark `spec/01-app/` as frozen
 
