@@ -25,14 +25,14 @@
 
 ### 2.1 Row 42 — "Add tests (Style A) — `coretestcases.CaseV1`" + `CaseNilSafe` example → ⓘ upstream-only
 
-- Cycle 37 (S-109) deep-probe already established that `enum-v8/tests/creationtests/` does NOT consume `coretestcases.CaseV1` / `CaseNilSafe` — the entire `coretests` framework is upstream-`core-v9` only (`rg -n 'CaseV1|CaseNilSafe' tests/creationtests/` returns zero hits).
-- **Verdict:** ⓘ "upstream-only" — claim is accurate for upstream `core-v9` consumers but does not describe `enum-v8`'s test layout. Same scope-disclaimer pattern as the 9 items annotated in Cycle 37.
+- Cycle 37 (S-109) deep-probe already established that `enum-v9/tests/creationtests/` does NOT consume `coretestcases.CaseV1` / `CaseNilSafe` — the entire `coretests` framework is upstream-`core-v9` only (`rg -n 'CaseV1|CaseNilSafe' tests/creationtests/` returns zero hits).
+- **Verdict:** ⓘ "upstream-only" — claim is accurate for upstream `core-v9` consumers but does not describe `enum-v9`'s test layout. Same scope-disclaimer pattern as the 9 items annotated in Cycle 37.
 
 ### 2.2 Row 44 — "Three test files in `tests/creationtests/<pkg>tests/`: `<V>_Verification_test.go` etc." → ⓘ upstream-only
 
-- `enum-v8/tests/creationtests/` is **flat** (no `<pkg>tests/` subdirectory pattern). Real files: `PathType_Creation_test.go`, `ScriptType_test.go`, `creation_test.go`, `AllEnums_ContractsTesting_test.go` — all at the directory root.
+- `enum-v9/tests/creationtests/` is **flat** (no `<pkg>tests/` subdirectory pattern). Real files: `PathType_Creation_test.go`, `ScriptType_test.go`, `creation_test.go`, `AllEnums_ContractsTesting_test.go` — all at the directory root.
 - Upstream `core-v9` IS organised by `<pkg>tests/` subdirectories (e.g. `tests/integratedtests/converterstests/`, `tests/integratedtests/regexnewtests/` per Cycle 43+44 evidence) but uses neither `_Verification_` nor `<V>_Verification_test.go` filename pattern (representative samples: `LazyRegex_Compile_test.go`, `LazyRegex_Methods_test.go`, `StringTo_IntegerWithDefault_test.go`).
-- **Verdict:** ⓘ "upstream-only — and partially fabricated even there" — the `<pkg>tests/` subdirectory shape is real upstream but the `<V>_Verification_test.go` naming convention isn't used by either `enum-v8` or upstream `core-v9`. Folded into S-109 scope-disclaimer category for now (no new finding ID; will be addressed when AJ-08..14 rewrites the surrounding §6 template).
+- **Verdict:** ⓘ "upstream-only — and partially fabricated even there" — the `<pkg>tests/` subdirectory shape is real upstream but the `<V>_Verification_test.go` naming convention isn't used by either `enum-v9` or upstream `core-v9`. Folded into S-109 scope-disclaimer category for now (no new finding ID; will be addressed when AJ-08..14 rewrites the surrounding §6 template).
 
 ### 2.3 Row 46 — Diagnostic rules ("Message starts with field label", "No trailing punctuation", "No interpolated newlines") → out-of-band
 

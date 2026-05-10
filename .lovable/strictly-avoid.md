@@ -9,7 +9,7 @@ This is the project's "never do this" list. Every entry is enforced across all s
 ## Module paths & renames
 
 - **Reintroducing `github.com/alimtvnetwork/core-v8` outside `cross-repo/core-v9/`.** All source imports use `core-v9`. The mirror directory keeps `core-v8` intentionally and tracks a different upstream module.
-- **Rewriting `enum-v1` → `enum-v8` inside `cross-repo/core-v9/`.** That directory tracks a different module and must not be touched by the bulk-rename.
+- **Rewriting `enum-v1` → `enum-v9` inside `cross-repo/core-v9/`.** That directory tracks a different module and must not be touched by the bulk-rename.
 - **Pseudo-version `v1.5.6-0.<date>-<sha>` for the `replace` bridge.** It needs a `v1.5.5` predecessor tag that doesn't exist; Go module proxy will reject it.
 
 ## Spec content

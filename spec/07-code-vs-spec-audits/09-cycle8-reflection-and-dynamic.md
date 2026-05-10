@@ -11,10 +11,10 @@
 
 For each numbered section in the spec, classify every concrete claim (import path, exported symbol, signature, MUST/MUST-NOT rule) as:
 
-- ✅ **Match** — claim verified against `enum-v8` source on disk.
+- ✅ **Match** — claim verified against `enum-v9` source on disk.
 - ⚠️ **Drift** — verifiable but inaccurate.
 - ❌ **Contradiction** — verifiable and wrong.
-- ❓ **Unverifiable** — package not consumed by `enum-v8` and no upstream `core-v9` source on disk; defer to task **AB**.
+- ❓ **Unverifiable** — package not consumed by `enum-v9` and no upstream `core-v9` source on disk; defer to task **AB**.
 
 Verification commands run from repo root:
 
@@ -28,7 +28,7 @@ ls cross-repo/core-v9/{coredynamic,reflectcore} 2>/dev/null
 ```
 
 Results:
-- **Zero importers** of `coredynamic`, `reflectcore`, or `reflectinternal` in `enum-v8`.
+- **Zero importers** of `coredynamic`, `reflectcore`, or `reflectinternal` in `enum-v9`.
 - **Zero call sites** of any documented symbol (19 probed).
 - **Zero direct `"reflect"` imports** in consumer code (excluding `cross-repo/` mirror).
 - **Zero `reflect.DeepEqual` calls** in consumer code.
@@ -42,8 +42,8 @@ Results:
 | #  | Spec § | Claim                                                                                              | Verdict | Note |
 |----|--------|----------------------------------------------------------------------------------------------------|---------|------|
 | 1  | §1     | Three-layer architecture (`coredynamic` public / `reflectcore` public / `internal/reflectinternal` internal) | ❓ | Layer existence not verifiable without upstream source |
-| 2  | §1 (MUST) | Consumer code MUST NOT import `internal/reflectinternal`                                          | ✅ | Verified — `rg "core-v9/internal/reflectinternal"` → 0 hits in `enum-v8` |
-| 3  | §1 (MUST) | Consumer code MUST NOT import stdlib `"reflect"` directly                                          | ✅ | Verified — `rg '"reflect"'` (excl. `cross-repo/`) → 0 hits in `enum-v8` |
+| 2  | §1 (MUST) | Consumer code MUST NOT import `internal/reflectinternal`                                          | ✅ | Verified — `rg "core-v9/internal/reflectinternal"` → 0 hits in `enum-v9` |
+| 3  | §1 (MUST) | Consumer code MUST NOT import stdlib `"reflect"` directly                                          | ✅ | Verified — `rg '"reflect"'` (excl. `cross-repo/`) → 0 hits in `enum-v9` |
 | 4  | §1 (convention) | MUST/MUST-NOT/MAY are non-negotiable; "should/prefer" are guidance                            | ✅ | Documentation convention — internally consistent and applied throughout this audit cycle |
 | 5  | §2.1   | `coredynamic.InvokeMethod(target any, name string, args ...any) (any, error)` — two-return only (F-V14-02) | ❓ | No consumer |
 | 6  | §2.1   | `coredynamic.HasMethod(target, name) bool`                                                         | ❓ | No consumer |
@@ -56,10 +56,10 @@ Results:
 | 13 | §3.2   | `reflectcore.WalkFields(target, func(name, value))`                                                | ❓ | No consumer |
 | 14 | §3.2   | `reflectcore.GetTag(target, fieldName, tagName) string`                                            | ❓ | No consumer |
 | 15 | §3.3   | `reflectcore.DerefAll(ptr)` returns the underlying value                                           | ❓ | No consumer |
-| 16 | §4     | `internal/reflectinternal` responsibilities (low-level setters, unsafe pointer arithmetic, type-cache) | ❓ | Internal package — by design unverifiable from `enum-v8` |
+| 16 | §4     | `internal/reflectinternal` responsibilities (low-level setters, unsafe pointer arithmetic, type-cache) | ❓ | Internal package — by design unverifiable from `enum-v9` |
 | 17 | §5     | Decision matrix (generics vs `coredynamic` vs `reflectcore` vs `internal/reflectinternal` vs `corejson` vs `corefuncs.GetFuncName`) | ❓ | Reflects §2–§4 surface; same status |
 | 18 | §6     | Performance mitigations: type cache, `coreonce` lazy binding, generics-first defaults              | ❓ | Behavioural rules — no consumer |
-| 19 | §7     | Common-mistakes table (6 rows) — `reflect`-stdlib ban, `internal/` ban, prefer generics, cache `HasMethod`, `DerefAll` first, prefer `isany.DeepEqual` over `reflect.DeepEqual` | ✅ | Two anti-patterns measurable: stdlib `"reflect"` import (claim #3) and `reflect.DeepEqual` use — both **0 hits** in `enum-v8` consumer code → rules are being honoured |
+| 19 | §7     | Common-mistakes table (6 rows) — `reflect`-stdlib ban, `internal/` ban, prefer generics, cache `HasMethod`, `DerefAll` first, prefer `isany.DeepEqual` over `reflect.DeepEqual` | ✅ | Two anti-patterns measurable: stdlib `"reflect"` import (claim #3) and `reflect.DeepEqual` use — both **0 hits** in `enum-v9` consumer code → rules are being honoured |
 
 **Total claims**: 19
 **Verifiable subset**: 4 (claims #2, #3, #4, #19 — all rule-compliance checks)
@@ -73,13 +73,13 @@ Results:
 |------------|-------|-----------------------------------------|--------|----|-----|----|----|--------------------|
 | 2026-05-05 | 8 (baseline / closed) | `01-app/10-reflection-and-dynamic.md` | 19 | 4 | 0 | 0 | 15 | **100.0%** *(verifiable)* |
 
-> **Note**: closed at baseline — no fixes needed because all four verifiable claims are already at ✅ Match (the MUST/MUST-NOT rules are being followed in `enum-v8`).
+> **Note**: closed at baseline — no fixes needed because all four verifiable claims are already at ✅ Match (the MUST/MUST-NOT rules are being followed in `enum-v9`).
 
 ---
 
 ## 4. Findings
 
-**No drifts, no contradictions found.** Cycle 8 is the first audit cycle where the spec's verifiable subset consists entirely of **negative-rule compliance** (MUST-NOT statements), and `enum-v8` honours all of them:
+**No drifts, no contradictions found.** Cycle 8 is the first audit cycle where the spec's verifiable subset consists entirely of **negative-rule compliance** (MUST-NOT statements), and `enum-v9` honours all of them:
 
 - §1 ban on consumer-side `"reflect"` import → 0 violations
 - §1 ban on `internal/reflectinternal` import → 0 violations (also impossible due to Go's `internal/` rule across the `core-v9` module boundary — see C-CVS-02 / C-CVS-04 history)
@@ -112,7 +112,7 @@ The promised flat-namespace functions (`coredynamic.InvokeMethod`, `coredynamic.
 | #  | Original verdict | New verdict | Evidence |
 |----|------------------|-------------|----------|
 | 1  | ❓ | ⚠️ | Three-layer architecture **partially correct**: `internal/reflectinternal/` exists; `reflectcore/` exists; but no top-level `coredynamic/` (it's `coredata/coredynamic/`). |
-| 2  | ✅ | ✅ | Re-confirmed — 0 importers in `enum-v8`. |
+| 2  | ✅ | ✅ | Re-confirmed — 0 importers in `enum-v9`. |
 | 3  | ✅ | ✅ | Re-confirmed. |
 | 4  | ✅ | ✅ | Re-confirmed. |
 | 5  | ❓ | ❌ | No `coredynamic.InvokeMethod(...)` top-level func. Closest is `reflectcore.reflectmodel.MethodProcessor.Invoke(...)`. |

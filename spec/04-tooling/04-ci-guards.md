@@ -1,6 +1,6 @@
 # CI Guards
 
-Reusable, language-agnostic CI guards from [`spec/12 §03-reusable-ci-guards`](https://github.com/alimtvnetwork/coding-guidelines-v20/tree/main/spec/12-cicd-pipeline-workflows/03-reusable-ci-guards), implemented for `enum-v8`.
+Reusable, language-agnostic CI guards from [`spec/12 §03-reusable-ci-guards`](https://github.com/alimtvnetwork/coding-guidelines-v20/tree/main/spec/12-cicd-pipeline-workflows/03-reusable-ci-guards), implemented for `enum-v9`.
 
 Workflow: [`.github/workflows/ci-guards.yml`](../../.github/workflows/ci-guards.yml)
 

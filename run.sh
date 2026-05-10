@@ -658,7 +658,7 @@ cmd_precommit() {
     for dir in "${pkgs_with_coverage[@]}"; do
         local rel_path
         rel_path=$(echo "$dir" | sed "s|^$SCRIPT_DIR/||" | sed 's|/$||' | tr '\\' '/')
-        local go_pkg="github.com/alimtvnetwork/enum-v8/$rel_path"
+        local go_pkg="github.com/alimtvnetwork/enum-v9/$rel_path"
 
         set +e
         go test -c -gcflags=all=-e -o /dev/null "$go_pkg" > /dev/null 2>&1

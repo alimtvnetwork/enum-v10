@@ -38,7 +38,7 @@ This is an **advisory walk-through**, not a per-claim AB sweep. The guide is a c
 
 ✅ Three references remain. **All three are explicitly scoped as upstream-consumer examples**:
 - Line 36 (Decision Matrix Style D): explicit upstream example.
-- Line 825 (Test Folder Structure preamble): contains the disclaimer *"the layout below describes upstream `core-v9` consumers. `enum-v8` itself uses a single shared `tests/creationtests/` package"* with cross-links to `spec/01-app/13-testing-patterns.md §6.1` and `spec/06-testing-guidelines/01-folder-structure.md`.
+- Line 825 (Test Folder Structure preamble): contains the disclaimer *"the layout below describes upstream `core-v9` consumers. `enum-v9` itself uses a single shared `tests/creationtests/` package"* with cross-links to `spec/01-app/13-testing-patterns.md §6.1` and `spec/06-testing-guidelines/01-folder-structure.md`.
 - Line 828 (code-fence label): part of the upstream-scoped folder diagram.
 
 These are **policy-compliant** under Task **AH** + PI-002 (do NOT rewrite `integratedtests/` → `creationtests/` when the surrounding context is explicitly upstream-scoped). No action.

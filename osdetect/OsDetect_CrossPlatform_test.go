@@ -4,7 +4,7 @@ import (
 	"encoding/json"
 	"testing"
 
-	"github.com/alimtvnetwork/enum-v8/osdetect"
+	"github.com/alimtvnetwork/enum-v9/osdetect"
 	. "github.com/smartystreets/goconvey/convey"
 )
 

@@ -2,24 +2,24 @@
 
 **Date:** 2026-05-04
 **Spec audited:** [`spec/01-app/04-error-system.md`](../01-app/04-error-system.md)
-**Method:** Manual claim extraction from spec; automated `rg` verification of consumer-side usage in `enum-v8`. Upstream `core-v9` source (where `errcore` is defined) is **not** checked into this repo and the sandbox has no Go toolchain, so the audit is **consumer-anchored**: a claim is "match" only if `enum-v8` actually exercises the named symbol in the documented shape.
+**Method:** Manual claim extraction from spec; automated `rg` verification of consumer-side usage in `enum-v9`. Upstream `core-v9` source (where `errcore` is defined) is **not** checked into this repo and the sandbox has no Go toolchain, so the audit is **consumer-anchored**: a claim is "match" only if `enum-v9` actually exercises the named symbol in the documented shape.
 **Auditor:** Lovable agent (evidence-driven)
 
 ---
 
 ## Audit scope & limitation
 
-`errcore` lives in `github.com/alimtvnetwork/core-v9` (declared module name: `core-v9`). The spec describes that upstream package, but `enum-v8` is the only artifact we can read. We can therefore verify:
+`errcore` lives in `github.com/alimtvnetwork/core-v9` (declared module name: `core-v9`). The spec describes that upstream package, but `enum-v9` is the only artifact we can read. We can therefore verify:
 
-1. **Symbols `enum-v8` calls** — direct evidence the documented API exists and is used.
-2. **Symbols `enum-v8` calls but the spec does NOT document** — drift: spec is incomplete relative to the API consumers actually rely on.
-3. **Symbols the spec documents but `enum-v8` never calls** — *unverifiable* from this repo (could exist upstream and just be unused here, or could be aspirational). Marked **❓** rather than ❌.
+1. **Symbols `enum-v9` calls** — direct evidence the documented API exists and is used.
+2. **Symbols `enum-v9` calls but the spec does NOT document** — drift: spec is incomplete relative to the API consumers actually rely on.
+3. **Symbols the spec documents but `enum-v9` never calls** — *unverifiable* from this repo (could exist upstream and just be unused here, or could be aspirational). Marked **❓** rather than ❌.
 
 Marking aspirational APIs ❓ instead of ❌ avoids false contradictions when the upstream `core-v9` checkout becomes available later (planned task **AB**).
 
 ---
 
-## Symbols actually used by `enum-v8` (`rg -o 'errcore\.\w+(\.\w+)?' -g '*.go'`)
+## Symbols actually used by `enum-v9` (`rg -o 'errcore\.\w+(\.\w+)?' -g '*.go'`)
 
 ```
 errcore.ComparatorShouldBeWithinRangeType.String
@@ -54,11 +54,11 @@ Spec claims are numbered C1..C18 in order of appearance.
 |---|-------|----------|
 | C5 | `HandleErr(err)` is the canonical panic helper for `*Must` variants — no-op if nil, panics otherwise (§1 row + §1.2 callout, F-V12-05) | 80+ `*Must` files invoke `errcore.HandleErr(err)` (e.g. `verifiertriggertype/NewMust.go:7`, `compressformats/NewMust.go:7`). Zero `panic(err)` calls in `*Must` files. |
 | C6 | `ShouldBe.StrEqMsg(actual, expected)` produces an assertion-style message (§1.3) | Used in `tests/creationtests/AllEnums_ContractsTesting_test.go:23` exactly as documented: `errcore.ShouldBe.StrEqMsg`. |
-| C18 | Decision tree: unparseable shape → `FailedToConvertType`; parses but rule-rejects → `ValidationFailedType` (§"Boundary Cases") | Pattern is *consistent* with how `enum-v8`'s `all-validation-checking-err.go` files segregate parse failure from range failure, though they call `RangeNotMeet` / `ValidationError` (helpers) rather than the raw type. No contradictory usage found. |
+| C18 | Decision tree: unparseable shape → `FailedToConvertType`; parses but rule-rejects → `ValidationFailedType` (§"Boundary Cases") | Pattern is *consistent* with how `enum-v9`'s `all-validation-checking-err.go` files segregate parse failure from range failure, though they call `RangeNotMeet` / `ValidationError` (helpers) rather than the raw type. No contradictory usage found. |
 
 ### ⚠️ Drift — spec is incomplete (8)
 
-These are the highest-impact findings: `enum-v8` depends on APIs the spec does not mention. A new contributor reading §04 would not learn the patterns the codebase actually uses.
+These are the highest-impact findings: `enum-v9` depends on APIs the spec does not mention. A new contributor reading §04 would not learn the patterns the codebase actually uses.
 
 | # | Claim missing from spec | Code evidence | Severity | Fix path |
 |---|-------------------------|---------------|----------|----------|
@@ -69,7 +69,7 @@ These are the highest-impact findings: `enum-v8` depends on APIs the spec does n
 | D-CVS-10 | `errcore.MessageWithRef(name, ref)` — message-only formatter (returns `string`, not `error`) | Used directly in source | LOW | Add row to §1.4 "Variable-Context Formatting" |
 | D-CVS-11 | `errcore.RangeNotMeet(...)` — domain-specific error builder for out-of-range enum values | Used in enum constructors | LOW | Add §1.6 "Enum-Specific Builders" or note in §7 table |
 | D-CVS-12 | `errcore.ToError(...)` and `errcore.ToString(err)` conversion helpers | `osdetect/vars.go:111` uses `errcore.ToString(err)` | LOW | Add §1.7 "Conversion Helpers" |
-| D-CVS-13 | Several `RawErrorType` values used in `enum-v8` are not in the §1.1 "Common categories" list: `FailedToExecuteType`, `NotSupportedType`, `PathInvalidErrorType`, `ComparatorShouldBeWithinRangeType` | Direct call sites listed above | LOW | Either expand the §1.1 examples or add a footnote pointing to the upstream `RawErrorType.go` enumeration |
+| D-CVS-13 | Several `RawErrorType` values used in `enum-v9` are not in the §1.1 "Common categories" list: `FailedToExecuteType`, `NotSupportedType`, `PathInvalidErrorType`, `ComparatorShouldBeWithinRangeType` | Direct call sites listed above | LOW | Either expand the §1.1 examples or add a footnote pointing to the upstream `RawErrorType.go` enumeration |
 
 ### ✅ Match — resolved via upstream `core-v9 v1.5.8` probe (Cycle 90, 2026-05-07)
 
@@ -85,7 +85,7 @@ All 7 previously-❓ rows confirmed against `/tmp/core-v9-upstream/errcore/` (up
 | C8 | `MergeErrors`, `ManyErrorToSingle`, `SliceToError` (§3.1) | `errcore/MergeErrors.go`, `ManyErrorToSingle.go` + `ManyErrorToSingleDirect.go`, `SliceToError.go` + `SliceToErrorPtr.go`. ✅ |
 | C9 | Type aliases `ErrFunc`, `ErrBytesFunc`, `ErrStringsFunc`, `ErrStringFunc`, `ErrAnyFunc` (§6) | `errcore/funcs.go:26-30` declares all five (plus `TaskWithErrFunc = ErrFunc`). ✅ |
 
-> No new D-CVS findings — spec was accurate; the API simply isn't exercised by `enum-v8` (legitimate, since `core-v9` serves many consumers beyond this enum module).
+> No new D-CVS findings — spec was accurate; the API simply isn't exercised by `enum-v9` (legitimate, since `core-v9` serves many consumers beyond this enum module).
 
 ### ❌ Contradiction (0)
 

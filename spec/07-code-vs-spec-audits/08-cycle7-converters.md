@@ -11,10 +11,10 @@
 
 For each numbered section in the spec, classify every concrete claim (import path, exported symbol, signature, behavioural rule, error-category contract) as:
 
-- ✅ **Match** — claim verified against `enum-v8` source on disk.
+- ✅ **Match** — claim verified against `enum-v9` source on disk.
 - ⚠️ **Drift** — verifiable but inaccurate.
 - ❌ **Contradiction** — verifiable and wrong.
-- ❓ **Unverifiable** — package not consumed by `enum-v8` and no upstream `core-v9` source on disk; defer to task **AB**.
+- ❓ **Unverifiable** — package not consumed by `enum-v9` and no upstream `core-v9` source on disk; defer to task **AB**.
 
 Verification commands run from repo root:
 
@@ -27,7 +27,7 @@ rg -n "strconv\.(Atoi|ParseInt|ParseFloat|ParseBool)" --type go
 ls cross-repo/core-v9/{converters,typesconv} 2>/dev/null
 ```
 
-All commands returned **zero matches**: no `enum-v8` package imports `converters` or `typesconv`, none of the documented symbols (`StringTo.Integer`, `BytesTo.String`, `PrettyJson.FromAny`, `IntToInt64`, `Int64ToInt32`, `Float64ToInt`, etc.) appear in source, and the `cross-repo/core-v9/` mirror does not carry either package. The `strconv.Atoi/ParseBool` anti-pattern from §5 is also absent — there is nothing to violate the rule against.
+All commands returned **zero matches**: no `enum-v9` package imports `converters` or `typesconv`, none of the documented symbols (`StringTo.Integer`, `BytesTo.String`, `PrettyJson.FromAny`, `IntToInt64`, `Int64ToInt32`, `Float64ToInt`, etc.) appear in source, and the `cross-repo/core-v9/` mirror does not carry either package. The `strconv.Atoi/ParseBool` anti-pattern from §5 is also absent — there is nothing to violate the rule against.
 
 ---
 
@@ -53,11 +53,11 @@ All commands returned **zero matches**: no `enum-v8` package imports `converters
 | 16 | §2     | "When to use `typesconv` vs `converters`" decision matrix                                              | ❓ | Reflects §1+§2 surface; same status |
 | 17 | §3     | Two-return-mode contract: `(value, error)` for log-on-failure / `(value, bool)` for fallback           | ❓ | Behavioural contract — no consumer |
 | 18 | §3     | "No panics on bad input — always returns zero value + failure signal"                                  | ❓ | Behavioural rule — no consumer |
-| 19 | §3     | Errors wrapped via `errcore.FailedToConvertType`                                                       | ❓ | `FailedToConvertType` not invoked anywhere in `enum-v8` (see Cycle 2 ❓) |
+| 19 | §3     | Errors wrapped via `errcore.FailedToConvertType`                                                       | ❓ | `FailedToConvertType` not invoked anywhere in `enum-v9` (see Cycle 2 ❓) |
 | 20 | §3     | "Locale-independent — `.` decimal separator, no thousand grouping"                                     | ❓ | Behavioural rule — no consumer |
 | 21 | §3     | "Truncation is silent in `*WithDefault` variants"                                                      | ❓ | Behavioural rule — no consumer |
-| 22 | §4.3   | `errcore.OverflowType.Fmt(...)` for narrowing overflow                                                 | ❓ | `OverflowType` not invoked anywhere in `enum-v8` |
-| 23 | §5     | Common-mistakes table (5 rows: prefer `converters` over `strconv.Atoi`, etc.)                          | ❓ | Anti-pattern absent (no `strconv.Atoi/ParseBool` calls in `enum-v8`) — no rule-violation to flag, but consumer-side enforcement also unverifiable |
+| 22 | §4.3   | `errcore.OverflowType.Fmt(...)` for narrowing overflow                                                 | ❓ | `OverflowType` not invoked anywhere in `enum-v9` |
+| 23 | §5     | Common-mistakes table (5 rows: prefer `converters` over `strconv.Atoi`, etc.)                          | ❓ | Anti-pattern absent (no `strconv.Atoi/ParseBool` calls in `enum-v9`) — no rule-violation to flag, but consumer-side enforcement also unverifiable |
 
 **Total claims**: 23
 **Verifiable subset**: 0
@@ -79,7 +79,7 @@ All commands returned **zero matches**: no `enum-v8` package imports `converters
 
 ### Cross-cycle observation
 
-§09 is the second consecutive section (after §07) with **zero verifiable subset** and **zero on-disk drift signals**. Both packages are documented entirely from upstream knowledge with no `enum-v8` adoption. This raises the running ❓ count on the scoreboard significantly without changing the closed-section count.
+§09 is the second consecutive section (after §07) with **zero verifiable subset** and **zero on-disk drift signals**. Both packages are documented entirely from upstream knowledge with no `enum-v9` adoption. This raises the running ❓ count on the scoreboard significantly without changing the closed-section count.
 
 ---
 

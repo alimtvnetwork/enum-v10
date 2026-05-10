@@ -4,7 +4,7 @@
 > **Severity**: low
 > **Resolved via**: AI-driven audit finding F03 — explicit stability declaration replaces deferred maintainer call.
 
-> **Scope note (`enum-v8`, added Cycle 18)**: `tests/testwrappers/` is an **upstream `core-v9`** directory. `enum-v8` does NOT have a `tests/testwrappers/` directory at all — it has `tests/creationtests/` with a single shared `EnumTestWrapper` (and `PathPatternTypeCreationTestWrapper`) registered via the Goconvey-based collection in `allBasicEnumsCollection.go`. The "STABLE for any test code inside this module" declaration below applies inside the **upstream `core-v9`** module, not this one. See `spec/01-app/13-testing-patterns.md` §6.1 and `spec/01-app/14-tests-folder-walkthrough.md` consumer-coverage callout for the `enum-v8` wrapper layout. Historical declaration text preserved verbatim below.
+> **Scope note (`enum-v9`, added Cycle 18)**: `tests/testwrappers/` is an **upstream `core-v9`** directory. `enum-v9` does NOT have a `tests/testwrappers/` directory at all — it has `tests/creationtests/` with a single shared `EnumTestWrapper` (and `PathPatternTypeCreationTestWrapper`) registered via the Goconvey-based collection in `allBasicEnumsCollection.go`. The "STABLE for any test code inside this module" declaration below applies inside the **upstream `core-v9`** module, not this one. See `spec/01-app/13-testing-patterns.md` §6.1 and `spec/01-app/14-tests-folder-walkthrough.md` consumer-coverage callout for the `enum-v9` wrapper layout. Historical declaration text preserved verbatim below.
 
 ## Stability Declaration (authoritative)
 

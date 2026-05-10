@@ -17,7 +17,7 @@
 | C-CVS-08 | 4  | §06 | ✅ Resolved | `corepayload.New.PayloadWrapper.UsingInstruction(...)` example unverifiable |
 | C-CVS-09a | 9  | §11 | ✅ Resolved | Mojibake `core-v9 → core-v9` at §3:95 |
 | C-CVS-09b | 9  | §11 | ✅ Resolved | Mojibake `core-v9 → core-v9` at §4:112 |
-| C-CVS-10 | 10 | §12 | ✅ Resolved | "No `cmd/` directory" assertion contradicted by `enum-v8/cmd/main/main.go`; carved out smoke-test policy |
+| C-CVS-10 | 10 | §12 | ✅ Resolved | "No `cmd/` directory" assertion contradicted by `enum-v9/cmd/main/main.go`; carved out smoke-test policy |
 
 ## Drifts (D-CVS-XX) — MED/LOW severity
 

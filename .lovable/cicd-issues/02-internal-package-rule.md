@@ -1,4 +1,4 @@
-# 02 — Go's `internal/` Rule Rejects `enum-v8` Consumers
+# 02 — Go's `internal/` Rule Rejects `enum-v9` Consumers
 
 ## Symptom
 
@@ -9,11 +9,11 @@ use of internal package github.com/alimtvnetwork/core-v8/.../internal/X
 not allowed
 ```
 
-…even though `enum-v8` source imports the package as `github.com/alimtvnetwork/core-v9/.../internal/X`.
+…even though `enum-v9` source imports the package as `github.com/alimtvnetwork/core-v9/.../internal/X`.
 
 ## Root Cause
 
-Go's `internal/` rule is enforced against the **cached module's declared path** (`core-v8`), NOT the import path the consumer used (`core-v9`). To the toolchain, `enum-v8` looks like a foreign module reaching into a different module's `internal/`.
+Go's `internal/` rule is enforced against the **cached module's declared path** (`core-v8`), NOT the import path the consumer used (`core-v9`). To the toolchain, `enum-v9` looks like a foreign module reaching into a different module's `internal/`.
 
 This is a **direct downstream consequence of issue #01**.
 

@@ -842,7 +842,7 @@ import "github.com/alimtvnetwork/core-v9/keymk"
 
 ### Test Folder Structure
 
-> ⚠️ **Scope:** the layout below describes **upstream `core-v9`** consumers. `enum-v8` itself uses a single shared `tests/creationtests/` package — see [`spec/01-app/13-testing-patterns.md` §6.1](./01-app/13-testing-patterns.md#61-enum-v8-specific-layout) and [`spec/06-testing-guidelines/01-folder-structure.md`](./06-testing-guidelines/01-folder-structure.md). The Style D row in the Decision Matrix above (`tests/integratedtests/GetAssert_*_test.go`) is likewise an upstream-consumer example.
+> ⚠️ **Scope:** the layout below describes **upstream `core-v9`** consumers. `enum-v9` itself uses a single shared `tests/creationtests/` package — see [`spec/01-app/13-testing-patterns.md` §6.1](./01-app/13-testing-patterns.md#61-enum-v9-specific-layout) and [`spec/06-testing-guidelines/01-folder-structure.md`](./06-testing-guidelines/01-folder-structure.md). The Style D row in the Decision Matrix above (`tests/integratedtests/GetAssert_*_test.go`) is likewise an upstream-consumer example.
 
 ```
 tests/integratedtests/

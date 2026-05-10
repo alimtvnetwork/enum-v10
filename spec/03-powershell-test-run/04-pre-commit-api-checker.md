@@ -1,6 +1,6 @@
 # Pre-Commit API Mismatch Checker
 
-> **Scope note (`enum-v8`)** — the discovery glob below (`tests/integratedtests/`) is the upstream-`core-v9` layout. The actual `run.ps1 PC` implementation reads the test root from disk and works equally on `enum-v8`'s `tests/creationtests/`. JSON example paths use upstream package names (`corejsontests`) for illustration. See [`01-overview.md`](./01-overview.md) scope note and `spec/01-app/13-testing-patterns.md` §6.1.
+> **Scope note (`enum-v9`)** — the discovery glob below (`tests/integratedtests/`) is the upstream-`core-v9` layout. The actual `run.ps1 PC` implementation reads the test root from disk and works equally on `enum-v9`'s `tests/creationtests/`. JSON example paths use upstream package names (`corejsontests`) for illustration. See [`01-overview.md`](./01-overview.md) scope note and `spec/01-app/13-testing-patterns.md` §6.1.
 
 ## Problem
 

@@ -30,7 +30,7 @@
 | [`coreonce`](#5-coreonce--compute-once-values) | Lazy compute-once cached values |
 | [`corepayload`](#6-corepayload--payloadwrapper) | Wire-format payload envelopes |
 
-> ℹ️ **Consumer-coverage note** *(audit Cycle 4)*: from `enum-v8`, only `corejson` (80 files), `corestr` (4 files), and `coreonce` (1 file) are actually imported. `coregeneric` and `corepayload` have **zero `enum-v8` consumers** — they are documented here for upstream `core-v9` completeness, but the API surfaces in §2 and §6 cannot be verified against this repo. Treat those two sub-sections as *upstream-reference* until task **AB** fetches `core-v9` source.
+> ℹ️ **Consumer-coverage note** *(audit Cycle 4)*: from `enum-v9`, only `corejson` (80 files), `corestr` (4 files), and `coreonce` (1 file) are actually imported. `coregeneric` and `corepayload` have **zero `enum-v9` consumers** — they are documented here for upstream `core-v9` completeness, but the API surfaces in §2 and §6 cannot be verified against this repo. Treat those two sub-sections as *upstream-reference* until task **AB** fetches `core-v9` source.
 
 ### Shared rules
 
@@ -45,7 +45,7 @@
 
 Located at `coredata/coregeneric/`. Generic-first, built on Go 1.18+ type parameters.
 
-> ⚠️ **Upstream-only sub-package** *(audit Cycle 4)*: `coregeneric` has **zero consumers in `enum-v8`**. The API tables below reflect upstream `core-v9` documentation but cannot be cross-checked against any call site in this repo. Treat as upstream-reference until task **AB** verifies against `core-v9` source.
+> ⚠️ **Upstream-only sub-package** *(audit Cycle 4)*: `coregeneric` has **zero consumers in `enum-v9`**. The API tables below reflect upstream `core-v9` documentation but cannot be cross-checked against any call site in this repo. Treat as upstream-reference until task **AB** verifies against `core-v9` source.
 
 ### 2.1 `Collection[T any]`
 
@@ -175,7 +175,7 @@ Lower-volume containers; same construction pattern via `coregeneric.New.LinkedLi
 
 ## 3. `corestr` — String Collections
 
-Located at `coredata/corestr/`. The exported surface actually consumed from `enum-v8` is three string-typed helpers (audit Cycle 4):
+Located at `coredata/corestr/`. The exported surface actually consumed from `enum-v9` is three string-typed helpers (audit Cycle 4):
 
 | Type / constructor | Purpose | Example call site |
 |---|---|---|
@@ -201,7 +201,7 @@ label := corestr.SimpleStringOnce{Producer: func() string { return expensiveLabe
 fmt.Println(label.Value())
 ```
 
-> **Note (audit Cycle 4):** earlier drafts of this spec showed `corestr.NewCollectionPtrUsingStrings(&values, 0)` as the canonical entry point. That constructor is **not used anywhere in `enum-v8`**, and a thread-safe "string list collection" is not part of the consumer-side surface today. If you need a string list with mutex-protected mutation, use `coregeneric.New.Collection.String` (upstream-only — see §1 callout) or — for the lock-free case — `corestr.New.SimpleSlice`.
+> **Note (audit Cycle 4):** earlier drafts of this spec showed `corestr.NewCollectionPtrUsingStrings(&values, 0)` as the canonical entry point. That constructor is **not used anywhere in `enum-v9`**, and a thread-safe "string list collection" is not part of the consumer-side surface today. If you need a string list with mutex-protected mutation, use `coregeneric.New.Collection.String` (upstream-only — see §1 callout) or — for the lock-free case — `corestr.New.SimpleSlice`.
 
 ---
 
@@ -238,7 +238,7 @@ func (it MyType) JsonPtr() *corejson.Result { return corejson.New(it) }
 
 ### Rule (with documented exceptions)
 
-Any package that touches JSON **should** import `corejson` rather than `encoding/json` directly. Two **legitimate exceptions** apply (audit Cycle 4 — these are the only direct `encoding/json` imports in `enum-v8`):
+Any package that touches JSON **should** import `corejson` rather than `encoding/json` directly. Two **legitimate exceptions** apply (audit Cycle 4 — these are the only direct `encoding/json` imports in `enum-v9`):
 
 | File | Use of `encoding/json` | Why it's allowed |
 |---|---|---|
@@ -251,7 +251,7 @@ Outside of these two patterns (a `MarshalJSON` body emitting a primitive, or a `
 
 ## 5. `coreonce` — Compute-Once Values
 
-Located at `coredata/coreonce/`. Lazy-evaluated cached values built on `sync.Once`. The exported surface used from `enum-v8` is a small set of typed top-level constructors (audit Cycle 4):
+Located at `coredata/coreonce/`. Lazy-evaluated cached values built on `sync.Once`. The exported surface used from `enum-v9` is a small set of typed top-level constructors (audit Cycle 4):
 
 | Constructor | Cached value type | Use case |
 |---|---|---|
@@ -280,7 +280,7 @@ Use for expensive package-level computations (regex compilation, file reads, net
 
 Located at `coredata/corepayload/`. Wire-format envelope for payload-bearing messages.
 
-> ⚠️ **Upstream-only sub-package** *(audit Cycle 4)*: `corepayload` has **zero consumers in `enum-v8`**. The example below reflects the documented upstream API but cannot be cross-checked against any call site in this repo. Treat it as upstream-reference; the exact field names of `PayloadCreateInstruction` are pending verification under task **AB**.
+> ⚠️ **Upstream-only sub-package** *(audit Cycle 4)*: `corepayload` has **zero consumers in `enum-v9`**. The example below reflects the documented upstream API but cannot be cross-checked against any call site in this repo. Treat it as upstream-reference; the exact field names of `PayloadCreateInstruction` are pending verification under task **AB**.
 
 ```go
 import "github.com/alimtvnetwork/core-v9/coredata/corepayload"
@@ -311,9 +311,9 @@ payload = corepayload.New.PayloadWrapper.UsingInstruction(&corepayload.PayloadCr
 
 ## 7. Choosing the Right Container
 
-Decision matrix. ⚠️ marks rows whose target sub-package has no `enum-v8` consumers (see §1 callout) — usable upstream but cannot be verified from this repo.
+Decision matrix. ⚠️ marks rows whose target sub-package has no `enum-v9` consumers (see §1 callout) — usable upstream but cannot be verified from this repo.
 
-| Need | Use | Verified in `enum-v8`? |
+| Need | Use | Verified in `enum-v9`? |
 |---|---|---|
 | Generic, mutex-protected, slice-backed | `coregeneric.New.Collection.<Type>` | ⚠️ upstream-only |
 | Generic, mutex-protected, set semantics | `coregeneric.New.Hashset.<Type>` | ⚠️ upstream-only |

@@ -10,7 +10,7 @@
 
 Dual-dimension probe:
 
-1. **Code-vs-spec** — confirm referenced symbols (`coretests.GetAssert`, `tests/testwrappers/`, `tests/integratedtests/<pkg>tests/`, `csvinternaltests/`, `errcoretests/`) reflect **upstream `core-v9`** scope, not `enum-v8` reality.
+1. **Code-vs-spec** — confirm referenced symbols (`coretests.GetAssert`, `tests/testwrappers/`, `tests/integratedtests/<pkg>tests/`, `csvinternaltests/`, `errcoretests/`) reflect **upstream `core-v9`** scope, not `enum-v9` reality.
 2. **Spec-internal-consistency** — README index matches `00-issues-index.md`; severity declarations match across files; status banners ("resolved" vs "open") consistent; cross-refs resolve; no banned tokens.
 
 ```bash
@@ -20,9 +20,9 @@ ls tests/testwrappers/ internal/ 2>&1
 ```
 
 **Result of the consumer probe:**
-- `tests/testwrappers/` does **not** exist in `enum-v8`. Per Cycle 12 §6.1 callout, `enum-v8` uses a single shared `EnumTestWrapper` inside `tests/creationtests/`.
-- `internal/` directory does **not** exist in `enum-v8`. The "internal-package coverage policy" (#02) applies vacuously — there are no internal packages to test.
-- `coretests.GetAssert` returns zero hits in `enum-v8` source (`rg coretests\\.GetAssert` — verified Cycle 12).
+- `tests/testwrappers/` does **not** exist in `enum-v9`. Per Cycle 12 §6.1 callout, `enum-v9` uses a single shared `EnumTestWrapper` inside `tests/creationtests/`.
+- `internal/` directory does **not** exist in `enum-v9`. The "internal-package coverage policy" (#02) applies vacuously — there are no internal packages to test.
+- `coretests.GetAssert` returns zero hits in `enum-v9` source (`rg coretests\\.GetAssert` — verified Cycle 12).
 - All 9 issue files exist + the `00-issues-index.md` + README.
 
 ## 2. Claim-by-claim table
@@ -36,13 +36,13 @@ ls tests/testwrappers/ internal/ 2>&1
 | 3  | README | Cross-ref to `spec/05-failing-tests/` for backward-looking fix log | ✅ | Resolves (folder exists). |
 | 4  | 00-issues-index | Canonical 9-row index, all resolved | ✅ | Authoritative; matches per-file `Status: resolved` banners after the fix to README. |
 | 5  | 01-style-b-style-a-coexistence | Severity medium, resolved | ✅ | Banner consistent. |
-| 6  | 02-internal-package-coverage-policy | "Resolution: …business/integration tests for internal packages remain allowed under `tests/integratedtests/<pkg>tests/`" | ⚠️→✅ | **D-CVS-57** — `tests/integratedtests/` and `csvinternaltests/`/`fsinternaltests/` are upstream-`core-v9` paths; `enum-v8` has no `internal/` directory. Cycle 18 adds an `enum-v8`-scope footnote pointing at the Cycle 15 callout in `06-testing-guidelines/README.md` (D-CVS-43). Historical resolution text preserved verbatim. |
+| 6  | 02-internal-package-coverage-policy | "Resolution: …business/integration tests for internal packages remain allowed under `tests/integratedtests/<pkg>tests/`" | ⚠️→✅ | **D-CVS-57** — `tests/integratedtests/` and `csvinternaltests/`/`fsinternaltests/` are upstream-`core-v9` paths; `enum-v9` has no `internal/` directory. Cycle 18 adds an `enum-v9`-scope footnote pointing at the Cycle 15 callout in `06-testing-guidelines/README.md` (D-CVS-43). Historical resolution text preserved verbatim. |
 | 7  | 02-internal-package-coverage-policy | Cross-refs to `06-branch-coverage.md` § Internal Package Coverage Policy and `06-testing-guidelines/README.md` core principle #6 | ✅ | Both target sections exist (Cycle 15 verified). |
-| 8  | 03-getassert-undocumented-api | "`coretests.GetAssert` is STABLE for any test code inside this module" | ⚠️→✅ | **D-CVS-58** — declaration applies to the upstream `core-v9` module, not `enum-v8`. `rg coretests\\.GetAssert` over `enum-v8` returns zero hits. Cycle 18 adds an `enum-v8`-scope footnote pointing at Cycle 12 §6.1 / Cycle 12 consumer-coverage callout. Historical declaration preserved verbatim. |
+| 8  | 03-getassert-undocumented-api | "`coretests.GetAssert` is STABLE for any test code inside this module" | ⚠️→✅ | **D-CVS-58** — declaration applies to the upstream `core-v9` module, not `enum-v9`. `rg coretests\\.GetAssert` over `enum-v9` returns zero hits. Cycle 18 adds an `enum-v9`-scope footnote pointing at Cycle 12 §6.1 / Cycle 12 consumer-coverage callout. Historical declaration preserved verbatim. |
 | 9  | 03-getassert-undocumented-api | Cross-ref to `spec/01-app/14-tests-folder-walkthrough.md` §3 | ✅ | Target file exists. |
-| 10 | 04-testwrappers-public-surface | "All packages under `tests/testwrappers/` are STABLE for any test code inside this module" | ⚠️→✅ | **D-CVS-59** — `tests/testwrappers/` does NOT exist in `enum-v8`. Same fix pattern as D-CVS-58: `enum-v8`-scope footnote, historical text preserved. |
+| 10 | 04-testwrappers-public-surface | "All packages under `tests/testwrappers/` are STABLE for any test code inside this module" | ⚠️→✅ | **D-CVS-59** — `tests/testwrappers/` does NOT exist in `enum-v9`. Same fix pattern as D-CVS-58: `enum-v9`-scope footnote, historical text preserved. |
 | 11 | 04-testwrappers-public-surface | Cross-ref to `spec/01-app/14-tests-folder-walkthrough.md` §2 wrapper-inventory rule | ✅ | Target section exists. |
-| 12 | 05-missing-params-go-files | "back-fill across the entire `tests/integratedtests/` tree" + `errcoretests/params.go` example | ⚠️→✅ | **D-CVS-60** — `tests/integratedtests/` and `errcoretests/` are upstream-`core-v9` package names; `enum-v8` uses single shared `tests/creationtests/` with shared `vars.go` (no per-package `params.go`). Cycle 18 adds `enum-v8`-scope footnote noting the rule applies vacuously here. Historical resolution preserved. |
+| 12 | 05-missing-params-go-files | "back-fill across the entire `tests/integratedtests/` tree" + `errcoretests/params.go` example | ⚠️→✅ | **D-CVS-60** — `tests/integratedtests/` and `errcoretests/` are upstream-`core-v9` package names; `enum-v9` uses single shared `tests/creationtests/` with shared `vars.go` (no per-package `params.go`). Cycle 18 adds `enum-v9`-scope footnote noting the rule applies vacuously here. Historical resolution preserved. |
 | 13 | 05-missing-params-go-files | Spec edit applied to `06-testing-guidelines/03-args-reference.md` | ✅ | Target section exists (verified Cycle 15). |
 | 14 | 06-validator-error-canonical-example | Severity low, resolved | ✅ | Banner consistent. |
 | 15 | 07-newcreator-filename-casing | Severity low, resolved | ✅ | Banner consistent. |
@@ -70,23 +70,23 @@ ls tests/testwrappers/ internal/ 2>&1
 
 **Severity:** LOW. **Root cause:** README was scaffolded in Step 6 of the original audit plan (status "🚧 Skeleton") and never updated when issues #06–#09 were added or when all 9 were resolved at spec-v0.6.0–v0.8.0. **Fix:** Cycle 18 rewrites the README index to 9 rows all ✅ resolved; updates the top-of-file status banner to "All 9 issues resolved (last update spec-v0.8.0)".
 
-### D-CVS-57 — `02-internal-package-coverage-policy.md` describes upstream-`core-v9` scope without `enum-v8` callout
+### D-CVS-57 — `02-internal-package-coverage-policy.md` describes upstream-`core-v9` scope without `enum-v9` callout
 
-**Severity:** LOW. **Root cause:** the resolved policy quotes `tests/integratedtests/<pkg>tests/` and `csvinternaltests/` / `fsinternaltests/` paths that don't exist in `enum-v8` (which has no `internal/` directory at all — the policy applies vacuously). **Fix:** added a Cycle-18 `Scope note (enum-v8)` after the status banner, pointing at the Cycle 15 callout in `06-testing-guidelines/README.md`. Historical resolution text preserved verbatim.
+**Severity:** LOW. **Root cause:** the resolved policy quotes `tests/integratedtests/<pkg>tests/` and `csvinternaltests/` / `fsinternaltests/` paths that don't exist in `enum-v9` (which has no `internal/` directory at all — the policy applies vacuously). **Fix:** added a Cycle-18 `Scope note (enum-v9)` after the status banner, pointing at the Cycle 15 callout in `06-testing-guidelines/README.md`. Historical resolution text preserved verbatim.
 
-### D-CVS-58 — `03-getassert-undocumented-api.md` "STABLE for any test code inside this module" applies to upstream not `enum-v8`
+### D-CVS-58 — `03-getassert-undocumented-api.md` "STABLE for any test code inside this module" applies to upstream not `enum-v9`
 
-**Severity:** LOW. **Fix:** added an `enum-v8`-scope footnote noting `coretests.GetAssert` returns zero hits in `enum-v8` (Goconvey assertions are used inside `EnumTestWrapper` instead), pointing at Cycle 12 §6.1.
+**Severity:** LOW. **Fix:** added an `enum-v9`-scope footnote noting `coretests.GetAssert` returns zero hits in `enum-v9` (Goconvey assertions are used inside `EnumTestWrapper` instead), pointing at Cycle 12 §6.1.
 
-### D-CVS-59 — `04-testwrappers-public-surface.md` "STABLE for any test code inside this module" applies to upstream not `enum-v8`
+### D-CVS-59 — `04-testwrappers-public-surface.md` "STABLE for any test code inside this module" applies to upstream not `enum-v9`
 
-**Severity:** LOW. **Fix:** same pattern as D-CVS-58. `enum-v8` has no `tests/testwrappers/` directory at all.
+**Severity:** LOW. **Fix:** same pattern as D-CVS-58. `enum-v9` has no `tests/testwrappers/` directory at all.
 
-### D-CVS-60 — `05-missing-params-go-files.md` references upstream-`core-v9` package names without `enum-v8` callout
+### D-CVS-60 — `05-missing-params-go-files.md` references upstream-`core-v9` package names without `enum-v9` callout
 
-**Severity:** LOW. **Fix:** added `enum-v8`-scope footnote noting the "grandfathered, no back-fill" rule applies vacuously here (`tests/creationtests/` uses shared `vars.go`, no per-package `params.go`).
+**Severity:** LOW. **Fix:** added `enum-v9`-scope footnote noting the "grandfathered, no back-fill" rule applies vacuously here (`tests/creationtests/` uses shared `vars.go`, no per-package `params.go`).
 
-> **Aggregate:** 5 LOW drifts (D-CVS-56 → D-CVS-60) raised + resolved in one cycle. Pattern: D-CVS-56 is index-staleness (mechanical fix); D-CVS-57 → D-CVS-60 are all the same upstream-vs-`enum-v8` scope class previously seen in Cycles 12, 15, 16, 17 — this is the **last directory** carrying that drift class. With Cycle 18, the cross-`spec/` AH sweep is fully complete.
+> **Aggregate:** 5 LOW drifts (D-CVS-56 → D-CVS-60) raised + resolved in one cycle. Pattern: D-CVS-56 is index-staleness (mechanical fix); D-CVS-57 → D-CVS-60 are all the same upstream-vs-`enum-v9` scope class previously seen in Cycles 12, 15, 16, 17 — this is the **last directory** carrying that drift class. With Cycle 18, the cross-`spec/` AH sweep is fully complete.
 
 ## 4. Spec-internal consistency
 
@@ -96,7 +96,7 @@ Specifically checked-and-clean (after fixes):
 - All cross-refs resolve.
 - No banned tokens (`enum-v1`, `enum-v2`, `enum-v3`, mojibake `core-v9 → core-v9`, `.lovable/user-preferences`, `cross-repo/core-v9`).
 - No contradiction with the **`spec/01-app/` freeze** (`spec-v0.30.0`) — Cycle 18 touches only `spec/02-` files.
-- No contradiction with Cycles 15, 16, 17 callouts — Cycle 18's `enum-v8`-scope footnotes follow the same pattern.
+- No contradiction with Cycles 15, 16, 17 callouts — Cycle 18's `enum-v9`-scope footnotes follow the same pattern.
 
 ## 5. Directory-level milestone — `spec/02-app-issues/` baselined & closed; cross-`spec/` AH sweep complete
 

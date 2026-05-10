@@ -29,7 +29,7 @@ var (
 
 ## Confirmed migration map
 
-| Old call (enum-v8 code today) | New call (core-v9 v1.5.8) | Verified? |
+| Old call (enum-v9 code today) | New call (core-v9 v1.5.8) | Verified? |
 |---|---|---|
 | `converters.AnyToValueString(x)` | `converters.AnyTo.ValueString(x)` | ✅ Applied 2026-05-06 (6 sites) |
 | `converters.StringToInteger(s)` | `converters.StringTo.Integer(s)` | ✅ Applied 2026-05-06 |
@@ -67,7 +67,7 @@ source now compiles against the struct namespace form:
 - `converters.StringTo.IntegerDefault(s)`
 - `converters.StringTo.Byte(s)`
 
-## Where broken calls live in enum-v8
+## Where broken calls live in enum-v9
 
 Run this to find all affected files:
 ```bash

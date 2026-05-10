@@ -8,7 +8,7 @@
 
 ## 1. Method
 
-Same dual-dimension probe as Cycle 13 — *code-vs-spec* (probe `enum-v8` source for consumer usage) plus *spec-internal-consistency* (cross-refs resolve, no banned-pattern occurrences, no contradiction with sibling files).
+Same dual-dimension probe as Cycle 13 — *code-vs-spec* (probe `enum-v9` source for consumer usage) plus *spec-internal-consistency* (cross-refs resolve, no banned-pattern occurrences, no contradiction with sibling files).
 
 ```bash
 rg -n 'tests/integratedtests|enum-v1|core-v9 → core-v9|\.lovable/user-preferences' spec/01-app/16-security.md
@@ -32,7 +32,7 @@ ls spec/01-app/{04-error-system,15-observability,08-validators,10-reflection-and
 | 9  | §3 table | 5-row panic-allowed matrix | ✅ | All categories (`*Must`, `init()`, internal helpers, `internal/`, public `(T, error)`) consistent with §04 §1. |
 | 10 | §3 rule 1 | MUST use `errcore.HandleErr` not bare `panic(err)` | ✅ | Cross-ref to `04-error-system.md` §1 resolves. |
 | 11 | §3 rule 2 | MUST name `*Must` with exact `Must` suffix at end of 8-slot order | ❓ | Cross-refs `00-llm-integration-guide.md` Pattern 7 — file location not verified this cycle. |
-| 12 | §3 rule 3 | MUST NOT recover from panics inside `core-v9` | ✅ | `rg 'recover\(\)' --type go --glob '!cross-repo/**' --glob '!tests/**' --glob '!cmd/**'` → zero hits in `enum-v8` production code. |
+| 12 | §3 rule 3 | MUST NOT recover from panics inside `core-v9` | ✅ | `rg 'recover\(\)' --type go --glob '!cross-repo/**' --glob '!tests/**' --glob '!cmd/**'` → zero hits in `enum-v9` production code. |
 | 13 | §3 rule 4 | SHOULD prefer error-returning variant in library code | ✅ | Spec-internal guidance, no contradiction. |
 | 14 | §4 table | 6-row container-allocation risk mapping | ❓ (5 rows) / ✅ (1 row) | `corestr.StringBuilder` and the `coregeneric.*` symbols verified existing-and-documented per Cycle 4 §06. Risk-class assertions themselves are behavioural — pending AB. The internal consistency (each row points at a real container documented in §06) is ✅. Scoring as ✅ on the consistency dimension. |
 | 15 | §4 rule 1 | MUST validate length / cardinality before container ingest using `corevalidator.New.Slice.MaxLength(N)` | ❓ | API surface pending AB. Spec-internal: ✅ (consistent with §08). |
@@ -66,7 +66,7 @@ Specifically checked-and-clean:
 - No mojibake `core-v9 → core-v9`.
 - No `.lovable/user-preferences` citations.
 - All inter-spec cross-references resolve.
-- Banned runtime patterns (`recover()` in production, bare `panic(err)`) absent from `enum-v8`.
+- Banned runtime patterns (`recover()` in production, bare `panic(err)`) absent from `enum-v9`.
 
 ## 4. Directory-level milestone — `spec/01-app/` complete
 

@@ -11,7 +11,7 @@
 
 ## 1. New contract harness
 
-Created `tests/contracttests/converters_test.go` (package `contracttests`) — a new test directory dedicated to behavioural contract claims that span enum-v8 → upstream `core-v9` boundaries. Five tests, each pinning one spec claim:
+Created `tests/contracttests/converters_test.go` (package `contracttests`) — a new test directory dedicated to behavioural contract claims that span enum-v9 → upstream `core-v9` boundaries. Five tests, each pinning one spec claim:
 
 | Test                                                    | Spec row(s) | What it pins                                                                                                       |
 | ------------------------------------------------------- | ----------- | ------------------------------------------------------------------------------------------------------------------ |

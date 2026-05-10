@@ -8,7 +8,7 @@
 
 ## 1. Method
 
-Direct file probe of every PowerShell module + GitHub Actions workflow referenced as the implementation surface for the ❓ claims. No upstream comparison — these claims are about how `enum-v8`'s own tooling behaves.
+Direct file probe of every PowerShell module + GitHub Actions workflow referenced as the implementation surface for the ❓ claims. No upstream comparison — these claims are about how `enum-v9`'s own tooling behaves.
 
 ## 2. Cycle 16 promotions (`spec/03-powershell-test-run/`, 6 ❓)
 

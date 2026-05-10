@@ -13,7 +13,7 @@ While bootstrapping the AB clone, two **Core-memory drift items** surfaced and w
 
 | ID | Stale memory claim | Reality (verified in sandbox) | Action |
 |---|---|---|---|
-| **M-CVS-01** | "This is a Go enum library (enum-v3, module path `github.com/alimtvnetwork/enum-v3`...)" | `go.mod` declares `module github.com/alimtvnetwork/enum-v8` | Memory line 4 corrected to `enum-v8`. |
+| **M-CVS-01** | "This is a Go enum library (enum-v3, module path `github.com/alimtvnetwork/enum-v3`...)" | `go.mod` declares `module github.com/alimtvnetwork/enum-v9` | Memory line 4 corrected to `enum-v9`. |
 | **M-CVS-02** | "upstream `core-v9` repo's own `go.mod` STILL declares `module github.com/alimtvnetwork/core-v8`. ... `go.mod` carries `replace ...`" | Upstream `core-v9 v1.5.8` declares `module github.com/alimtvnetwork/core-v9`. `go.mod` no longer carries the `replace` bridge (cleared by Task AG). | Memory line 6 rewritten to "rename complete; bridge removed." |
 
 Both confirm Tasks **W** and **AG** are legitimately Done. The previous memory text was a snapshot frozen from a pre-AG cycle.
