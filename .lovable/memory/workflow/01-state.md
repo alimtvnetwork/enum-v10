@@ -1,7 +1,14 @@
 # Workflow State
 
 > Snapshot of where the project stands. Update at the end of every "Write memory" run.
-> **Last updated:** 2026-05-10 (Cycles 49–54 batch — Write-Memory checkpoint).
+> **Last updated:** 2026-05-10 (post-remix Write-Memory checkpoint after `enum-v8 → enum-v9` rename + reliability report v3).
+>
+> ## Remix checkpoint (2026-05-10)
+>
+> - Project remixed; module path renamed `enum-v8 → enum-v9` across 122 files. `package.json` 1.31.0 → 1.32.0. Zero stale `enum-v8`/`core-v8` tokens outside `cross-repo/`.
+> - **New deliverable:** `/mnt/documents/03-reliability-risk-report-v3.md` — composite success probability frontier 92 % / mid 74 % / mediocre 55 %. Identifies 9 failure modes (F-01..F-09); 6 already locked by CI guards. Single biggest residual risk = F-01 (fabricated `errcore.OverflowType.Fmt` behind `spec/01-app/` freeze).
+> - **No code changes this run.** Report-only + workflow-state checkpoint. No additional version bump.
+> - **Next-task hand-off list** is mirrored in §7 of the v3 report and `.lovable/plan.md` Next Task Selection.
 >
 > ## Latest cycles (49 → 54, all green)
 >
