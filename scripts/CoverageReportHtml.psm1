@@ -52,7 +52,7 @@ function Write-CoverageHtmlWithAiButton {
         foreach ($f in $lowCovFuncs) { $aiTextLines.Add($f.TrimStart()) }; $aiTextLines.Add("")
     }
     $aiTextLines.Add("## Instructions")
-    $aiTextLines.Add("- Tests go in tests/creationtests/{pkg}tests/ (this repo) or tests/integratedtests/{pkg}tests/ (upstream core-v9 layout)")
+    $aiTextLines.Add("- Tests go in the per-package test suite directory (resolved at runtime via Resolve-TestSuiteRoot — `creationtests` in this repo, `integrated` + `tests` in upstream layout)")
     $aiTextLines.Add("- Use CaseV1 table-driven pattern with AAA comments")
     $aiTextLines.Add("- Focus on the lowest coverage packages first")
 
