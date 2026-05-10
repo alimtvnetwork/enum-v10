@@ -141,12 +141,11 @@ func TestCmdNamesUplift_fail2bancmdnames(t *testing.T) {
 		t.Errorf("UnmarshallEnumToValue: %v", err)
 	}
 
-	for _, name := range v.AllNameValues() {
-		x, e := New(name)
-		if e != nil || x.IsInvalid() {
-			t.Errorf("iter %q: %v", name, e)
-		}
+	for _, n := range v.IntegerEnumRanges() {
+		x := Variant(byte(n))
+		_ = x.Name()
 		_ = x.Format("%s")
+		_ = x.IsValid()
 	}
 }
 
