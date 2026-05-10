@@ -213,20 +213,21 @@
 
 **Recommended next task:** Pick from this list (in order):
 
-1. **AL2-02** — Batch B (DB family: dbexposetype, dbuserprivillegetype, sqljointype, sqliteconnpathtype, querymethodtype, resauthtype) ⭐ **NEXT**
-2. **AL2-03** — Batch C (networking / IP)
-3. **AL2-04** — Batch D (Linux / OS)
-4. **AL2-05** — Batch E (misc value enums)
-5. **AL2-06** — Batch F (task / script / prompt)
-6. **AL2-07** — Bespoke `dbdrivertype` connection-string suite
-7. **AL2-08** — Bespoke `osdetect` Linux/Windows guarded branches
-8. **AC** — Re-audit §07 / §09
-9. **AB residual** — Continue ❓ promotion for later cycles
-10. **AK** — New enum package creation / recipe validation
-11. **A** — Manual `cross-repo/core-v9/` push
+1. **AO** — Coverage probe + uplift any package still <75% (gate threshold) ⭐ **NEXT**
+2. **AN-D** — Validate `0 issues` on next CI run (awaiting fresh push) ⏳
+3. **AC** — Re-audit §07 / §09 spec dimensions
+4. **AB residual** — Continue ❓ promotion in §03/§04 (PI-003, LOW)
+5. **A** — Manual `cross-repo/core-v9/` push ⏭️
 
-**Done from this list:**
-- AL-01..AL-08 ✅ (Cycles 49–55, 56, 58 — full AL umbrella)
+**Done from this list (reconciled 2026-05-10):**
+- AL2-02 ✅ (Cycles 68–69, v0.40.0/v0.41.0 — DB family Coverage_test files in all 6 packages)
+- AL2-03 ✅ (Coverage_test files in all 5 networking packages)
+- AL2-04 ✅ (Coverage_test + Uplift_test in all 6 Linux/OS packages)
+- AL2-05 ✅ (Coverage_test + Uplift_test in all 7 misc enum packages)
+- AL2-06 ✅ (Coverage_test in all task/script/prompt packages; cmdenumtypes Coverage_test in all 27 sub-packages)
+- AL2-07 ✅ (`dbdrivertype/DbDriverType_Connection_Coverage_test.go` shipped)
+- AL2-08 ✅ (Cycle, v0.99.0 — `osdetect/OsDetect_Uplift_test.go`)
+- AL-01..AL-08 ✅ (Cycles 49–58 — full AL umbrella)
 - Cycle 57 ✅ (test fixes for 6 failures)
 - PI-008 ✅ (Cycle 59, off-by-one fix in quotes/brackets unwrap helpers)
 - PI-005 + PI-006 + PI-007 ✅ (Cycle 60, sqliteconnpathtype cluster — local overrides for upstream core-v9 defects; 4 skip-list entries removed)
@@ -234,6 +235,14 @@
 - AA / Cycle 15 ✅ (audited `spec/06-testing-guidelines/`, baselined at 100% verifiable)
 - AB residual for §06 ✅ (Cycle 62, 10 deferred ❓ → 10 ✅ via `/tmp/core-v9-upstream` v1.5.8; zero new findings)
 - Cycle 63 ✅ (3 test failures fixed: osdetect lowerCaseNames gap, sqliteconnpathtype StringMin fixture drift, sqliteconnpathtype RangesDynamicMap upstream lazy-init defect; 4th "failure" was Goconvey log-conflation phantom; RCA pattern catalogue saved to `.lovable/memory/07-test-failure-rca-patterns.md`)
+
+### AO. Coverage probe + uplift remaining sub-75% packages (NEW)
+
+- **Status:** 📋 Planned
+- **Objective:** Run `./run.ps1 -tc` (or `go test ./... -coverprofile=coverage.out`), identify every package below the 75% CI gate, ship targeted uplift tests.
+- **Dependencies:** None.
+- **Approach:** (1) Run coverage. (2) Sort `go tool cover -func=coverage.out` ascending. (3) For each package <75%, write a focused `*_Uplift_test.go` covering the uncovered statements. (4) Re-run, confirm all ≥75%.
+- **Acceptance:** Coverage gate passes cleanly with no per-package outlier <75%.
 
 **Done — full AL umbrella:**
 - AL-01 ✅ (Cycle 49, 15.5% → 21.6%, +6.1pp)
