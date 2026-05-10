@@ -8,6 +8,18 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 The release pipeline extracts the matching `## [vX.Y.Z]` section as the
 GitHub Release body — keep entries small, sectioned, and human-readable.
 
+## [v1.20.1] - 2026-05-10
+### Fixed — 4 real lint findings in `osdetect/generate.go`
+- **errcheck (2):** `os.RemoveAll` and `defaultLinuxReleaseFile.Close`
+  return values were discarded implicitly; now explicitly ignored via
+  `_ =` and a deferred closure.
+- **ineffassign (2) — actual latent bug:** the CentOS and RHEL branches
+  declared a new `release` inside `if release := readTrimmedFile(...)`,
+  shadowing the outer variable. Assignments to `m[2]` / `m[1]` therefore
+  never reached the enclosing scope and the parsed release string was
+  silently dropped. Renamed the inner binding to `rel` so the outer
+  `release` actually receives the regex match.
+
 ## [v1.20.0] - 2026-05-10
 ### Fixed — 575 lint findings against the stable public API surface
 - **Symptom:** golangci-lint v2.5.0 reported 575 issues across the codebase:
