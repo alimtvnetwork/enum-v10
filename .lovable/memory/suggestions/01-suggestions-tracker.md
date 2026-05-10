@@ -18,11 +18,11 @@
 
 ### BA: Per-package coverage uplift — restore floor on remaining 6 library packages
 
-- **Status:** in-progress (1/7 done as of v1.34.0).
+- **Status:** in-progress (2/7 done as of v1.35.0).
 - **Created:** 2026-05-10 (post-remix CI failure on per-package coverage gate).
 - **Source:** Lovable / CI failure.
-- **Affected (still ignored):** `compressformats` 69.5%, `compresslevels` 71.2%, `dbdrivertype` 58.8%, `instructiontype` 68.4%, `inttype` 66.4%, `osarchs` 72.5%.
-- **Done:** ✅ `httpstatusfamily` 73.0% → **100.0%** (v1.34.0, new `HttpStatusFamily_DirectMethods_test.go`).
+- **Affected (still ignored):** `compresslevels` 71.2%, `dbdrivertype` 58.8%, `instructiontype` 68.4%, `inttype` 66.4%, `osarchs` 72.5%.
+- **Done:** ✅ `httpstatusfamily` 73.0% → **100.0%** (v1.34.0). ✅ `compressformats` 69.5% → ≥95% (v1.35.0, new `CompressFormats_DirectMethods_test.go`).
 - **Description:** The reflective `Uplift` sweep skips methods with non-nullary signatures (`IsEqual(Variant)`, `IsAnyOf(...Variant)`, `Format(string)`, `OnlySupportedErr(...string)`, `JsonParseSelfInject(*corejson.Result)`, etc.) plus top-level helpers (`Ranges`, `RangesInvalidErr`, `Is`, `ValidationError`, `StringMustBe`). Each remaining package needs a `<Pkg>_DirectMethods_test.go` modelled on the `httpstatusfamily` template — typically pushes to ≥95% in 60 LOC.
 - **Acceptance:** All 6 `--ignore` entries removed from `.github/workflows/ci.yml`; CI green with the bare `--threshold 75`.
 - **Notes:** `dbdrivertype` is the worst offender (58.8 %); its low score comes from `Connection.go`/`ConnectionOptions.go`/`connectionStringCompiler.go` business logic that needs bespoke driver-by-driver DSN tests, not just the template.
