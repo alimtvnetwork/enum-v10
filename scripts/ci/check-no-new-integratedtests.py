@@ -47,7 +47,7 @@ ALLOWLIST: dict[str, int] = {
     # Smoke test that exercises the legacy-only branch of Resolve-TestSuiteRoot:
     "tests/scripts/Test-ResolveTestSuiteRoot.ps1": 3,
     # The guard itself + its self-tests must mention the token:
-    "scripts/ci/check-no-new-integratedtests.py": 11,
+    "scripts/ci/check-no-new-integratedtests.py": 13,
     "scripts/ci/test_check_no_new_integratedtests.py": 9,
 }
 
