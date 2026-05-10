@@ -8,6 +8,12 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 The release pipeline extracts the matching `## [vX.Y.Z]` section as the
 GitHub Release body — keep entries small, sectioned, and human-readable.
 
+## [v1.30.0] - 2026-05-10
+### Added — AS per-package coverage gate (Cycle 53)
+- `scripts/ci/check-package-coverage.py` — parses a Go cover profile, aggregates per-package statement coverage, fails non-zero if any package falls below `--threshold` (default 75.0). Supports `--ignore <pkg>` for opt-out paths.
+- `scripts/ci/test_check_package_coverage.py` — 6 unittest cases (parsing, pass, fail, ignore, missing input, malformed input). Wired into the existing `unittest discover -s scripts/ci -p 'test_*.py'` harness in `python-tests.yml`. Local discovery: 42 → 48 tests, all OK.
+- `.github/workflows/ci.yml` — new `Coverage gate per-package (75%)` step in the `test-summary` job, runs immediately after the existing total-coverage gate. Locks in the AO uplift so future PRs cannot silently regress any package below the floor.
+
 ## [v1.29.0] - 2026-05-10
 ### Verified — AT RCA pattern audit (Cycle 52)
 - Re-validated all 3 active RCA patterns (P8/P9/P10) in `.lovable/memory/07-test-failure-rca-patterns.md` against current source. All mitigations intact:
