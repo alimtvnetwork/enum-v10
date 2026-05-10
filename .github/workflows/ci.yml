@@ -246,12 +246,9 @@ jobs:
             --ignore scripts/specapisig \
             --ignore cross-repo/core-v9/scripts/autofix \
             --ignore cross-repo/core-v9/scripts/bracecheck \
-            
-            
             --ignore dbdrivertype \
             --ignore instructiontype \
-            --ignore inttype \
-            --ignore osarchs
+            --ignore inttype
 
       - uses: actions/upload-artifact@v4
         if: always() && needs.sha-check.outputs.already-built != 'true'
