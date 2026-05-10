@@ -16,6 +16,12 @@
 
 ## Open Suggestions
 
+### AV: E2E test for `Test-UpstreamClone` (S-115)
+
+- **Status:** ✅ DONE (v1.45.0).
+- **Source:** `.lovable/suggestions.md` AV; depends on S-115 (shipped v0.18.0).
+- **Done:** Extended `tests/scripts/Test-UpstreamClone.ps1` with two new E2E cases — Case 5 overrides module-private `$script:UpstreamCloneUrl` to a bogus `file:///` URL and verifies `-AutoClone` returns `Ok=$false; Reason='clone-failed'; PackageCount=0`; Case 6 verifies `-AutoClone` is a no-op (`Ok=$true; Reason='ok'`) when path already healthy. Wired into `.github/workflows/ci-guards.yml` as new `upstream-clone-e2e` job that clones core-v9 v1.5.8 then runs the smoke test under `pwsh`. Locks the audit-probe correctness guardrails CoveragePreChecks.psm1 + Get-UpstreamPackages depend on.
+
 ### AW: Per-package coverage trend warning
 
 - **Status:** ✅ DONE (v1.44.0).
