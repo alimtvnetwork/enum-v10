@@ -8,6 +8,12 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 The release pipeline extracts the matching `## [vX.Y.Z]` section as the
 GitHub Release body — keep entries small, sectioned, and human-readable.
 
+## [v1.28.0] - 2026-05-10
+### Changed — AR bookkeeping (Cycle 51)
+- `.lovable/memory/pending-issues/01-all-pending-issues.md`: PI-003 (148 ❓ claims unresolved / Task AB) marked ✅ RESOLVED. All active probes drained across `spec/01-app/`, `spec/06-testing-guidelines/`, and §07/§09 advisory carry-overs (Cycles 19–25, 41–50, 62). Remaining ❓ marks are out-of-scope ⓘ advisories that intentionally cannot be resolved without spec thaw.
+- `.lovable/plan.md` "Next Task Selection": removed the **AB residual** entry (item 1) since it is now formally closed; reordered the remaining items.
+- No source code or spec content changes — pure tracker hygiene.
+
 ## [v1.27.0] - 2026-05-10
 ### Added — AJ-46 converter behavioural contract pass (Cycle 50)
 - New test directory `tests/contracttests/` with `converters_test.go` (5 tests, all PASS in 0.005s):

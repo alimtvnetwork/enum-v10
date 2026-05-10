@@ -13,11 +13,11 @@
 
 - **resolved:** Cycles 12/15/17/18 + Cycle 34 — see PI tracker note above.
 
-### PI-003: 148 ❓ claims unresolved (Task AB)
+### PI-003: 148 ❓ claims unresolved (Task AB) ✅ RESOLVED (2026-05-10, Cycle 51)
 
-- **severity:** LOW (mostly drained)
-- **description:** AB-residual deep-probe sweep is COMPLETE for `spec/01-app/` (Cycles 19–25 + 41–47, settled in `spec-v0.53.0` freeze). Remaining ❓ claims live in scattered §03/§04 spec dirs and are tracked per-cycle. No active blocker.
-- **owner:** AI (continues opportunistically during AA cycles)
+- **severity:** LOW (resolved)
+- **resolved:** All active ❓ probes drained across `spec/01-app/` (Cycles 19–25 + 41–47, frozen in `spec-v0.53.0`), `spec/06-testing-guidelines/` (Cycle 62, 10→10), and §07/§09 advisory carry-overs (Cycles 49–50, AC + AJ-46). Remaining ❓ marks are out-of-scope ⓘ advisories that intentionally cannot be resolved without spec thaw. No active blocker.
+- **fix:** Closure formalised by AR (Cycle 51 bookkeeping pass).
 
 ### PI-004: `spec/06-testing-guidelines/` never audited ✅ RESOLVED
 
