@@ -8,6 +8,16 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 The release pipeline extracts the matching `## [vX.Y.Z]` section as the
 GitHub Release body — keep entries small, sectioned, and human-readable.
 
+## [v1.24.0] - 2026-05-10
+### Added — AO pass 2: high-leverage 5-package uplift
+- `sitestatetype/SiteStateType_Uplift_test.go` — **17.6% → 89.7%** (+72.1pp)
+- `taskcategory/TaskCategory_Uplift2_test.go` — **39.1% → 92.2%** (+53.1pp)
+- `conntrackstate/ConnTrackState_Uplift_test.go` — **38.8% → 96.2%** (+57.4pp)
+- `servicestate/ServiceState_Uplift_test.go` — **45.0% → 83.8%** (+38.8pp)
+- `quotes/Quotes_Uplift_test.go` — **55.4% → 93.4%** (+38.0pp)
+- Each test exercises the full Variant/Action/Quote accessor surface: constructor round-trip, `Min`/`Max`/`RangesInvalidErr`, all numeric-width accessors, every Is-predicate, JSON round-trip via Marshal/Unmarshal/UnmarshallEnumToValue, As*-binder accessors, and per-Variant byte-iteration.
+- All 5 packages now pass the 75% per-package coverage gate.
+
 ## [v1.23.0] - 2026-05-10
 ### Added — AO pass 1: cmdenumtypes uplift sweep (27 packages)
 - New `<Pkg>_Uplift_test.go` per cmdenumtypes sub-package (compresscmdnames, configcmdnames, crontabscmdnames, decompresscmdnames, dnscmdnames, dockercmdnames, downloadcmdnames, envpathcmdnames, envvarscmdnames, ethernetcmdnames, fail2bancmdnames, firewallcmdnames, ftpcmdnames, hostingplancmdnames, macrocmdnames, operatingsystemcmdnames, packagecmdnames, servicescmdnames, snapshotcmdnames, sshcmdnames, sslcmdnames, sysgroupcmdnames, toolingcmdnames, usercmdnames, userrolecmdnames, webservercmdnames). Each test exercises ~45 of the 51 Variant methods: New/NewMust round-trip, Min/Max, AllNameValues/IntegerEnumRanges/RangesByte/RangeNamesCsv/TypeName/RangesDynamicMap, full string-conversion suite (String/ValueString/ToNumberString/NameValue/Format/Min-MaxValueString/FullName/HyphenName/ToNameLower), full numeric-width sweep (MinByte/MaxByte/ValueByte/MinInt/MaxInt/ValueInt/ValueInt8-16-32/Value/ValueUInt16/MinMaxAny), every IsX predicate (IsValid/IsInvalid/Is/IsAnyOf/IsNameEqual/IsValueEqual/IsByteValueEqual/IsAnyValuesEqual/IsAnyNamesOf), error helpers (OnlySupportedErr/OnlySupportedMsgErr), all As*-binder accessors, JSON round-trip via Marshal/Unmarshal/Json/JsonPtr/UnmarshallEnumToValue, and per-Variant byte-iteration sweep through IntegerEnumRanges.
