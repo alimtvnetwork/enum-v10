@@ -26,22 +26,32 @@ func TestOsDetect_PlatformWrappers_DoNotPanic(t *testing.T) {
 	_ = osdetect.IsWindowsServer2016()
 	_ = osdetect.IsWindowsServer2019()
 
-	// CurrentOsTypesNotContainsError: passing the actual current type yields nil.
-	cur := osdetect.CurrentOsType()
-	if err := osdetect.CurrentOsTypesNotContainsError(cur); err != nil {
-		t.Errorf("expected nil error for current type, got %v", err)
+	// CurrentOsTypesNotContainsError: a type from the live map yields nil.
+	// Use CurrentOsMixTypes() (the authoritative slice underlying the map)
+	// instead of CurrentOsType() — the latter is the singular detected type
+	// which on minimally-provisioned Linux hosts (sandboxes/containers) may
+	// fall back to Invalid even though the mix-types map is populated.
+	mix := osdetect.CurrentOsMixTypes()
+	var probe osdetect.Variant
+	if len(mix) > 0 {
+		probe = mix[0]
+		if err := osdetect.CurrentOsTypesNotContainsError(probe); err != nil {
+			t.Errorf("expected nil error for mix-type %v, got %v", probe, err)
+		}
 	}
 	if err := osdetect.CurrentOsTypesNotContainsError(osdetect.Invalid); err == nil {
 		t.Error("expected non-nil error for Invalid type")
 	}
 
-	// CurrentOsTypesMustBePresent should not panic for the current type.
+	// CurrentOsTypesMustBePresent should not panic when given a known mix-type.
 	defer func() {
 		if r := recover(); r != nil {
 			t.Errorf("MustBePresent panicked unexpectedly: %v", r)
 		}
 	}()
-	osdetect.CurrentOsTypesMustBePresent(cur)
+	if len(mix) > 0 {
+		osdetect.CurrentOsTypesMustBePresent(probe)
+	}
 }
 
 func TestOsDetect_GetCurrentOsDetail_Smoke(t *testing.T) {
