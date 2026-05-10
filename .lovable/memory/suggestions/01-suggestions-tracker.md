@@ -16,16 +16,14 @@
 
 ## Open Suggestions
 
-### BA: Per-package coverage uplift — restore floor on remaining 6 library packages
+### BA: Per-package coverage uplift — restore floor on remaining library packages
 
-- **Status:** in-progress (6/7 done as of v1.39.0).
+- **Status:** ✅ DONE (7/7 as of v1.40.0). All `--ignore` entries for library packages removed; only structural ignores remain (`cmd/main`, `tests/creationtests`, `scripts/autofix|bracecheck|specapisig`, `cross-repo/core-v9/scripts/*`).
 - **Created:** 2026-05-10 (post-remix CI failure on per-package coverage gate).
 - **Source:** Lovable / CI failure.
-- **Affected (still ignored):** `dbdrivertype` 58.8% (last; needs bespoke DSN tests beyond template).
-- **Done:** ✅ `httpstatusfamily` (v1.34.0). ✅ `compressformats` (v1.35.0). ✅ `compresslevels` (v1.36.0). ✅ `osarchs` (v1.37.0). ✅ `instructiontype` (v1.38.0). ✅ `inttype` 66.4% → ≥95% (v1.39.0, new `IntType_DirectMethods_test.go`).
-- **Description:** The reflective `Uplift` sweep skips methods with non-nullary signatures (`IsEqual(Variant)`, `IsAnyOf(...Variant)`, `Format(string)`, `OnlySupportedErr(...string)`, `JsonParseSelfInject(*corejson.Result)`, etc.) plus top-level helpers (`Ranges`, `RangesInvalidErr`, `Is`, `ValidationError`, `StringMustBe`). Each remaining package needs a `<Pkg>_DirectMethods_test.go` modelled on the `httpstatusfamily` template — typically pushes to ≥95% in 60 LOC.
-- **Acceptance:** All 6 `--ignore` entries removed from `.github/workflows/ci.yml`; CI green with the bare `--threshold 75`.
-- **Notes:** `dbdrivertype` is the worst offender (58.8 %); its low score comes from `Connection.go`/`ConnectionOptions.go`/`connectionStringCompiler.go` business logic that needs bespoke driver-by-driver DSN tests, not just the template.
+- **Done:** ✅ `httpstatusfamily` (v1.34.0). ✅ `compressformats` (v1.35.0). ✅ `compresslevels` (v1.36.0). ✅ `osarchs` (v1.37.0). ✅ `instructiontype` (v1.38.0). ✅ `inttype` (v1.39.0). ✅ `dbdrivertype` 58.8% → ≥95% (v1.40.0, new `DbDriverType_DirectMethods_test.go`).
+- **Reusable template:** `<Pkg>_DirectMethods_test.go` covering non-nullary methods (`IsEqual/IsAnyOf/IsAnyValuesEqual/IsAnyNamesOf/Format/OnlySupported*Err`), top-level helpers (`Min/Max/RangesInvalidErr/New/NewMust/Is/ValidationError/StringMustBe`), and JSON round-trip (`MarshalJSON` + `UnmarshallEnumToValue` or `JsonParseSelfInject`). Typically pushes a 60-75% package to ≥95% in 60-100 LOC.
+- **Acceptance:** ✅ All library `--ignore` entries removed from `.github/workflows/ci.yml`; CI passes per-package gate at threshold 75 with bare flag.
 
 ### S-115: Harden `Get-UpstreamPackages` to recursively walk `coredata/`
 
