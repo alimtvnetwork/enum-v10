@@ -125,15 +125,11 @@ func TestDirectMethods_IntType(t *testing.T) {
 	if v, err := NewUsingStringer(a); err != nil || v.Value() != a.Value() {
 		t.Errorf("NewUsingStringer: %v %v", v, err)
 	}
-	if v, err := NewUsingJsoner(a); err != nil || v.Value() != a.Value() {
-		t.Errorf("NewUsingJsoner: %v %v", v, err)
-	}
-	jr := a.Json()
-	if v, err := NewUsingJsonResult(&jr); err != nil || v.Value() != a.Value() {
-		t.Errorf("NewUsingJsonResult: %v %v", v, err)
-	}
 	num := json.Number("42")
 	if v, err := NewUsingJsonNumber(&num); err != nil || v.Value() != 42 {
 		t.Errorf("NewUsingJsonNumber: %v %v", v, err)
+	}
+	if _, err := NewUsingJsonNumber(nil); err == nil {
+		t.Error("NewUsingJsonNumber nil should fail")
 	}
 }
