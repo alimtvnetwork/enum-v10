@@ -33,6 +33,23 @@ jobs:
       - name: Run CI guard script tests
         run: python3 -m unittest discover -s scripts/ci -p 'test_*.py' -v
 
+  no-new-integratedtests:
+    # BC (Cycle 56): locks Task BB. Fails if a new file outside the documented
+    # allowlist hardcodes `tests/integratedtests/`, or if an allowlisted file's
+    # occurrence count grows beyond its baseline. Use Resolve-TestSuiteRoot
+    # (scripts/Utilities.psm1) for any new dual-layout handling.
+    needs: python-tests
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Lint — no new hardcoded `integratedtests` paths
+        run: python3 scripts/ci/check-no-new-integratedtests.py
+
   collision-audit:
     needs: python-tests
     runs-on: ubuntu-latest
