@@ -8,14 +8,14 @@ import (
 // AO pass 2 — comprehensive Variant accessor sweep.
 
 func TestConnTrackState_Uplift(t *testing.T) {
-	v, err := Create("Established")
+	v, err := Create("ESTABLISHED")
 	if err != nil {
 		t.Fatalf("Create: %v", err)
 	}
-	if v.Name() != "Established" {
+	if v.Name() != "ESTABLISHED" {
 		t.Errorf("Name: %q", v.Name())
 	}
-	_ = CreateMust("Established")
+	_ = CreateMust("ESTABLISHED")
 	if _, err := Create("__bogus__"); err == nil {
 		t.Error("bogus should err")
 	}
@@ -56,15 +56,15 @@ func TestConnTrackState_Uplift(t *testing.T) {
 	if !v.IsAnyOf(v, Invalid) {
 		t.Error("IsAnyOf")
 	}
-	if !v.IsNameEqual("Established") || !v.IsValueEqual(v.Value()) || !v.IsByteValueEqual(v.Value()) || !v.IsAnyValuesEqual(v.Value()) || !v.IsAnyNamesOf("Established") {
+	if !v.IsNameEqual("ESTABLISHED") || !v.IsValueEqual(v.Value()) || !v.IsByteValueEqual(v.Value()) || !v.IsAnyValuesEqual(v.Value()) || !v.IsAnyNamesOf("ESTABLISHED") {
 		t.Error("predicates")
 	}
 	_ = v.IsEqual(v)
 	_ = v.IsAboveOrEqual(v)
 	_ = v.IsLowerOrEqual(v)
 
-	_ = v.OnlySupportedErr("Established")
-	_ = v.OnlySupportedMsgErr("ctx", "Established")
+	_ = v.OnlySupportedErr("ESTABLISHED")
+	_ = v.OnlySupportedMsgErr("ctx", "ESTABLISHED")
 
 	_ = v.EnumType()
 	_ = v.AsJsoner()
