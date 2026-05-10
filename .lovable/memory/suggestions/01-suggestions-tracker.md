@@ -16,7 +16,18 @@
 
 ## Open Suggestions
 
+### BA: Per-package coverage uplift — restore floor on 7 library packages
+
+- **Status:** open (HIGH priority — every entry temporarily ignored in `.github/workflows/ci.yml` per-package gate as of v1.33.0).
+- **Created:** 2026-05-10 (post-remix CI failure on per-package coverage gate).
+- **Source:** Lovable / CI failure.
+- **Affected:** `compressformats` 69.5%, `compresslevels` 71.2%, `dbdrivertype` 58.8%, `httpstatusfamily` 73.0%, `instructiontype` 68.4%, `inttype` 66.4%, `osarchs` 72.5%.
+- **Description:** The per-package gate was wired in (Task AS) at the same threshold the AO uplift had reached. Either subsequent code changes drifted these 7 packages back below 75 %, or AO never actually crossed 75 % for these packages and the gate was set too high. Remove each `--ignore <pkg>` from `.github/workflows/ci.yml` as its tests are extended back above the 75 % floor.
+- **Acceptance:** All 7 `--ignore` entries removed; CI green with the bare `--threshold 75`.
+- **Notes:** `dbdrivertype` is the worst offender (58.8 %); likely needs Connection-string template tests per `Connection.go` driver Variant. The other 6 are 1–7 pp short — small, targeted `*_Uplift_test.go` files should suffice.
+
 ### S-115: Harden `Get-UpstreamPackages` to recursively walk `coredata/`
+
 
 - **createdAt:** 2026-05-06
 - **source:** Lovable (Cycle 47 — third retraction R-CVS-03 of same drift class)
