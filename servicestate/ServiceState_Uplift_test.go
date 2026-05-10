@@ -64,9 +64,7 @@ func TestServiceState_Uplift(t *testing.T) {
 	_ = a.OnlySupportedMsgErr("ctx", "status")
 
 	_ = a.EnumType()
-	_ = a.AsJsoner()
-	_ = a.AsJsonContractsBinder()
-	_ = a.AsJsonMarshaller()
+	_ = a.AsActionTyper()
 	_ = a.AsBasicByteEnumContractsBinder()
 	_ = a.AsBasicEnumContractsBinder()
 
