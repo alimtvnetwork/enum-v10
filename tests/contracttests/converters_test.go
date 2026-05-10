@@ -79,12 +79,12 @@ func TestConverters_ErrorsAreErrcoreTyped(t *testing.T) {
 	}
 	// errcore.ParsingFailedType is what stringTo.Integer returns on
 	// strconv.Atoi failure (verified at /tmp/core-v9-upstream/converters/stringTo.go:164).
-	// The category surface itself is publicly addressable:
-	if errcore.ParsingFailedType.Name() == "" {
-		t.Error("errcore.ParsingFailedType has empty Name — surface broken")
+	// RawErrorType is a typed string — its String() must be non-empty.
+	if errcore.ParsingFailedType.String() == "" {
+		t.Error("errcore.ParsingFailedType has empty String — surface broken")
 	}
-	if errcore.FailedToConvertType.Name() == "" {
-		t.Error("errcore.FailedToConvertType has empty Name — surface broken")
+	if errcore.FailedToConvertType.String() == "" {
+		t.Error("errcore.FailedToConvertType has empty String — surface broken")
 	}
 
 	// And critically: the raw stdlib error is NOT what callers receive —
