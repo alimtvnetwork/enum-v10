@@ -247,6 +247,29 @@ jobs:
             --ignore cross-repo/core-v9/scripts/autofix \
             --ignore cross-repo/core-v9/scripts/bracecheck
 
+      # AW (Cycle 53, 2026-05-10): per-package coverage TREND warning.
+      # Warning-only — never fails the build. Complements the floor gate
+      # above by surfacing relative drops between PRs (e.g. 95% → 80%
+      # while still above the 75% floor). Baseline lives in
+      # .ci-baselines/package-coverage.json and is refreshed on main.
+      # See scripts/ci/test_check_package_coverage_trend.py.
+      - name: Coverage trend (per-package, warning-only)
+        if: needs.sha-check.outputs.already-built != 'true' && needs.test.result == 'success'
+        run: |
+          python3 scripts/ci/check-package-coverage-trend.py \
+            test-artifacts/test-results/coverage.out \
+            --baseline .ci-baselines/package-coverage.json \
+            --tolerance 1.0
+
+      - name: Refresh per-package coverage baseline (main only)
+        if: success() && needs.sha-check.outputs.already-built != 'true' && github.ref == 'refs/heads/main' && github.event_name == 'push'
+        run: |
+          python3 scripts/ci/check-package-coverage-trend.py \
+            test-artifacts/test-results/coverage.out \
+            --baseline .ci-baselines/package-coverage.json \
+            --tolerance 1.0 \
+            --write
+
       - uses: actions/upload-artifact@v4
         if: always() && needs.sha-check.outputs.already-built != 'true'
         with:
