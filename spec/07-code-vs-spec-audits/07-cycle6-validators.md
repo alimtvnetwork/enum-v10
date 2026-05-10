@@ -11,10 +11,10 @@
 
 For each numbered section in the spec, classify every concrete claim (import path, exported symbol, signature, behavioural rule, diagnostic-format contract) as:
 
-- ✅ **Match** — claim verified against `enum-v9` source on disk.
+- ✅ **Match** — claim verified against `enum-v10` source on disk.
 - ⚠️ **Drift** — verifiable but inaccurate.
 - ❌ **Contradiction** — verifiable and wrong.
-- ❓ **Unverifiable** — package not consumed by `enum-v9` and no upstream `core-v9` source on disk; defer to task **AB**.
+- ❓ **Unverifiable** — package not consumed by `enum-v10` and no upstream `core-v9` source on disk; defer to task **AB**.
 
 Verification commands run from repo root:
 
@@ -27,7 +27,7 @@ rg -n "coretestcases\.(CaseV1|CaseNilSafe)" --type go
 ls cross-repo/core-v9/corevalidator 2>/dev/null
 ```
 
-All commands returned **zero matches**: no `enum-v9` package imports `corevalidator` or any of its peers (`errcore.VarTwoNoType`, `ValidationFailedType`, `regexnew.New.Lazy`, `coretestcases.CaseV1/CaseNilSafe`), and the `cross-repo/core-v9/` mirror does not carry `corevalidator` source.
+All commands returned **zero matches**: no `enum-v10` package imports `corevalidator` or any of its peers (`errcore.VarTwoNoType`, `ValidationFailedType`, `regexnew.New.Lazy`, `coretestcases.CaseV1/CaseNilSafe`), and the `cross-repo/core-v9/` mirror does not carry `corevalidator` source.
 
 ---
 
@@ -43,14 +43,14 @@ All commands returned **zero matches**: no `enum-v9` package imports `corevalida
 | 6  | §2.3   | `TextValidator` — multi-line whole-document rules                                          | ❓ | No consumer |
 | 7  | §2.4   | `corevalidator.New.Range.Int.Min(N).MaxExclusive(N).Build()` semantics                     | ❓ | No consumer |
 | 8  | §2.5   | `StringCompareAs` diagnostic format is regex-checked by framework tests                    | ❓ | No consumer |
-| 9  | §3.1   | `errcore.MergeErrors(errs...)` aggregates validator errors                                 | ❓ | `MergeErrors` not invoked anywhere in `enum-v9` |
-| 10 | §3.2   | Domain-type embedding pattern (`(r *T) Validate() error`)                                  | ❓ | Pattern not exercised in `enum-v9` |
+| 9  | §3.1   | `errcore.MergeErrors(errs...)` aggregates validator errors                                 | ❓ | `MergeErrors` not invoked anywhere in `enum-v10` |
+| 10 | §3.2   | Domain-type embedding pattern (`(r *T) Validate() error`)                                  | ❓ | Pattern not exercised in `enum-v10` |
 | 11 | §3.3   | `conditional.IfFunc[error](...)` for branching validation                                  | ❓ | `conditional` already ❓ in Cycle 5 |
 | 12 | §4.1–4.3 | Custom-validator template uses `regexnew.New.Lazy` + nil-receiver guard                  | ❓ | No consumer |
 | 13 | §4.3   | `Result.Error()` returns `errcore.ValidationFailedType.Fmt(...)`                           | ❓ | `ValidationFailedType` symbol not imported |
-| 14 | §4.4   | Tests use `coretestcases.CaseV1` + `CaseNilSafe` (Style A)                                 | ❓ | Neither symbol imported anywhere in `enum-v9` |
+| 14 | §4.4   | Tests use `coretestcases.CaseV1` + `CaseNilSafe` (Style A)                                 | ❓ | Neither symbol imported anywhere in `enum-v10` |
 | 15 | §5     | Diagnostic message format: `<Label>: field=<n> value=<v> reason=<short>`                   | ❓ | Format contract has no in-repo emitter |
-| 16 | §5     | `errcore.VarTwoNoType("field", label, "value", actual)` is the canonical builder          | ❓ | Symbol not imported anywhere in `enum-v9` |
+| 16 | §5     | `errcore.VarTwoNoType("field", label, "value", actual)` is the canonical builder          | ❓ | Symbol not imported anywhere in `enum-v10` |
 | 17 | §6     | Three-test layout: `*_Verification_test.go` / `*_NilReceiver_test.go` / `*_Format_test.go` | ❓ | No validator tests under `tests/` |
 | 18 | §6     | Path: `tests/integratedtests/<pkg>tests/`                                                  | ⚠️ | **Stale path** — repeats C-CVS-01 / D-CVS-17 pattern: actual layout is `tests/creationtests/`. Filed as **D-CVS-26**. |
 | 19 | §7     | Common-mistakes table (7 rows)                                                             | ❓ | All rows depend on §1–§4 surface |
@@ -107,14 +107,14 @@ Repository reality: `tests/integratedtests/` does not exist; tests live under `t
 | 7  | ❓ | ❌ | No `New.Range.Int.Min(N).MaxExclusive(N).Build()`. Upstream provides `RangeSegmentsValidator` with a different surface. Subsumed by D-CVS-29. |
 | 8  | ❓ | ✅ | `stringcompareas` enum exists (imported by `corevalidator/vars.go`). |
 | 9  | ❓ | ✅ | `errcore.MergeErrors(errs ...error) error` exists at `errcore/MergeErrors.go:32`. |
-| 10 | ❓ | ❓ | Pattern still not exercised in `enum-v9`; no upstream change required. |
+| 10 | ❓ | ❓ | Pattern still not exercised in `enum-v10`; no upstream change required. |
 | 11 | ❓ | ✅ | `conditional/` package exists with `ErrorFunc`, `Functions`, etc. |
 | 12 | ❓ | ✅ | `regexnew/CreateLock.go` + `LazyRegex.go` provide the lazy regex surface. |
 | 13 | ❓ | ✅ | `errcore.ValidationFailedType` exists at `errcore/RawErrorType.go:121` and is used by `corevalidator/LinesValidators.go:188,221`. |
 | 14 | ❓ | ⚠️ | `coretests/` (note: **`coretests`**, not `coretestcases`) provides `BaseTestCase` family. Spec's `CaseV1` / `CaseNilSafe` symbol names not found upstream. Filed as **D-CVS-30**. |
 | 15 | ❓ | ⚠️ | Diagnostic format `<Label>: field=<n> value=<v> reason=<short>` not emitted verbatim by upstream `VarTwoNoType`. Filed as **D-CVS-31**. |
 | 16 | ❓ | ✅ | `errcore.VarTwoNoType(n1, v1, n2, v2)` exists at `errcore/VarTwoNoType.go:25`. |
-| 17 | ❓ | ❓ | Behavioural; no validator tests in `enum-v9` to verify against. |
+| 17 | ❓ | ❓ | Behavioural; no validator tests in `enum-v10` to verify against. |
 | 18 | ⚠️ | ⚠️ | (D-CVS-26 already filed) — unchanged. |
 | 19 | ❓ | ⚠️ | All rows depend on §1–§4 surface; with D-CVS-29 confirming the fluent API is fictitious, table needs ground-up rewrite. Filed as **D-CVS-32**. |
 

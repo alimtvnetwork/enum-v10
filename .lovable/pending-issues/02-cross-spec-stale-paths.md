@@ -6,7 +6,7 @@ Cycles 1–12 cleared every occurrence of the stale path `tests/integratedtests/
 
 ## Root Cause
 
-Bulk authoring carried the upstream-only `core-v9` test layout into spec content that documents `enum-v9` (which actually uses `tests/creationtests/`). Same root cause as audit findings C-CVS-01 / D-CVS-17 / D-CVS-26 / D-CVS-27 / D-CVS-32 / D-CVS-33 / D-CVS-36 / D-CVS-37 / D-CVS-39 / D-CVS-40 / D-CVS-41 / D-CVS-43.
+Bulk authoring carried the upstream-only `core-v9` test layout into spec content that documents `enum-v10` (which actually uses `tests/creationtests/`). Same root cause as audit findings C-CVS-01 / D-CVS-17 / D-CVS-26 / D-CVS-27 / D-CVS-32 / D-CVS-33 / D-CVS-36 / D-CVS-37 / D-CVS-39 / D-CVS-40 / D-CVS-41 / D-CVS-43.
 
 ## Steps to Reproduce
 

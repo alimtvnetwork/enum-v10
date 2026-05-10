@@ -2,9 +2,9 @@
 
 > ✅ **Done** — extracted from `spec/00-llm-integration-guide.md` §Testing Patterns + audit §4 (Style Inventory).
 > **Status**: filled in audit Step 4 (2026-04-23, Asia/Kuala_Lumpur).
-> **Audience**: AI agents and contributors writing tests for `core-v9` *(upstream)* or for `enum-v9` *(this module)*.
+> **Audience**: AI agents and contributors writing tests for `core-v9` *(upstream)* or for `enum-v10` *(this module)*.
 
-> **Consumer-coverage note (`enum-v9`)**: every code example on this page (`coretestcases.CaseV1`, `args.Map`, `coretests.BaseTestCase`, `testWrapper`, `coretests.GetAssert`) refers to **upstream `core-v9`** test infrastructure that is **not consumed by `enum-v9/`**. This module's own tests live at `tests/creationtests/` and use a different shape entirely — a Goconvey-based registry runner over `EnumTestWrapper` (see [`14-tests-folder-walkthrough.md`](./14-tests-folder-walkthrough.md) §"`tests/creationtests/` shape"). Treat the Styles A–D below as the authoritative reference for upstream `core-v9` tests; for `enum-v9` enums, mirror the `creationtests` registry pattern instead.
+> **Consumer-coverage note (`enum-v10`)**: every code example on this page (`coretestcases.CaseV1`, `args.Map`, `coretests.BaseTestCase`, `testWrapper`, `coretests.GetAssert`) refers to **upstream `core-v9`** test infrastructure that is **not consumed by `enum-v10/`**. This module's own tests live at `tests/creationtests/` and use a different shape entirely — a Goconvey-based registry runner over `EnumTestWrapper` (see [`14-tests-folder-walkthrough.md`](./14-tests-folder-walkthrough.md) §"`tests/creationtests/` shape"). Treat the Styles A–D below as the authoritative reference for upstream `core-v9` tests; for `enum-v10` enums, mirror the `creationtests` registry pattern instead.
 
 This page is the **architectural overview** of how tests are organized. For the full pattern reference, drill into [`/spec/06-testing-guidelines/`](../06-testing-guidelines/) (9 files). For folder-level structure, see [`14-tests-folder-walkthrough.md`](./14-tests-folder-walkthrough.md).
 
@@ -200,7 +200,7 @@ The full helper inventory lives in [`14-tests-folder-walkthrough.md` §3](./14-t
 
 ## 6. Per-Package File Layout (canonical, **upstream `core-v9`**)
 
-> ⚠️ **Scope:** the layout below applies to **upstream `core-v9`** packages. `enum-v9` does **not** have per-package `*tests/` folders — all enum contract tests live in the shared `tests/creationtests/` registry runner. See the consumer-coverage note at the top of this file and §6.1 below.
+> ⚠️ **Scope:** the layout below applies to **upstream `core-v9`** packages. `enum-v10` does **not** have per-package `*tests/` folders — all enum contract tests live in the shared `tests/creationtests/` registry runner. See the consumer-coverage note at the top of this file and §6.1 below.
 
 For a public package `foo/`, its tests live at `tests/creationtests/footests/` *(upstream)*:
 
@@ -223,7 +223,7 @@ footests/
 Folder-naming and import rules: [`/spec/06-testing-guidelines/01-folder-structure.md`](../06-testing-guidelines/01-folder-structure.md).
 Prior fixes that removed stale `tests/integratedtests/` references from the spec corpus: C-CVS-01 / D-CVS-17 / D-CVS-26 / D-CVS-27 / D-CVS-32 — this section is the 6th and final occurrence (see D-CVS-36).
 
-### 6.1 `enum-v9`-specific layout
+### 6.1 `enum-v10`-specific layout
 
 ```
 tests/creationtests/

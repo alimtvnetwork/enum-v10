@@ -54,7 +54,7 @@
 ## [spec-v0.55.0] — 2026-05-07 (Cycle 20 — Task **AA**: walk-through audit of `spec/00-llm-integration-guide.md` — **AA CLOSED**)
 
 ### Added
-- `spec/07-code-vs-spec-audits/39-cycle20-llm-integration-guide-walkthrough.md` — final walk-through audit of the 2388-line LLM-onboarding monolith. Verified against upstream `core-v9 v1.5.8` source at `/tmp/core-v9-upstream`: module identity ✅, package map 34/34 dirs ✅, 11 import paths ✅, all 6 `enumimpl.New.Basic*` factory creators ✅, factory methods (`UsingTypeSlice`, `Default`, `CreateUsingMap`, …) ✅. The 3 remaining `tests/integratedtests/` references (lines 36, 825, 828) are explicitly upstream-consumer-scoped (line 825 carries the disclaimer + cross-links to the `enum-v9`-specific layout) and are policy-compliant under Task **AH** / PI-002 — no rewrite. Zero D-CVS / C-CVS findings.
+- `spec/07-code-vs-spec-audits/39-cycle20-llm-integration-guide-walkthrough.md` — final walk-through audit of the 2388-line LLM-onboarding monolith. Verified against upstream `core-v9 v1.5.8` source at `/tmp/core-v9-upstream`: module identity ✅, package map 34/34 dirs ✅, 11 import paths ✅, all 6 `enumimpl.New.Basic*` factory creators ✅, factory methods (`UsingTypeSlice`, `Default`, `CreateUsingMap`, …) ✅. The 3 remaining `tests/integratedtests/` references (lines 36, 825, 828) are explicitly upstream-consumer-scoped (line 825 carries the disclaimer + cross-links to the `enum-v10`-specific layout) and are policy-compliant under Task **AH** / PI-002 — no rewrite. Zero D-CVS / C-CVS findings.
 
 ### Notes
 - **Task AA is now CLOSED.** All 6 walk-through targets are complete: Cycle 15 (`spec/06-testing-guidelines/`), Cycle 16 (`spec/03-powershell-test-run/`), Cycle 17 (`spec/04-tooling/`), Cycle 18 (`spec/02-app-issues/`), Cycle 19 (`spec/05-failing-tests/`), Cycle 20 (`spec/00-llm-integration-guide.md`).
@@ -66,8 +66,8 @@
 ## [spec-v0.54.0] — 2026-05-07 (Cycle 19 — Task **AA**: walk-through audit of `spec/05-failing-tests/`)
 
 ### Added
-- `spec/05-failing-tests/README.md` — directory-level scope/provenance disclaimer. The 25 files in this folder are upstream `core-v9` test post-mortems imported for institutional memory and reference packages (`corepayload`, `coredynamic`, `corejson`, `corestr`, `errcore`, `corevalidator`, etc.) and test paths (`tests/integratedtests/<pkg>tests/`) that **do not exist inside `enum-v9`**. README pins the legend (5 RESOLVED / 20 historical) and instructs future AI cycles NOT to rewrite `integratedtests/` → `creationtests/` here, since those paths refer to upstream layout (per Task **AH** policy / PI-002).
-- `spec/07-code-vs-spec-audits/38-cycle19-failing-tests-walkthrough.md` — full walk-through audit. 25/25 files inventoried. Every referenced package confirmed absent from `enum-v9`. Zero D-CVS / C-CVS spawned (advisory-only directory). Score: N/A (no per-claim AB sweep applicable).
+- `spec/05-failing-tests/README.md` — directory-level scope/provenance disclaimer. The 25 files in this folder are upstream `core-v9` test post-mortems imported for institutional memory and reference packages (`corepayload`, `coredynamic`, `corejson`, `corestr`, `errcore`, `corevalidator`, etc.) and test paths (`tests/integratedtests/<pkg>tests/`) that **do not exist inside `enum-v10`**. README pins the legend (5 RESOLVED / 20 historical) and instructs future AI cycles NOT to rewrite `integratedtests/` → `creationtests/` here, since those paths refer to upstream layout (per Task **AH** policy / PI-002).
+- `spec/07-code-vs-spec-audits/38-cycle19-failing-tests-walkthrough.md` — full walk-through audit. 25/25 files inventoried. Every referenced package confirmed absent from `enum-v10`. Zero D-CVS / C-CVS spawned (advisory-only directory). Score: N/A (no per-claim AB sweep applicable).
 
 ### Notes
 - This closes Task **AA** Cycle 19. The only remaining un-walk-through'd `spec/` target is `spec/00-llm-integration-guide.md` (2388 lines) → Cycle 20.
@@ -110,7 +110,7 @@
 ## [spec-v0.51.0] — 2026-05-06 (Cycle 46 — AB-residual deep-probe of `spec/01-app/08-validators.md`)
 
 ### Added
-- `spec/07-code-vs-spec-audits/35-cycle46-AB-residual-spec01-validators.md` — settles all 6 ❓ items left by Cycle 21. **2 promotions to ✅** (row 43: `errcore.VarTwoNoType` + `ValidationFailedType` symbol existence at `errcore/VarTwoNoType.go:25` + `RawErrorType.go:121`; row 45: `regexnew.New.Lazy` constructor at `regexnew/newCreator.go:34`). **3 reclassifications to ⓘ "upstream-only"** per Cycle 37 (S-109): row 42 (`coretestcases.CaseV1`/`CaseNilSafe`), row 44 (`<pkg>tests/<V>_Verification_test.go` naming — enum-v9 has flat `tests/creationtests/`, upstream `core-v9` uses `<pkg>tests/` subdirs but neither uses `_Verification_` filenames). **1 out-of-band** (row 46: aspirational diagnostic rules → Task AC advisory dimension). **NO NEW FINDINGS.**
+- `spec/07-code-vs-spec-audits/35-cycle46-AB-residual-spec01-validators.md` — settles all 6 ❓ items left by Cycle 21. **2 promotions to ✅** (row 43: `errcore.VarTwoNoType` + `ValidationFailedType` symbol existence at `errcore/VarTwoNoType.go:25` + `RawErrorType.go:121`; row 45: `regexnew.New.Lazy` constructor at `regexnew/newCreator.go:34`). **3 reclassifications to ⓘ "upstream-only"** per Cycle 37 (S-109): row 42 (`coretestcases.CaseV1`/`CaseNilSafe`), row 44 (`<pkg>tests/<V>_Verification_test.go` naming — enum-v10 has flat `tests/creationtests/`, upstream `core-v9` uses `<pkg>tests/` subdirs but neither uses `_Verification_` filenames). **1 out-of-band** (row 46: aspirational diagnostic rules → Task AC advisory dimension). **NO NEW FINDINGS.**
 - Scoreboard top-line + per-section row updated (§08 verifiable 33.3% → 42.9%; §08 ❓ pool fully cleared).
 
 ### Notes
@@ -173,8 +173,8 @@
 ## [spec-v0.44.0] — 2026-05-06 (Cycle 37 — S-109 `tests/creationtests/` deep-probe)
 
 ### Added
-- `spec/07-code-vs-spec-audits/29-cycle37-S109-creationtests-deep-probe.md` — full deep-probe report of all 14 files under `enum-v9/tests/creationtests/`. Settles the 10 ❓ items left by Cycle 15 in `spec/06-testing-guidelines/`: **1 promoted ✅** (claim 20, diff-based assertion pattern — found in `AllEnums_ContractsTesting_test.go` via `enumimpl.DynamicMap.LogShouldDiffMessage` + `So(diff, ShouldBeEmpty)`), **9 annotated ⓘ "upstream-only"** (`CaseV1`/`CaseNilSafe`/`GenericGherkins`, `args.*`, `results.*`/`InvokeWithPanicRecovery`, `ShouldBeEqual*`/`ShouldBeSafe` upstream-custom assertions distinct from GoConvey's `ShouldEqual`/`ShouldResemble`/`ShouldBeNil` family used by enum-v9, `07-diagnostics-output-standards` 5 sub-claims, `08-good-vs-bad` examples, `09-creating-custom-cases` `BaseTestCase` extension pattern). Probe commands documented for reproducibility. Closes **S-109**.
-- New finding **D-CVS-64** (LOW): `02-test-case-types.md` and `05-assertion-patterns.md` don't surface the **GoConvey-only sub-pattern** that `enum-v9` itself uses (plain `So(actual, ShouldEqual, expected)` + AAA comments + plain `[]*Wrapper` registry, no `args.Map` bundling, no `BaseTestCase` extension, no `coretests.GetAssert`). Tracked as carry-forward suggestion **S-111** — cosmetic, non-blocking.
+- `spec/07-code-vs-spec-audits/29-cycle37-S109-creationtests-deep-probe.md` — full deep-probe report of all 14 files under `enum-v10/tests/creationtests/`. Settles the 10 ❓ items left by Cycle 15 in `spec/06-testing-guidelines/`: **1 promoted ✅** (claim 20, diff-based assertion pattern — found in `AllEnums_ContractsTesting_test.go` via `enumimpl.DynamicMap.LogShouldDiffMessage` + `So(diff, ShouldBeEmpty)`), **9 annotated ⓘ "upstream-only"** (`CaseV1`/`CaseNilSafe`/`GenericGherkins`, `args.*`, `results.*`/`InvokeWithPanicRecovery`, `ShouldBeEqual*`/`ShouldBeSafe` upstream-custom assertions distinct from GoConvey's `ShouldEqual`/`ShouldResemble`/`ShouldBeNil` family used by enum-v10, `07-diagnostics-output-standards` 5 sub-claims, `08-good-vs-bad` examples, `09-creating-custom-cases` `BaseTestCase` extension pattern). Probe commands documented for reproducibility. Closes **S-109**.
+- New finding **D-CVS-64** (LOW): `02-test-case-types.md` and `05-assertion-patterns.md` don't surface the **GoConvey-only sub-pattern** that `enum-v10` itself uses (plain `So(actual, ShouldEqual, expected)` + AAA comments + plain `[]*Wrapper` registry, no `args.Map` bundling, no `BaseTestCase` extension, no `coretests.GetAssert`). Tracked as carry-forward suggestion **S-111** — cosmetic, non-blocking.
 - `spec/07-code-vs-spec-audits/01-scoreboard.md` — Cycle 37 row added.
 
 ### Notes
@@ -193,11 +193,11 @@
 - Updated internal cross-ref inside the new `portable/02-ai-agent-complete-reference.md` (table row pointing to its sibling).
 
 ### Added
-- `spec/03-powershell-test-run/portable/README.md` — explains the scope split (portable vs `enum-v9`-specific), lists the two files, and lays out three editor rules to keep the portability promise intact.
+- `spec/03-powershell-test-run/portable/README.md` — explains the scope split (portable vs `enum-v10`-specific), lists the two files, and lays out three editor rules to keep the portability promise intact.
 
 ### Notes
 - Historical `08-`/`09-` filename references in `spec/CHANGELOG.md` (Cycle-16 entry), `spec/07-code-vs-spec-audits/17-cycle16-powershell-test-run.md`, and `spec/99-audits/01-original-11-step-plan.md` are intentionally left as-is — they document the audit history at the time those cycles ran.
-- Closes **S-103**. The structural split makes it easier for future portable-runner edits to ship without touching `enum-v9`-specific files, and replaces the reliance on top-of-file consumer-coverage callouts (D-CVS-47/48 from Cycle 16) with a directory-level signal.
+- Closes **S-103**. The structural split makes it easier for future portable-runner edits to ship without touching `enum-v10`-specific files, and replaces the reliance on top-of-file consumer-coverage callouts (D-CVS-47/48 from Cycle 16) with a directory-level signal.
 
 ---
 
@@ -223,7 +223,7 @@
 ## [spec-v0.42.1] — 2026-05-06 (Cycle 34 — S-004 scope callout)
 
 ### Changed
-- `spec/00-llm-integration-guide.md` — added an inline upstream-vs-enum-v9 scope callout above the "Test Folder Structure" code fence (line 826), matching the disclaimer model already used by `spec/06-testing-guidelines/01-folder-structure.md` line 3. Cross-links `spec/01-app/13-testing-patterns.md` §6.1 and `spec/06-testing-guidelines/01-folder-structure.md`. Closes suggestion **S-004** and disambiguates the Decision-Matrix Style-D row (line 36) by the same callout — `integratedtests/` references are now correctly scoped to upstream `core-v9` consumers.
+- `spec/00-llm-integration-guide.md` — added an inline upstream-vs-enum-v10 scope callout above the "Test Folder Structure" code fence (line 826), matching the disclaimer model already used by `spec/06-testing-guidelines/01-folder-structure.md` line 3. Cross-links `spec/01-app/13-testing-patterns.md` §6.1 and `spec/06-testing-guidelines/01-folder-structure.md`. Closes suggestion **S-004** and disambiguates the Decision-Matrix Style-D row (line 36) by the same callout — `integratedtests/` references are now correctly scoped to upstream `core-v9` consumers.
 
 ### Notes
 - **S-003** verified already-resolved: `spec/06-testing-guidelines/01-folder-structure.md` line 3 already carries the same scope disclaimer.
@@ -435,10 +435,10 @@ Cumulative AB pattern: across the 2 sections audited so far, ~25 % of API claims
 
 ### Fixed
 - **`spec/02-app-issues/README.md`** (D-CVS-56) — index was stale by ~4 issues for ~14 days (since spec-v0.6.0 introduced #06–#09 and resolved all 9). Rewrote the index table to 9 rows all ✅ resolved; updated the top-of-file status banner to "All 9 issues resolved (last update spec-v0.8.0)".
-- **`spec/02-app-issues/02-internal-package-coverage-policy.md`** (D-CVS-57) — added a Cycle-18 `Scope note (enum-v9)` after the status banner, explaining that the cited `tests/integratedtests/<pkg>tests/` and `csvinternaltests/`/`fsinternaltests/` paths describe upstream `core-v9` (which has an `internal/` directory); `enum-v9` has no `internal/` at all, so the policy applies vacuously here. Historical resolution text preserved verbatim.
-- **`spec/02-app-issues/03-getassert-undocumented-api.md`** (D-CVS-58) — added an `enum-v9`-scope footnote noting `coretests.GetAssert` returns zero hits in `enum-v9` (Goconvey assertions are used inside `EnumTestWrapper` instead). Historical "STABLE for any test code inside this module" declaration preserved verbatim — it now correctly applies to upstream `core-v9` only.
-- **`spec/02-app-issues/04-testwrappers-public-surface.md`** (D-CVS-59) — added an `enum-v9`-scope footnote noting `tests/testwrappers/` does NOT exist in `enum-v9` (the project uses a single shared `EnumTestWrapper` inside `tests/creationtests/`). Historical declaration preserved verbatim.
-- **`spec/02-app-issues/05-missing-params-go-files.md`** (D-CVS-60) — added an `enum-v9`-scope footnote noting `tests/integratedtests/` and `errcoretests/` are upstream-`core-v9` package names; the "grandfathered, no back-fill" rule applies vacuously here (`tests/creationtests/` uses shared `vars.go`, no per-package `params.go`).
+- **`spec/02-app-issues/02-internal-package-coverage-policy.md`** (D-CVS-57) — added a Cycle-18 `Scope note (enum-v10)` after the status banner, explaining that the cited `tests/integratedtests/<pkg>tests/` and `csvinternaltests/`/`fsinternaltests/` paths describe upstream `core-v9` (which has an `internal/` directory); `enum-v10` has no `internal/` at all, so the policy applies vacuously here. Historical resolution text preserved verbatim.
+- **`spec/02-app-issues/03-getassert-undocumented-api.md`** (D-CVS-58) — added an `enum-v10`-scope footnote noting `coretests.GetAssert` returns zero hits in `enum-v10` (Goconvey assertions are used inside `EnumTestWrapper` instead). Historical "STABLE for any test code inside this module" declaration preserved verbatim — it now correctly applies to upstream `core-v9` only.
+- **`spec/02-app-issues/04-testwrappers-public-surface.md`** (D-CVS-59) — added an `enum-v10`-scope footnote noting `tests/testwrappers/` does NOT exist in `enum-v10` (the project uses a single shared `EnumTestWrapper` inside `tests/creationtests/`). Historical declaration preserved verbatim.
+- **`spec/02-app-issues/05-missing-params-go-files.md`** (D-CVS-60) — added an `enum-v10`-scope footnote noting `tests/integratedtests/` and `errcoretests/` are upstream-`core-v9` package names; the "grandfathered, no back-fill" rule applies vacuously here (`tests/creationtests/` uses shared `vars.go`, no per-package `params.go`).
 
 ### Changed
 - **`spec/07-code-vs-spec-audits/01-scoreboard.md`** — added Cycle 18 history row; lifted top-line milestone to include **🎉 Cross-`spec/` AH sweep COMPLETE**; bumped open-❓ aggregate from **172 → 177** (5 audit-history claims).
@@ -452,8 +452,8 @@ Cumulative AB pattern: across the 2 sections audited so far, ~25 % of API claims
 
 ### Fixed
 - **`spec/04-tooling/00-overview.md`** (D-CVS-49) — fixed 2 broken `cross-repo/core-v9/` paths (Map table row 06 + Maintenance §3) to `cross-repo/core-v9/` with explicit Core-memory note that the directory intentionally retains its historical `core-v8` name even though the import path is `core-v9`.
-- **`spec/04-tooling/04-bootstrap-into-new-repo.md`** (D-CVS-50) — §7 decoupling row "tests/integratedtests/ mirror layout required ❌ No" now names both upstream-`core-v9` and `enum-v9` (`tests/creationtests/`) layouts as concrete examples. Closes the AH-tracked occurrence for this directory.
-- **`spec/04-tooling/06-cross-repo-sync.md`** (D-CVS-51 → D-CVS-55) — fixed 5 stale-token sites: `enum-v2 → enum-v9` at lines 11, 80 (template comment), 91; `cross-repo/core-v9 → cross-repo/core-v9` at lines 19, 80 (template comment), 103 (See Also). Template comment at line 80 carried both stale tokens (D-CVS-53). Each rewrite includes a Core-memory clarification where appropriate.
+- **`spec/04-tooling/04-bootstrap-into-new-repo.md`** (D-CVS-50) — §7 decoupling row "tests/integratedtests/ mirror layout required ❌ No" now names both upstream-`core-v9` and `enum-v10` (`tests/creationtests/`) layouts as concrete examples. Closes the AH-tracked occurrence for this directory.
+- **`spec/04-tooling/06-cross-repo-sync.md`** (D-CVS-51 → D-CVS-55) — fixed 5 stale-token sites: `enum-v2 → enum-v10` at lines 11, 80 (template comment), 91; `cross-repo/core-v9 → cross-repo/core-v9` at lines 19, 80 (template comment), 103 (See Also). Template comment at line 80 carried both stale tokens (D-CVS-53). Each rewrite includes a Core-memory clarification where appropriate.
 
 ### Changed
 - **`spec/07-code-vs-spec-audits/01-scoreboard.md`** — added Cycle 17 history row; lifted top-line milestone to include **`spec/04-tooling/` baselined & closed**; bumped open-❓ aggregate from **164 → 172** (8 from `spec/04` workflow-internal behaviours).
@@ -466,11 +466,11 @@ Cumulative AB pattern: across the 2 sections audited so far, ~25 % of API claims
 - **`spec/07-code-vs-spec-audits/17-cycle16-powershell-test-run.md`** — Cycle 16 audit covering all 9 files in `spec/03-powershell-test-run/` (28 representative claims across 2 519 lines). Closes the directory at **100 % verifiable** (22 ✅ / 6 ❓; the 6 ❓ are runner-internal behaviours — parallel-threading model, JSON-schema fidelity — requiring a direct `scripts/*.psm1` probe). Raises and resolves **D-CVS-44 → D-CVS-48** (5 LOW drifts) in the same cycle. Folds in task **AH** debt for this directory.
 
 ### Fixed
-- **`spec/03-powershell-test-run/01-overview.md`** (D-CVS-44) — added a top-of-file **`Scope note (enum-v9)`** explaining `run.ps1` is layout-agnostic and example JSON paths (`tests/integratedtests/corecmptests/...`) use upstream-`core-v9` package names for illustration. The runner reads test packages from disk via `go list ./tests/...` and works on either layout.
-- **`spec/03-powershell-test-run/04-pre-commit-api-checker.md`** (D-CVS-45) — added the same `Scope note (enum-v9)` callout, redirecting to `01-overview.md` and `01-app/13-testing-patterns.md` §6.1.
-- **`spec/03-powershell-test-run/06-coverage-prompt-generator.md`** (D-CVS-46) — inline rewrite of the prompt template (line 71) to name both upstream-`core-v9` and `enum-v9` test layouts. Inline rewrite chosen because the line is *quoted prompt output* — a top-of-file scope note wouldn't propagate into the generated prompt.
-- **`spec/03-powershell-test-run/08-generic-go-test-coverage-runner.md`** (D-CVS-47) — added a top-of-file **`Consumer-coverage note (enum-v9)`** scoping the entire portable-runner spec to upstream-`core-v9` nomenclature.
-- **`spec/03-powershell-test-run/09-ai-agent-complete-reference.md`** (D-CVS-48) — added the same `Consumer-coverage note (enum-v9)` callout. Per-token rewrite of the 7 in-text `tests/integratedtests/` references avoided to preserve the file's portability promise (header line: "self-contained reference for any AI agent working on a Go project").
+- **`spec/03-powershell-test-run/01-overview.md`** (D-CVS-44) — added a top-of-file **`Scope note (enum-v10)`** explaining `run.ps1` is layout-agnostic and example JSON paths (`tests/integratedtests/corecmptests/...`) use upstream-`core-v9` package names for illustration. The runner reads test packages from disk via `go list ./tests/...` and works on either layout.
+- **`spec/03-powershell-test-run/04-pre-commit-api-checker.md`** (D-CVS-45) — added the same `Scope note (enum-v10)` callout, redirecting to `01-overview.md` and `01-app/13-testing-patterns.md` §6.1.
+- **`spec/03-powershell-test-run/06-coverage-prompt-generator.md`** (D-CVS-46) — inline rewrite of the prompt template (line 71) to name both upstream-`core-v9` and `enum-v10` test layouts. Inline rewrite chosen because the line is *quoted prompt output* — a top-of-file scope note wouldn't propagate into the generated prompt.
+- **`spec/03-powershell-test-run/08-generic-go-test-coverage-runner.md`** (D-CVS-47) — added a top-of-file **`Consumer-coverage note (enum-v10)`** scoping the entire portable-runner spec to upstream-`core-v9` nomenclature.
+- **`spec/03-powershell-test-run/09-ai-agent-complete-reference.md`** (D-CVS-48) — added the same `Consumer-coverage note (enum-v10)` callout. Per-token rewrite of the 7 in-text `tests/integratedtests/` references avoided to preserve the file's portability promise (header line: "self-contained reference for any AI agent working on a Go project").
 
 ### Changed
 - **`spec/07-code-vs-spec-audits/01-scoreboard.md`** — added Cycle 16 history row; lifted top-line milestone to include **`spec/03-powershell-test-run/` baselined & closed**; bumped open-❓ aggregate from **158 → 164** (6 from `spec/03` runner-internal behaviours).
@@ -496,10 +496,10 @@ Cumulative AB pattern: across the 2 sections audited so far, ~25 % of API claims
 ## [spec-v0.29.0] — 2026-05-06 (Cycle 15 baseline & closed — `spec/06-testing-guidelines/` directory at 100 % verifiable)
 
 ### Added
-- **`spec/07-code-vs-spec-audits/16-cycle15-testing-guidelines.md`** — Cycle 15 audit covering all 10 files in `spec/06-testing-guidelines/` (32 representative claims). Closes the directory at **100 % of its verifiable subset** (22 ✅ / 10 ❓; the 10 ❓ are upstream-`core-v9` behavioural claims pending task **AB**). Introduces **D-CVS-43** (LOW) — same upstream-vs-`enum-v9` scope mismatch already resolved at `01-app/13` and `01-app/14` — and resolves it in the same cycle via the README + 01-folder-structure callout pattern.
+- **`spec/07-code-vs-spec-audits/16-cycle15-testing-guidelines.md`** — Cycle 15 audit covering all 10 files in `spec/06-testing-guidelines/` (32 representative claims). Closes the directory at **100 % of its verifiable subset** (22 ✅ / 10 ❓; the 10 ❓ are upstream-`core-v9` behavioural claims pending task **AB**). Introduces **D-CVS-43** (LOW) — same upstream-vs-`enum-v10` scope mismatch already resolved at `01-app/13` and `01-app/14` — and resolves it in the same cycle via the README + 01-folder-structure callout pattern.
 
 ### Fixed
-- **`spec/06-testing-guidelines/README.md`** (resolves **D-CVS-43** part 1) — added a "**Consumer-coverage note (`enum-v9`)**" callout immediately after the title block, scoping the entire portable testing-guideline folder to **upstream `core-v9`** and redirecting `enum-v9` readers at `spec/01-app/13-testing-patterns.md` §6.1 and `spec/01-app/14-tests-folder-walkthrough.md` for this module's actual `tests/creationtests/` layout.
+- **`spec/06-testing-guidelines/README.md`** (resolves **D-CVS-43** part 1) — added a "**Consumer-coverage note (`enum-v10`)**" callout immediately after the title block, scoping the entire portable testing-guideline folder to **upstream `core-v9`** and redirecting `enum-v10` readers at `spec/01-app/13-testing-patterns.md` §6.1 and `spec/01-app/14-tests-folder-walkthrough.md` for this module's actual `tests/creationtests/` layout.
 - **`spec/06-testing-guidelines/01-folder-structure.md`** (resolves **D-CVS-43** part 2) — added a `⚠️ Scope` warning at the top of the file marking the per-package `tests/integratedtests/<pkg>tests/` directory tree as upstream-only and redirecting to the same `01-app/13-` §6.1 anchor. Other in-text references in `03-args-reference.md` and `06-branch-coverage.md` are now covered by the README callout (no per-token rewrite — the spec is deliberately portable).
 
 ### Changed
@@ -515,7 +515,7 @@ Cumulative AB pattern: across the 2 sections audited so far, ~25 % of API claims
 ## [spec-v0.27.0] — 2026-05-04 (Cycle 5 baseline — §07 conditional-and-utilities audited)
 
 ### Added
-- **`spec/07-code-vs-spec-audits/06-cycle5-conditional-and-utilities.md`** — Cycle 5 baseline audit of `spec/01-app/07-conditional-and-utilities.md`. All 17 claims (covering `conditional`, `isany`, `issetter`, `regexnew`, `coremath`, `corecmp`, `coresort`, `corefuncs`, `namevalue`, `keymk`) classified as **❓ unverifiable**: zero `enum-v9` consumers and no source mirrored under `cross-repo/core-v9/`. No drift or contradiction provable from `enum-v9` alone — verification deferred to task **AB** (fetch upstream `core-v9` source). Section coverage advances **4 / 16 → 5 / 16**; verifiable-match rate unchanged.
+- **`spec/07-code-vs-spec-audits/06-cycle5-conditional-and-utilities.md`** — Cycle 5 baseline audit of `spec/01-app/07-conditional-and-utilities.md`. All 17 claims (covering `conditional`, `isany`, `issetter`, `regexnew`, `coremath`, `corecmp`, `coresort`, `corefuncs`, `namevalue`, `keymk`) classified as **❓ unverifiable**: zero `enum-v10` consumers and no source mirrored under `cross-repo/core-v9/`. No drift or contradiction provable from `enum-v10` alone — verification deferred to task **AB** (fetch upstream `core-v9` source). Section coverage advances **4 / 16 → 5 / 16**; verifiable-match rate unchanged.
 
 ### Changed
 - **`spec/07-code-vs-spec-audits/01-scoreboard.md`** — added Cycle 5 (baseline) row marked **N/A** *(no verifiable subset)*; updated section-coverage milestone to **5/16**; restated **AB** task as now spanning **17 §07 + 7 §04 + 1 §05 + 6 §06** ❓ claims.
@@ -524,14 +524,14 @@ Cumulative AB pattern: across the 2 sections audited so far, ~25 % of API claims
 
 ### Fixed
 - **`spec/01-app/06-data-structures.md`** — resolves C-CVS-06..08 + D-CVS-20..25 from Cycle 4 in a single pass. Lifts §06 from **35.7 % → 100 %** of its verifiable subset; **❌ contradiction count: 3 → 0**.
-  - **§1 "Consumer-coverage note"** (resolves **D-CVS-25**): added a callout listing actual `enum-v9` consumer counts (`corejson` 80 / `corestr` 4 / `coreonce` 1; `coregeneric` and `corepayload` zero) so readers know which sub-sections are upstream-reference.
+  - **§1 "Consumer-coverage note"** (resolves **D-CVS-25**): added a callout listing actual `enum-v10` consumer counts (`corejson` 80 / `corestr` 4 / `coreonce` 1; `coregeneric` and `corepayload` zero) so readers know which sub-sections are upstream-reference.
   - **§2 `coregeneric` header**: added explicit "⚠️ Upstream-only sub-package" callout.
   - **§3 `corestr` rewrite** (resolves **D-CVS-23**): replaced the unused `corestr.NewCollectionPtrUsingStrings(&values, 0)` example with the actual exported surface (`corestr.New.Hashset`, `corestr.New.SimpleSlice`, `corestr.SimpleStringOnce`); cross-referenced the upstream-only `coregeneric.New.Collection.String` for callers that genuinely need a mutex-protected string list.
   - **§4 `corejson` code block** (resolves **C-CVS-07** + **D-CVS-20** + **D-CVS-21**): replaced fictional `Serialize.ToString` / `Serialize.Raw` / `Deserialize.UsingBytes` / `Deserialize.FromTo` with the real consumer-side API: `Serialize.ToBytesErr` returning `*Result`, `Deserialize.BytesTo`, and `corejson.NewPtr(...).PrettyJsonString()`. Added a contracts subsection naming `Jsoner` / `JsonMarshaller` / `JsonContractsBinder`.
   - **§4 "Rule (with documented exceptions)"** (resolves **C-CVS-06**): rule wording softened from "**never** `encoding/json` directly" to "**should** prefer `corejson`" with an explicit table of the two legitimate exceptions: `inttype/Variant.go:440` calling `json.Marshal(it.Value())` inside `MarshalJSON`, and `inttype/all-constructors.go:75` accepting `*json.Number` as a parameter type.
   - **§5 `coreonce` rewrite** (resolves **D-CVS-22** + **D-CVS-24**): replaced the fictional `coreonce.New.String(producer)` namespace with the real top-level constructors `coreonce.NewAnyOnce` / `coreonce.NewByteOnce`; cross-referenced `corestr.SimpleStringOnce` as the string equivalent (which lives in `corestr`, not `coreonce`); softened "all common types" wording.
   - **§6 `corepayload` upstream-only callout** (resolves **C-CVS-08**): added "⚠️ Upstream-only sub-package" callout deferring `PayloadCreateInstruction` field-set verification to task **AB**.
-  - **§7 decision matrix**: added a "Verified in `enum-v9`?" column (✅ vs ⚠️ upstream-only); replaced fictional rows (`corestr.Collection`, `coreonce.New.<Type>`, `corejson.Serialize`/`Deserialize` shorthand) with concrete entries pointing at real APIs.
+  - **§7 decision matrix**: added a "Verified in `enum-v10`?" column (✅ vs ⚠️ upstream-only); replaced fictional rows (`corestr.Collection`, `coreonce.New.<Type>`, `corejson.Serialize`/`Deserialize` shorthand) with concrete entries pointing at real APIs.
 
 ### Changed
 - **`spec/07-code-vs-spec-audits/01-scoreboard.md`** — moved C-CVS-06..08 + D-CVS-20..25 to **Resolved** (9 entries); cleared the **Open drift findings** table; added Cycle 4 (closed) row at **100.0 %** verifiable on §06; updated targets to ✅ for the ≥95 % aggregate goal and ✅ for zero-contradictions.
@@ -539,7 +539,7 @@ Cumulative AB pattern: across the 2 sections audited so far, ~25 % of API claims
 ## [spec-v0.25.0] — 2026-05-04 (Cycle 4 baseline — §06 data-structures audited)
 
 ### Added
-- **`spec/07-code-vs-spec-audits/05-cycle4-data-structures.md`** — full Cycle 4 audit of `01-app/06-data-structures.md`. 20 claims: 5 ✅ / 6 ⚠️ / **3 ❌** / **6 ❓**. Verifiable score: **35.7 %** (5/14). Three contradictions: `corejson.Serialize.ToString` / `Deserialize.FromTo` examples don't compile (real API: `Serialize.ToBytesErr` / `Deserialize.BytesTo`); `coreonce.New.String(...)` namespace doesn't match real top-level constructors (`coreonce.NewAnyOnce` / `NewByteOnce`); §4's "never `encoding/json` directly" rule is violated by `inttype/Variant.go` (`json.Marshal` in `MarshalJSON`) and `inttype/all-constructors.go` (`*json.Number` parameter type). The high ❓ count (6) reflects that `coregeneric` and `corepayload` have **zero consumers** in `enum-v9`.
+- **`spec/07-code-vs-spec-audits/05-cycle4-data-structures.md`** — full Cycle 4 audit of `01-app/06-data-structures.md`. 20 claims: 5 ✅ / 6 ⚠️ / **3 ❌** / **6 ❓**. Verifiable score: **35.7 %** (5/14). Three contradictions: `corejson.Serialize.ToString` / `Deserialize.FromTo` examples don't compile (real API: `Serialize.ToBytesErr` / `Deserialize.BytesTo`); `coreonce.New.String(...)` namespace doesn't match real top-level constructors (`coreonce.NewAnyOnce` / `NewByteOnce`); §4's "never `encoding/json` directly" rule is violated by `inttype/Variant.go` (`json.Marshal` in `MarshalJSON`) and `inttype/all-constructors.go` (`*json.Number` parameter type). The high ❓ count (6) reflects that `coregeneric` and `corepayload` have **zero consumers** in `enum-v10`.
 - **9 new drift findings** (C-CVS-06..08 + D-CVS-20..25): documented vs actual `corejson` API, `coreonce` constructor surface, `corestr` real exports (`Hashset` / `SimpleSlice` / `SimpleStringOnce` rather than a string-list collection), and the upstream-only status of `coregeneric` / `corepayload`.
 
 ### Changed
@@ -564,7 +564,7 @@ Cumulative AB pattern: across the 2 sections audited so far, ~25 % of API claims
 ## [spec-v0.23.0] — 2026-05-04 (Cycle 3 baseline — §05 enum-system audited)
 
 ### Added
-- **`spec/07-code-vs-spec-audits/04-cycle3-enum-system.md`** — full Cycle 3 audit of `01-app/05-enum-system.md`. 18 claims: 8 ✅ / 6 ⚠️ / **3 ❌** / 1 ❓. Verifiable score: **47.1 %** (8/17). Three real contradictions surfaced (C-CVS-03..05): the "first const = `Invalid`" rule is violated by 10 packages using alternate sentinel names (`Default`, `Unspecified`, `Uninitialized`, `InvalidIndex = -1`); the recipe imports `core-v9/internal/reflectinternal` which `enum-v9` cannot legally do across module boundaries; and `inttype.InvalidIndex Variant = -1` directly contradicts the "zero-value sentinel" wording.
+- **`spec/07-code-vs-spec-audits/04-cycle3-enum-system.md`** — full Cycle 3 audit of `01-app/05-enum-system.md`. 18 claims: 8 ✅ / 6 ⚠️ / **3 ❌** / 1 ❓. Verifiable score: **47.1 %** (8/17). Three real contradictions surfaced (C-CVS-03..05): the "first const = `Invalid`" rule is violated by 10 packages using alternate sentinel names (`Default`, `Unspecified`, `Uninitialized`, `InvalidIndex = -1`); the recipe imports `core-v9/internal/reflectinternal` which `enum-v10` cannot legally do across module boundaries; and `inttype.InvalidIndex Variant = -1` directly contradicts the "zero-value sentinel" wording.
 - **6 new drift findings** (D-CVS-14..19): documented vs actual file layout (`Variant.go` everywhere, no `consts.go`), missing `*AllCases` factory family in §6 (10+ call sites), unused `CreateUsingMap` listed, stale `tests/integratedtests/` reference (mirrors C-CVS-01), unrunnable `reflectinternal.TypeName(...)` example, predicate file-split rule that's never enforced.
 
 ### Changed
@@ -589,7 +589,7 @@ Cumulative AB pattern: across the 2 sections audited so far, ~25 % of API claims
 
 ### Added
 - **`spec/07-code-vs-spec-audits/03-cycle2-error-system.md`** — full Cycle 2 audit of `01-app/04-error-system.md`. 18 claims extracted: 3 ✅, 8 ⚠️ (spec is incomplete vs consumer usage), 7 ❓ (unverifiable without upstream `core-v9` source — sandbox lacks Go + the module is not vendored), 0 ❌. Verifiable-subset score: **27.3 %** (3/11). New ❓ bucket introduced so aspirational APIs aren't logged as contradictions before upstream source is available.
-- **8 new open drift findings** (D-CVS-06..13) covering APIs `enum-v9` actively uses but the spec does not document: `MustBeEmpty`, `RawErrCollection`, `<RawErrorType>.ErrorRefOnly`, `<RawErrorType>.CombineWithAnother`, `MessageWithRef`, `RangeNotMeet`, `ToError`/`ToString`, plus 4 missing `RawErrorType` examples (`FailedToExecuteType`, `NotSupportedType`, `PathInvalidErrorType`, `ComparatorShouldBeWithinRangeType`).
+- **8 new open drift findings** (D-CVS-06..13) covering APIs `enum-v10` actively uses but the spec does not document: `MustBeEmpty`, `RawErrCollection`, `<RawErrorType>.ErrorRefOnly`, `<RawErrorType>.CombineWithAnother`, `MessageWithRef`, `RangeNotMeet`, `ToError`/`ToString`, plus 4 missing `RawErrorType` examples (`FailedToExecuteType`, `NotSupportedType`, `PathInvalidErrorType`, `ComparatorShouldBeWithinRangeType`).
 
 ### Changed
 - **`spec/07-code-vs-spec-audits/01-scoreboard.md`** — added Cycle 2 row, new ❓ column, 8 open findings, 2 new milestones (apply D-CVS-06..13 spec fixes; fetch upstream `core-v9` source as task **AB**). Section progress: **2/16** done.
@@ -597,8 +597,8 @@ Cumulative AB pattern: across the 2 sections audited so far, ~25 % of API claims
 ## [spec-v0.20.0] — 2026-05-04 (Cycle 1 fully closed — §03 at 100%)
 
 ### Fixed
-- **`spec/01-app/03-import-conventions.md` §3 "`internal/` access from tests"** — resolves **C-CVS-02**. Section was titled "Common `internal/` packages used by tests" and used `core-v9/internal/reflectinternal` as a live example, but `enum-v9` (this repo) imports zero `internal/` packages. Reframed as a forward-looking explanation that `internal/` access is a **same-module** rule, with the `reflectinternal` example explicitly attributed to the upstream `core-v9` repo's own tests, and a new **consumer-side note** stating that `enum-v9`-style consumers cannot import `core-v9/internal/...` because Go enforces `internal/` at module boundaries.
-- **`spec/01-app/03-import-conventions.md` §4 "Test-Package Imports"** — resolves **C-CVS-01**. Old text claimed tests live at `tests/integratedtests/footests/`, which doesn't exist in this repo. Replaced with the actual `enum-v9` layout (`tests/creationtests/` — flat, single `package creationtests`, mix of `*_test.go` and shared fixture `.go` files) plus a cross-reference to the upstream `core-v9` per-suite layout (`tests/<suite>/footests/`). The four shared rules (separate package, normal imports of source, no cycles, same-module `internal/` only) apply to both layouts.
+- **`spec/01-app/03-import-conventions.md` §3 "`internal/` access from tests"** — resolves **C-CVS-02**. Section was titled "Common `internal/` packages used by tests" and used `core-v9/internal/reflectinternal` as a live example, but `enum-v10` (this repo) imports zero `internal/` packages. Reframed as a forward-looking explanation that `internal/` access is a **same-module** rule, with the `reflectinternal` example explicitly attributed to the upstream `core-v9` repo's own tests, and a new **consumer-side note** stating that `enum-v10`-style consumers cannot import `core-v9/internal/...` because Go enforces `internal/` at module boundaries.
+- **`spec/01-app/03-import-conventions.md` §4 "Test-Package Imports"** — resolves **C-CVS-01**. Old text claimed tests live at `tests/integratedtests/footests/`, which doesn't exist in this repo. Replaced with the actual `enum-v10` layout (`tests/creationtests/` — flat, single `package creationtests`, mix of `*_test.go` and shared fixture `.go` files) plus a cross-reference to the upstream `core-v9` per-suite layout (`tests/<suite>/footests/`). The four shared rules (separate package, normal imports of source, no cycles, same-module `internal/` only) apply to both layouts.
 - **`spec/07-code-vs-spec-audits/01-scoreboard.md`** — moved C-CVS-01 and C-CVS-02 from Open → Resolved; §03 score updated 83.3 → **100.0** (12/12). Open-findings list is now empty. Cycle 1 is closed.
 
 ### Verified
@@ -613,8 +613,8 @@ Cumulative AB pattern: across the 2 sections audited so far, ~25 % of API claims
   - **D-CVS-01** (line 4): `consumes core-v9 packages` → `consumes core-v9 packages`.
   - **D-CVS-02** (line 88): `path ends in core-v9` / `not corev8` → `core-v9` / `corev9`.
   - **D-CVS-03** (line 94): `For core-v9, this means:` → `For core-v9, this means:`.
-  - **D-CVS-04** (line 121): reworded "rooted at the same `core-v9` module" to a module-generic statement that applies equally to `core-v9`, `enum-v9`, or any other consumer with its own `internal/` tree.
-  - **D-CVS-05** (lines 61, 73): annotated `coredata/coregeneric` as `// optional` in the canonical import block and added a sentence noting "not every consumer uses every package — `enum-v9`, for example, currently uses 8 of the 11 listed canonical imports".
+  - **D-CVS-04** (line 121): reworded "rooted at the same `core-v9` module" to a module-generic statement that applies equally to `core-v9`, `enum-v10`, or any other consumer with its own `internal/` tree.
+  - **D-CVS-05** (lines 61, 73): annotated `coredata/coregeneric` as `// optional` in the canonical import block and added a sentence noting "not every consumer uses every package — `enum-v10`, for example, currently uses 8 of the 11 listed canonical imports".
 - **`spec/07-code-vs-spec-audits/01-scoreboard.md`** — moved D-CVS-01..05 from Open → Resolved; §03 score updated 41.7 → **83.3** (10/12). The two remaining `tests/integratedtests/` and `internal/reflectinternal` contradictions stay open pending a structural decision.
 
 ### Verified

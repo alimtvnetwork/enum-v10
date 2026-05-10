@@ -2,7 +2,7 @@ package strtype
 
 import (
 	"github.com/alimtvnetwork/core-v9/corecomparator"
-	"github.com/alimtvnetwork/enum-v9/internal/messages"
+	"github.com/alimtvnetwork/enum-v10/internal/messages"
 )
 
 // IsCompareResult Here left is v, and right is `n`

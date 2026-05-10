@@ -8,7 +8,7 @@
 
 ## 1. Why this directory exists
 
-`enum-v9` depends on `core-v9` and shares the same CI/CD philosophy with
+`enum-v10` depends on `core-v9` and shares the same CI/CD philosophy with
 it. Ideally both repos would consume the workflows from a single source
 of truth (a reusable workflow or a `.github` org-level repo). Until that
 exists, the workflows are **duplicated** with light per-repo
@@ -79,7 +79,7 @@ maintainer should:
 3. Add a comment to the target-repo workflow header pointing back at
    this spec, e.g.:
    ```yaml
-   # Synced from github.com/alimtvnetwork/enum-v9/cross-repo/core-v9/
+   # Synced from github.com/alimtvnetwork/enum-v10/cross-repo/core-v9/
    # See: spec/04-tooling/06-cross-repo-sync.md
    ```
 
@@ -90,7 +90,7 @@ maintainer should:
 Replace `cross-repo/` with one of:
 
 - **A reusable workflow** in a shared `alimtvnetwork/.github` repo, with
-  both `enum-v9` and `core-v9` calling it via `uses:`.
+  both `enum-v10` and `core-v9` calling it via `uses:`.
 - **A `composite action`** packaged in its own repo for the lint /
   vulncheck / collision-audit steps.
 - **A Go-module template repo** that downstream repos vendor.

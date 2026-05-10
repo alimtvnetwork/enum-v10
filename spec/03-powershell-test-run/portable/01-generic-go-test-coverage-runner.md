@@ -1,6 +1,6 @@
 # Generic Go Test Coverage Runner — PowerShell Spec
 
-> **Consumer-coverage note (`enum-v9`)** — this entire file is a **portable / generic** spec for building a Go-coverage runner from scratch in any Go module. References to `tests/integratedtests/` describe the **upstream `core-v9`** convention; the same runner deployed inside `enum-v9` resolves test packages from `tests/creationtests/`. See `spec/01-app/13-testing-patterns.md` §6.1 for the `enum-v9` layout.
+> **Consumer-coverage note (`enum-v10`)** — this entire file is a **portable / generic** spec for building a Go-coverage runner from scratch in any Go module. References to `tests/integratedtests/` describe the **upstream `core-v9`** convention; the same runner deployed inside `enum-v10` resolves test packages from `tests/creationtests/`. See `spec/01-app/13-testing-patterns.md` §6.1 for the `enum-v10` layout.
 
 ## Purpose
 

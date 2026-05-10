@@ -41,7 +41,7 @@ Cycle 6 baseline: 18 ❓, no verifiable subset.
 |-----------|-------|--------------|
 | 263-297 | "Add tests (Style A) — `coretestcases.CaseV1`" + `CaseNilSafe` example | Behavioural test pattern — would need `coretests` upstream verification (covered by future Cycle 24/25). |
 | 240, 259 | `errcore.VarTwoNoType("field", label, ...)`, `errcore.ValidationFailedType.Fmt(...)` | `VarTwoNoType` exists (`errcore/VarTwoNoType.go:25`), `ValidationFailedType` exists (`RawErrorType.go:121`) — the *snippet's correctness* depends on C-CVS-23's fabricated `Result` type compiling first; treat as ❓ until the surrounding template is rewritten. |
-| 347-353 | "Three test files in `tests/creationtests/<pkg>tests/`: `<V>_Verification_test.go` etc." | Naming convention claim; partially verifiable from `enum-v9/tests/creationtests/` shape. Defer. |
+| 347-353 | "Three test files in `tests/creationtests/<pkg>tests/`: `<V>_Verification_test.go` etc." | Naming convention claim; partially verifiable from `enum-v10/tests/creationtests/` shape. Defer. |
 | 367 | "Compile regex once via `regexnew.New.Lazy` at struct construction" | Behavioural advice — verified that `regexnew.New.Lazy` exists; the *advice* is sound but trivially advisory. |
 | 308-310 | Diagnostic rules: "Message starts with field label", "No trailing punctuation", "No interpolated newlines" | All three are aspirational rules; without an emitting code path (C-CVS-28) they cannot be validated against reality. |
 

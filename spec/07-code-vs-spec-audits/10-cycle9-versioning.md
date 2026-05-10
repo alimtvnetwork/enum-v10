@@ -22,10 +22,10 @@ head -3 go.mod
 ```
 
 Results:
-- **Zero importers** of `coreversion` or `versionindexes` in `enum-v9`.
+- **Zero importers** of `coreversion` or `versionindexes` in `enum-v10`.
 - **Zero call sites** of any documented symbol (9 probed).
 - **Zero direct `golang.org/x/mod/semver` use** (anti-pattern from §6 Common Mistakes — rule honoured).
-- `.release/`, `.lovable/`, `mem/` directories **do not exist on disk** in `enum-v9` — citations in §3, §5, §11 source-attribution are stale.
+- `.release/`, `.lovable/`, `mem/` directories **do not exist on disk** in `enum-v10` — citations in §3, §5, §11 source-attribution are stale.
 - Two stale `core-v9 → core-v9` mojibake artifacts (§3 line 95, §4 line 112) — left over from the bulk `v8`→`v9` rename and now nonsensical (the prose describes the **historical** era bump, which legitimately should read `core-v8` → `core-v9`).
 - One stale `tests/integratedtests/` reference (§4 line 108) — same pattern already filed as C-CVS-01 / D-CVS-17 / D-CVS-26.
 - One stale `versionindexes.V8` comment (§2 line 59) — says `// 8 (current era — core-v9)` which conflates the legacy V8 index with the current core-v9 era.
@@ -97,7 +97,7 @@ Comment says `V8 // 8 (current era — core-v9)`. **Fix**: rewrite to `V8 // 8 (
 
 ### D-CVS-31 — Stale `.lovable/user-preferences` citation (§3 source line, §3 line 78, §5 line 133) — **LOW (citation hygiene)**
 
-`.lovable/` does not exist in `enum-v9`. Both rules (`bump at least minor`, `never touch .release/`) live in `mem://index.md` Core. **Fix**: rewrite citations to point only to `mem://index.md` Core, drop the `.lovable/user-preferences line 8` reference.
+`.lovable/` does not exist in `enum-v10`. Both rules (`bump at least minor`, `never touch .release/`) live in `mem://index.md` Core. **Fix**: rewrite citations to point only to `mem://index.md` Core, drop the `.lovable/user-preferences line 8` reference.
 
 ---
 

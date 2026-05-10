@@ -3,7 +3,7 @@
 > ℹ️ **Historical naming — intentional. Do not rename this directory.**
 >
 > This folder mirrors a separate upstream repo whose name is still
-> `alimtvnetwork/core-v8`. Even though the **import path used by `enum-v9`
+> `alimtvnetwork/core-v8`. Even though the **import path used by `enum-v10`
 > source code is `github.com/alimtvnetwork/core-v9`** (renamed 2026-05-05,
 > tagged `v1.5.8`), the directory name here keeps the historical `core-v8`
 > token so it stays in lockstep with the upstream repo it mirrors.

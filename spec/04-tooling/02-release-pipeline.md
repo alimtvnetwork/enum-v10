@@ -2,7 +2,7 @@
 
 ## Overview
 
-Library release pipeline for `enum-v9`. Triggers on `release/**` branches and `v*` tags. Produces source archives + checksums + a GitHub Release with an extracted changelog section.
+Library release pipeline for `enum-v10`. Triggers on `release/**` branches and `v*` tags. Produces source archives + checksums + a GitHub Release with an extracted changelog section.
 
 This is a **Go library** — no cross-compiled binaries, install scripts, or code signing.
 
@@ -41,7 +41,7 @@ permissions:
 | Step | Purpose |
 |------|---------|
 | Resolve version | `refs/tags/vX.Y.Z` or `refs/heads/release/vX.Y.Z` → `vX.Y.Z` |
-| Package source archives | `dist/enum-v9-<ver>-source.tar.gz`, `.zip`, `checksums.txt` (SHA256) |
+| Package source archives | `dist/enum-v10-<ver>-source.tar.gz`, `.zip`, `checksums.txt` (SHA256) |
 | Extract changelog | `awk` over `CHANGELOG.md` for the matching `## [vX.Y.Z]` block; conventional-commits fallback when missing |
 | Assemble release body | Changelog + release-info table + `go get` install snippet + checksums block |
 | Publish | `softprops/action-gh-release@v2` with auto pre-release detection (`-` in version → prerelease + not latest) |
@@ -59,11 +59,11 @@ permissions:
 | Commit  | `<short-sha>` |
 | Ref     | `<github-ref>` |
 | Build Date | YYYY-MM-DD HH:MM:SS UTC |
-| Module  | `github.com/alimtvnetwork/enum-v9` |
+| Module  | `github.com/alimtvnetwork/enum-v10` |
 
 ### Install
 ```bash
-go get github.com/alimtvnetwork/enum-v9@vX.Y.Z
+go get github.com/alimtvnetwork/enum-v10@vX.Y.Z
 ```
 
 ### Checksums (SHA256)

@@ -1,4 +1,4 @@
-# golangci-lint v2 configuration for enum-v9.
+# golangci-lint v2 configuration for enum-v10.
 # Pinned to v2.x in CI (see .github/workflows/ci.yml).
 # v2 is required because go.mod declares `go 1.25.0` and v1.64.8
 # (the last v1.x release) was compiled with Go 1.24.

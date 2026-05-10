@@ -22,7 +22,7 @@ ls cross-repo/ .github/workflows/ scripts/ci/ 2>&1
 - All 5 referenced workflows exist: `.github/workflows/{ci,ci-guards,python-tests,release,vulncheck}.yml`.
 - `cross-repo/` contains exactly **one** sub-directory: `cross-repo/core-v9/` — confirming the Core memory rule (the directory keeps its historical `core-v8` name even though the import path is now `core-v9`).
 - `scripts/ci/` exists (referenced by `06-cross-repo-sync.md` §2 "Out of scope").
-- `tests/creationtests/` exists; `tests/integratedtests/` does not exist in `enum-v9`.
+- `tests/creationtests/` exists; `tests/integratedtests/` does not exist in `enum-v10`.
 
 ## 2. Claim-by-claim table
 
@@ -37,7 +37,7 @@ ls cross-repo/ .github/workflows/ scripts/ci/ 2>&1
 | 5  | 00-overview | All 5 reading-path cross-refs resolve | ✅ | Verified — every `[NN — Title](./NN-...)` link targets a present file. |
 | 6  | 01-ci-pipeline | `.github/workflows/ci.yml` referenced as primary CI workflow | ✅ | `ls .github/workflows/ci.yml` → present. |
 | 7  | 01-ci-pipeline | Stage descriptions (lint, build, test, coverage) | ❓ | Behavioural; not probed against actual workflow YAML this cycle. |
-| 8  | 02-release-pipeline | "Library release pipeline for `enum-v9`" | ✅ | Post-rename confirmed (`enum-v9` token correct). |
+| 8  | 02-release-pipeline | "Library release pipeline for `enum-v10`" | ✅ | Post-rename confirmed (`enum-v10` token correct). |
 | 9  | 02-release-pipeline | Triggers on `release/**` branches and `v*` tags | ❓ | Not probed against `release.yml` this cycle. |
 | 10 | 02-release-pipeline | Produces source archives + checksums + GitHub Release | ❓ | Same. |
 | 11 | 02-powershell-dashboard-ui | (1244 lines) UI design tokens, phase rendering, dashboard layout | ❓ (sampled 3 sub-claims) | Behavioural / cosmetic; not a code-vs-spec audit target this cycle. Spec-internal: ✅ no banned tokens. |
@@ -46,16 +46,16 @@ ls cross-repo/ .github/workflows/ scripts/ci/ 2>&1
 | 14 | 03-powershell-implementation | (466 lines) "For AI agents working on the PowerShell tooling itself" | ✅ | Self-described scope. Banned-token-clean. |
 | 15 | 03-powershell-implementation | Module loading / error-guarding / phase tracking architecture | ❓ | Behavioural; not probed against `scripts/*.psm1` this cycle. |
 | 16 | 04-bootstrap-into-new-repo | "Generic — no `core-v9` assumptions baked in" | ✅ | §7 decoupling table makes this verifiable claim-by-claim. |
-| 17 | 04-bootstrap-into-new-repo | §7 row "`tests/integratedtests/` mirror layout required ❌ No" | ⚠️→✅ | **D-CVS-50** — semantically correct but didn't name the `enum-v9` precedent (`tests/creationtests/`). Fixed inline this cycle to name both upstream-`core-v9` and `enum-v9` layouts. (This is the AH-tracked occurrence.) |
+| 17 | 04-bootstrap-into-new-repo | §7 row "`tests/integratedtests/` mirror layout required ❌ No" | ⚠️→✅ | **D-CVS-50** — semantically correct but didn't name the `enum-v10` precedent (`tests/creationtests/`). Fixed inline this cycle to name both upstream-`core-v9` and `enum-v10` layouts. (This is the AH-tracked occurrence.) |
 | 18 | 04-bootstrap-into-new-repo | §7 row "Module path hard-coded ❌ No — read from `go.mod`" | ✅ | Consistent with `01-app/03-import-conventions.md` §1. |
 | 19 | 04-bootstrap-into-new-repo | §7 row "`coretests` framework required ❌ No" | ✅ | Consistent with `06-testing-guidelines/README.md` Cycle 15 callout (the framework is upstream-only). |
 | 20 | 04-ci-guards | References `.github/workflows/ci-guards.yml` | ✅ | `ls` → present. |
 | 21 | 04-ci-guards | Cross-ref to upstream `coding-guidelines-v20/spec/12 §03-reusable-ci-guards` | ✅ | URL well-formed. |
 | 22 | 05-branch-protection | Repo-admin guidance for branch protection rules | ✅ | Process spec; no API surface to verify. |
-| 23 | 06-cross-repo-sync | "`enum-v2` depends on `core-v9`" (line 11) | ⚠️→✅ | **D-CVS-51** — `enum-v2` is stale (project is now `enum-v9` after two renames). Fixed inline. |
+| 23 | 06-cross-repo-sync | "`enum-v2` depends on `core-v9`" (line 11) | ⚠️→✅ | **D-CVS-51** — `enum-v2` is stale (project is now `enum-v10` after two renames). Fixed inline. |
 | 24 | 06-cross-repo-sync | "`cross-repo/core-v9/README.md`" (line 19) | ⚠️→✅ | **D-CVS-52** — broken path (actual dir is `cross-repo/core-v9/`). Fixed inline with Core-memory clarification. |
-| 25 | 06-cross-repo-sync | Comment template "Synced from github.com/alimtvnetwork/enum-v2/cross-repo/core-v9/" (line 80) | ⚠️→✅ | **D-CVS-53** — combines both stale tokens (`enum-v2` + `cross-repo/core-v9`). Fixed inline to `enum-v9/cross-repo/core-v9/`. |
-| 26 | 06-cross-repo-sync | "both `enum-v2` and `core-v9` calling it via `uses:`" (line 91) | ⚠️→✅ | **D-CVS-54** — `enum-v2` stale. Fixed inline to `enum-v9`. |
+| 25 | 06-cross-repo-sync | Comment template "Synced from github.com/alimtvnetwork/enum-v2/cross-repo/core-v9/" (line 80) | ⚠️→✅ | **D-CVS-53** — combines both stale tokens (`enum-v2` + `cross-repo/core-v9`). Fixed inline to `enum-v10/cross-repo/core-v9/`. |
+| 26 | 06-cross-repo-sync | "both `enum-v2` and `core-v9` calling it via `uses:`" (line 91) | ⚠️→✅ | **D-CVS-54** — `enum-v2` stale. Fixed inline to `enum-v10`. |
 | 27 | 06-cross-repo-sync | "See Also: `cross-repo/core-v9/README.md`" (line 103) | ⚠️→✅ | **D-CVS-55** — broken path. Fixed inline with Core-memory note. |
 | 28 | 06-cross-repo-sync | §3 sync rules (workflows are source of truth, deltas documented, `actionlint` gate) | ✅ | Spec-internal best practice; consistent with `04-tooling/01-ci-pipeline.md`. |
 | 29 | All files | Zero mojibake `core-v9 → core-v9` | ✅ | Zero hits. |
@@ -73,13 +73,13 @@ ls cross-repo/ .github/workflows/ scripts/ci/ 2>&1
 
 **Severity:** LOW (broken link in landing index). **Locations:** lines 26 (Map table) + 80 (Maintenance §3). **Fix:** inline rewrite to `cross-repo/core-v9/` with explicit Core-memory note explaining the directory keeps its historical name even though the import path is `core-v9`.
 
-### D-CVS-50 — `04-bootstrap-into-new-repo.md` §7 doesn't name the `enum-v9` test-layout precedent
+### D-CVS-50 — `04-bootstrap-into-new-repo.md` §7 doesn't name the `enum-v10` test-layout precedent
 
-**Severity:** LOW (already semantically correct — claims `tests/integratedtests/` is **not** required). **Location:** line 242. **Fix:** inline rewrite to name both upstream-`core-v9` (`tests/integratedtests/<pkg>tests/`) and `enum-v9` (`tests/creationtests/`) layouts as concrete examples. Closes the AH-tracked occurrence for this directory.
+**Severity:** LOW (already semantically correct — claims `tests/integratedtests/` is **not** required). **Location:** line 242. **Fix:** inline rewrite to name both upstream-`core-v9` (`tests/integratedtests/<pkg>tests/`) and `enum-v10` (`tests/creationtests/`) layouts as concrete examples. Closes the AH-tracked occurrence for this directory.
 
 ### D-CVS-51 — `06-cross-repo-sync.md` line 11 cites stale `enum-v2`
 
-**Severity:** LOW. **Fix:** `enum-v2` → `enum-v9` (project went through two renames: `v1 → v2 → v3 → v4`; this occurrence was missed in earlier sweeps).
+**Severity:** LOW. **Fix:** `enum-v2` → `enum-v10` (project went through two renames: `v1 → v2 → v3 → v4`; this occurrence was missed in earlier sweeps).
 
 ### D-CVS-52 — `06-cross-repo-sync.md` line 19 cites broken `cross-repo/core-v9/README.md`
 
@@ -87,11 +87,11 @@ ls cross-repo/ .github/workflows/ scripts/ci/ 2>&1
 
 ### D-CVS-53 — `06-cross-repo-sync.md` line 80 comment template combines two stale tokens
 
-**Severity:** LOW (the template is meant to be copy-pasted into other repos, so propagates the drift). **Fix:** inline rewrite of both `enum-v2 → enum-v9` and `cross-repo/core-v9 → cross-repo/core-v9`.
+**Severity:** LOW (the template is meant to be copy-pasted into other repos, so propagates the drift). **Fix:** inline rewrite of both `enum-v2 → enum-v10` and `cross-repo/core-v9 → cross-repo/core-v9`.
 
 ### D-CVS-54 — `06-cross-repo-sync.md` line 91 cites stale `enum-v2`
 
-**Severity:** LOW. **Fix:** `enum-v2` → `enum-v9`.
+**Severity:** LOW. **Fix:** `enum-v2` → `enum-v10`.
 
 ### D-CVS-55 — `06-cross-repo-sync.md` line 103 "See Also" cites broken `cross-repo/core-v9/`
 

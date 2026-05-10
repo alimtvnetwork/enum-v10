@@ -1,9 +1,9 @@
 # Cycle 10 — `01-app/12-cmd-entrypoints.md` Code-vs-Spec Audit
 
-> Audited 2026-05-05. Spec is short (~134 lines) but had a **HIGH-severity contradiction** because it asserted "no `cmd/` directory" in a repo (`enum-v9`) that ships exactly one (`cmd/main/main.go`).
+> Audited 2026-05-05. Spec is short (~134 lines) but had a **HIGH-severity contradiction** because it asserted "no `cmd/` directory" in a repo (`enum-v10`) that ships exactly one (`cmd/main/main.go`).
 
 ## Method
-Read the spec end-to-end, extracted every checkable claim, then verified each against `enum-v9/` source on disk.
+Read the spec end-to-end, extracted every checkable claim, then verified each against `enum-v10/` source on disk.
 
 ## Claim ledger
 
@@ -40,7 +40,7 @@ Read the spec end-to-end, extracted every checkable claim, then verified each ag
 
 ### C-CVS-10 — `cmd/` policy contradicts the existing `cmd/main/` harness (HIGH)
 - **Spec said:** "No `cmd/` directory. No `main` package." Rule: "Do not add a `cmd/` directory to this module."
-- **Reality:** `enum-v9/cmd/main/main.go` exists with `package main` + `func main()`. `cmd/README.md` documents the convention (`make` → `bin/main`).
+- **Reality:** `enum-v10/cmd/main/main.go` exists with `package main` + `func main()`. `cmd/README.md` documents the convention (`make` → `bin/main`).
 - **Fix:** Rewrote §1 to a "library-first, smoke-test allowed" policy. Distinguishes upstream `core-v9` (truly zero `cmd/`) from this module (one permitted `cmd/main/` smoke-test harness). Rule narrowed to "no additional `cmd/<name>/` entrypoints + no `cmd/` in upstream `core-v9`". Cross-linked `cmd/README.md`.
 
 ### D-CVS-32 — `tests/integratedtests/` reference (5th occurrence)

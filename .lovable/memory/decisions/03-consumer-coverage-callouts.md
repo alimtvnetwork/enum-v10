@@ -7,19 +7,19 @@
 
 ## Context
 
-Several `core-v9` API surfaces (e.g. `coregeneric`, `corepayload`, `corevalidator`, `coretests`, `tests/testwrappers`) are documented at length in `spec/01-app/` but have **zero `enum-v9` consumers**. Without explicit callouts, future readers (human or AI) would assume the API was verified against `enum-v9` code — but it wasn't, and can't be until Task AB lands.
+Several `core-v9` API surfaces (e.g. `coregeneric`, `corepayload`, `corevalidator`, `coretests`, `tests/testwrappers`) are documented at length in `spec/01-app/` but have **zero `enum-v10` consumers**. Without explicit callouts, future readers (human or AI) would assume the API was verified against `enum-v10` code — but it wasn't, and can't be until Task AB lands.
 
 ## Decision
 
 Wherever a section describes an upstream-only API surface, add an explicit **consumer-coverage callout** at the section header:
 
 ```markdown
-> ⚠️ **Consumer coverage:** The symbols in this section have no `enum-v9` consumer.
+> ⚠️ **Consumer coverage:** The symbols in this section have no `enum-v10` consumer.
 > Verification deferred to Task AB (fetch upstream `core-v9` source).
-> `enum-v9` readers should redirect to <pointer to actual `enum-v9` equivalent>.
+> `enum-v10` readers should redirect to <pointer to actual `enum-v10` equivalent>.
 ```
 
-The redirect pointer is critical — it tells `enum-v9` readers where to look for the **actually-used** equivalent (e.g. §13 `tests/integratedtests/` callout redirects to §6.1 documenting the real `tests/creationtests/` Goconvey + `EnumTestWrapper` registry).
+The redirect pointer is critical — it tells `enum-v10` readers where to look for the **actually-used** equivalent (e.g. §13 `tests/integratedtests/` callout redirects to §6.1 documenting the real `tests/creationtests/` Goconvey + `EnumTestWrapper` registry).
 
 ## Effect
 
@@ -30,7 +30,7 @@ The redirect pointer is critical — it tells `enum-v9` readers where to look fo
 ## Rule going forward
 
 When a future audit cycle encounters a high-❓ section:
-1. Identify which API surfaces have zero `enum-v9` consumers (`rg --type go` returns empty).
+1. Identify which API surfaces have zero `enum-v10` consumers (`rg --type go` returns empty).
 2. Add a consumer-coverage callout naming each upstream-only symbol.
-3. Add a redirect pointer if `enum-v9` has an equivalent.
+3. Add a redirect pointer if `enum-v10` has an equivalent.
 4. Score the documented-API claims as ❓ (not ⚠️) — they're unverifiable, not wrong.

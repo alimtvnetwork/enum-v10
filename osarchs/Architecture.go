@@ -2,7 +2,7 @@ package osarchs
 
 import (
 	"github.com/alimtvnetwork/core-v9/coreinterface/enuminf"
-	"github.com/alimtvnetwork/enum-v9/internal/consts"
+	"github.com/alimtvnetwork/enum-v10/internal/consts"
 )
 
 type Architecture byte
