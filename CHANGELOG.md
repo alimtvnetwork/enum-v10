@@ -8,6 +8,16 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 The release pipeline extracts the matching `## [vX.Y.Z]` section as the
 GitHub Release body — keep entries small, sectioned, and human-readable.
 
+## [v1.26.0] - 2026-05-10
+### Added — AC dimension audit (Cycle 49) — closes the AC umbrella
+- `spec/07-code-vs-spec-audits/40-cycle49-AC-spec01-converters-conditional-advisory.md` — spec-internal-consistency probe of advisory carry-overs from Cycles 19/20/43/44 (`spec/01-app/09-converters.md` rows 64/99-107/119/130/161/172 and `spec/01-app/07-conditional-and-utilities.md` row 142).
+- 3 ❓→✅ promotions: §09 row 64 (PrettyJson namespace structurally consistent with corejson — `converters/vars.go:35` delegates via `jsoninternal.Pretty`); §07 row 142 (`issetter.Value` "not a drop-in for `bool`" advisory entailed by 6-state byte enum); §07 row 173 already done in Cycle 44.
+- 1 ❓→❌ NEW **C-CVS-65 (HIGH)** — `errcore.OverflowType.Fmt(...)` on §09 line 161 is fabricated (`grep -rln Overflow /tmp/core-v9-upstream/errcore/` returns zero). Suggested replacement `errcore.Expected.MessageVarMap(...)`. Spawned **AJ-45** (purge from spec, blocked by `spec/01-app/` freeze).
+- 4 ❓ retained as out-of-AC-scope: rows 99-107 (no-panic / errcore-wrapped / locale-independent contracts), 119, 130 — consolidated under new **AJ-46 (MEDIUM)** "converter behavioural contract pass" (write Go-level traces in `tests/contracttests/converters_test.go`). Row 172 reclassified ❓→ⓘ "advisory by design" — never measurable from code alone.
+- AB-residual `spec/01-app/` ❓ pool: 6 → **3**. Cumulative AB+AC ❌: 53 → **54** (CRITICAL unchanged at 23, HIGH +1).
+- **AC umbrella complete** for all currently-loaded spec sections.
+- Spec changelog bumped to `spec-v0.57.0`.
+
 ## [v1.25.0] - 2026-05-10
 ### Added — AO pass 3: pathpatterntype + packageinstallmethod + osdetect uplift
 - `packageinstallmethod/PackageInstallMethod_Uplift_test.go` — **73.5% → 100.0%** (+26.5pp). Covers all `IsX` predicates, `ToPtr`/`ToSimple` (incl. nil-receiver), `Json`/`JsonPtr`/`JsonParseSelfInject` round-trip, and all `As*` binder accessors.
