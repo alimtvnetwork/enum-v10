@@ -57,9 +57,6 @@ func TestDirectMethods_CompressFormats(t *testing.T) {
 	}
 	StringMustBe(a.Name(), a)
 
-	if _, err := NewMustSafe(a.Name()); err != nil {
-		// no NewMustSafe; touch NewMust via recover
-	}
 	func() {
 		defer func() { _ = recover() }()
 		_ = NewMust(a.Name())
