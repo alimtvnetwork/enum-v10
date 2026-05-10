@@ -53,6 +53,38 @@ func TestQuotes_Uplift(t *testing.T) {
 	_ = q.OnlySupportedErr(q.Name())
 	_ = q.OnlySupportedMsgErr("ctx", q.Name())
 
+	_ = q.ValueInt8()
+	_ = q.ValueInt16()
+	_ = q.ValueInt32()
+	_ = q.ValueString()
+	_ = q.Format("%s")
+	_ = q.EnumType()
+	_ = q.NameValue()
+	_ = q.ToNumberString()
+	if q.IsInvalid() || !q.IsValid() {
+		t.Error("validity")
+	}
+	if !q.IsAnyOf(q, Invalid) {
+		t.Error("IsAnyOf")
+	}
+	_ = q.IsNameOf(q.Name())
+	_ = q.MaxByte()
+	_ = q.MinByte()
+	_ = q.RangeNamesCsv()
+	_ = q.TypeName()
+	_ = q.AsBasicEnumContractsBinder()
+	data, err := q.MarshalJSON()
+	if err != nil {
+		t.Errorf("MarshalJSON: %v", err)
+	}
+	var got Quote
+	if err := got.UnmarshalJSON(data); err != nil {
+		t.Errorf("UnmarshalJSON: %v", err)
+	}
+	if _, err := q.UnmarshallEnumToValue(data); err != nil {
+		t.Errorf("UnmarshallEnumToValue: %v", err)
+	}
+
 	for _, candidate := range []Quote{Double, Single, Backtick} {
 		_ = candidate.Name()
 		_ = candidate.SelfWrap()
