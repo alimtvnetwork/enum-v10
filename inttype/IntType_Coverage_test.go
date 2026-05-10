@@ -91,8 +91,8 @@ func Test_IntType_Coverage(t *testing.T) {
 		minA, maxA := v.MinMaxAny()
 		So(minA, ShouldNotBeNil)
 		So(maxA, ShouldNotBeNil)
-		So(func() { _ = v.OnlySupportedErr("anything") }, ShouldPanic)
-		So(func() { _ = v.OnlySupportedMsgErr("ctx", "anything") }, ShouldPanic)
+		So(v.OnlySupportedErr("anything"), ShouldNotBeNil)
+		So(v.OnlySupportedMsgErr("ctx", "anything"), ShouldNotBeNil)
 		_ = v.ValueUInt16()
 	})
 }

@@ -201,7 +201,7 @@
 
 ## Phase 4: Manual / Parked
 
-### A. Manual `cross-repo/core-v9/` push
+### A. Manual `cross-repo/core-v10/` push
 
 - **Status:** ⏭️ Manual user action (credential-bound)
 - **Trigger:** When main-repo CI files change, mirror then user pushes.
@@ -212,9 +212,13 @@
 
 **Recommended next task:** Pick from this list (in order):
 
-1. **AJ-45 / S-002** — Blocked by `spec/01-app/` freeze; cannot ship until user thaws.
-2. **A** — Manual `cross-repo/core-v9/` push ⏭️ (user-only)
-3. **AP / AQ / AS** — Proactive candidates (thaw-cycle, osdetect Linux-branch coverage, per-package CI gate). See chat suggestions.
+1. **BH** — Fix stale enum-v10 rename breadcrumb in memory docs.
+2. **BD** — Seed `.ci-baselines/package-coverage.json` with a real green-run per-package snapshot.
+3. **BF** — Finish/verify S-106 `scripts/spec-api-check.psm1` synthesized-stub API lint.
+4. **BG** — Audit remaining `Help.psm1` / `PackageCoverage.psm1` `integratedtests` allowlist entries.
+5. **AJ-45 / S-002** — Blocked by `spec/01-app/` freeze; cannot ship until user thaws.
+6. **A** — Manual `cross-repo/core-v10/` push ⏭️ (user-only)
+7. **AP** — Optional brief freeze thaw to clear AJ-45 + S-002 when user approves.
 
 **Recently closed:** AO ✅ (v1.25.0), AC ✅ (v1.26.0), AJ-46 ✅ (v1.27.0), AR ✅ (v1.28.0 — PI-003 closed), AT ✅ (v1.29.0 — RCA P8/P9/P10 re-verified), AS ✅ (v1.30.0 — per-package 75% CI gate), **AX ✅ (v1.31.0, Cycle 54 — RCA P9 static guard live in `ci-guards.yml`; surfaced + fixed real violation in `scripttype/ScriptDefault.go`).**
 
@@ -234,6 +238,7 @@
 - AA / Cycle 15 ✅ (audited `spec/06-testing-guidelines/`, baselined at 100% verifiable)
 - AB residual for §06 ✅ (Cycle 62, 10 deferred ❓ → 10 ✅ via `/tmp/core-v9-upstream` v1.5.8; zero new findings)
 - Cycle 63 ✅ (3 test failures fixed: osdetect lowerCaseNames gap, sqliteconnpathtype StringMin fixture drift, sqliteconnpathtype RangesDynamicMap upstream lazy-init defect; 4th "failure" was Goconvey log-conflation phantom; RCA pattern catalogue saved to `.lovable/memory/07-test-failure-rca-patterns.md`)
+- BI ✅ (v1.52.0 — `Test_IntType_Coverage` updated after `OnlySupported*Err` changed from panic to returned error; focused `go test ./inttype` green)
 
 ### AO. Coverage probe + uplift remaining sub-75% packages
 
