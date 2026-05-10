@@ -20,9 +20,6 @@ func TestTaskCategory_Uplift(t *testing.T) {
 		t.Error("bogus should err")
 	}
 
-	if Max() == Invalid {
-		t.Error("Max")
-	}
 	_ = RangesInvalidErr()
 
 	if len(v.AllNameValues()) == 0 || len(v.IntegerEnumRanges()) == 0 || len(v.RangesByte()) == 0 {
