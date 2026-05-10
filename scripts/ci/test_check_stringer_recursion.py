@@ -65,11 +65,17 @@ class CheckStringerRecursionTests(unittest.TestCase):
         self.assertIn("bad.go", rc.stdout)
 
     def test_test_files_are_excluded(self):
+        # _test.go file with the bomb — should be ignored.
         _write_go(self.tmp, "fine_test.go", """
             package x
             func (it Foo) String() string {
                 return converters.AnyTo.ValueString(it)
             }
+        """)
+        # Plus a clean non-test file so we have something to scan.
+        _write_go(self.tmp, "clean.go", """
+            package x
+            func Hello() string { return "hi" }
         """)
         rc = self._run(self.tmp)
         self.assertEqual(rc.returncode, 0, rc.stdout + rc.stderr)
