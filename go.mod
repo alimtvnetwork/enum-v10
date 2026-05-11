@@ -5,7 +5,7 @@ go 1.25.0
 require (
 	github.com/alimtvnetwork/core-v9 v1.5.8
 	github.com/smartystreets/goconvey v1.8.1
-	golang.org/x/sys v0.13.0
+	golang.org/x/sys v0.44.0
 )
 
 require (
