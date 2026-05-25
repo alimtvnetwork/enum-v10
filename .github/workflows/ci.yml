@@ -72,7 +72,7 @@ jobs:
       # go.sum doesn't, the action can replay stale lint findings (errors at
       # line numbers that no longer exist in source). Disabling the cache
       # eliminates that failure mode at the cost of ~30s per run.
-      - uses: golangci/golangci-lint-action@v7
+      - uses: golangci/golangci-lint-action@v9
         if: needs.sha-check.outputs.already-built != 'true'
         with:
           version: v2.5.0
