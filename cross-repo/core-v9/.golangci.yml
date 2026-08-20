@@ -1,4 +1,4 @@
-# golangci-lint configuration for enum-v1
+# golangci-lint configuration for enum-v10
 # Pinned to v1.64.8 in CI (see .github/workflows/ci.yml).
 # Local: `golangci-lint run --timeout=5m`
 

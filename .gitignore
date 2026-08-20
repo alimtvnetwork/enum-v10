@@ -34,3 +34,4 @@ dist-ssr
 /tmp/
 coverage*.out
 combined-coverage.out
+/.gitmap/backup

@@ -11,10 +11,10 @@
 Dual-dimension probe:
 
 1. **Code-vs-spec** — probe `enum-v10` source for any consumer usage of the spec's claimed APIs (`coretests.GetAssert`, `args.Map`, `CaseV1`, `tests/integratedtests/<pkg>tests/`, `Coverage*_test.go`, in-package framework imports).
-2. **Spec-internal-consistency** — cross-refs resolve, no banned-pattern occurrences (`enum-v1`, mojibake `core-v9 → core-v9`, `.lovable/user-preferences`), no contradiction with sibling files in `spec/01-app/13-testing-patterns.md` and `14-tests-folder-walkthrough.md`.
+2. **Spec-internal-consistency** — cross-refs resolve, no banned-pattern occurrences (`enum-v10`, mojibake `core-v9 → core-v9`, `.lovable/user-preferences`), no contradiction with sibling files in `spec/01-app/13-testing-patterns.md` and `14-tests-folder-walkthrough.md`.
 
 ```bash
-rg -nc 'integratedtests|enum-v1|enum-v3|core-v9 → core-v9|\.lovable/user-preferences|core-v8' spec/06-testing-guidelines/*.md
+rg -nc 'integratedtests|enum-v10|enum-v10|core-v9 → core-v9|\.lovable/user-preferences|core-v8' spec/06-testing-guidelines/*.md
 rg -n 'tests/testwrappers|coretests\.|coretestcases\.|args\.Map|CaseV1|GetAssert' --type go --glob '!cross-repo/**'
 rg -n 'Coverage.*_test\.go' --type go --glob '!cross-repo/**'
 ls spec/01-app/{13-testing-patterns,14-tests-folder-walkthrough}.md
@@ -56,7 +56,7 @@ ls spec/01-app/{13-testing-patterns,14-tests-folder-walkthrough}.md
 | 26 | 07-diagnostics-output-standards | (entire file — 78 lines) diagnostic output standards | ❓ (5 of 5 sub-claims) | Behavioural; pending AB. Cross-refs internal. |
 | 27 | 08-good-vs-bad | Examples of good vs bad tests using `args.Map` / `CaseV1` | ❓ | Pending AB on API; spec-internal: ✅ (no contradictions). |
 | 28 | 09-creating-custom-cases | `BaseTestCase` extension pattern | ❓ | Pending AB. |
-| 29 | All files | Zero `enum-v1` references | ✅ | `rg -c enum-v1 spec/06-testing-guidelines/*.md` → zero hits. |
+| 29 | All files | Zero `enum-v10` references | ✅ | `rg -c enum-v10 spec/06-testing-guidelines/*.md` → zero hits. |
 | 30 | All files | Zero mojibake `core-v9 → core-v9` | ✅ | Zero hits. |
 | 31 | All files | Zero `.lovable/user-preferences` citations | ✅ | Zero hits. |
 | 32 | Cross-spec | All inter-spec cross-refs resolve (`02-app-issues/02-`, `02-app-issues/05-`, `01-app/13-`, `01-app/14-`) | ✅ | All 4 target files exist (verified `ls`). |
@@ -90,8 +90,8 @@ ls spec/01-app/{13-testing-patterns,14-tests-folder-walkthrough}.md
 
 Specifically checked-and-clean:
 - No `tests/creationtests/` mis-references inside `spec/06-` (this folder is upstream-only by design — `enum-v10` shape is documented in `01-app/13` §6.1 and `01-app/14`).
-- No `enum-v1`.
-- No `enum-v3` (post-rename verified).
+- No `enum-v10`.
+- No `enum-v10` (post-rename verified).
 - No mojibake `core-v9 → core-v9`.
 - No `core-v8` (cross-repo mirror is out of scope).
 - No `.lovable/user-preferences` citations.

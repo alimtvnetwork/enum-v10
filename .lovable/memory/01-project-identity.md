@@ -3,7 +3,7 @@
 ## Module
 
 - **Module path:** `github.com/alimtvnetwork/enum-v10`
-- **Previous name:** `enum-v1` (renamed; do NOT reintroduce in source).
+- **Previous name:** `enum-v10` (renamed; do NOT reintroduce in source).
 - **Type:** Go enum library + PowerShell + Python tooling.
 - **Frontend shell:** A React/Vite project lives in `src/` for the Lovable preview. It is **incidental** — real work is in Go packages, PowerShell scripts, and Python CI guards.
 

@@ -23,7 +23,7 @@ For each spec file (e.g. `spec/01-app/15-observability.md`):
 
 - **Code-vs-spec** — does `enum-v10` source confirm or contradict the claim?
 - **Spec-internal consistency** *(introduced Cycle 13)* — does the cross-reference resolve? Does any sibling spec file contradict this one? Is the rule self-consistent?
-- **Banned-pattern absence** — is the file free of `tests/integratedtests/`, `enum-v1` (outside the mirror), `core-v9 → core-v9` mojibake, `.lovable/user-preferences line 8` citations?
+- **Banned-pattern absence** — is the file free of `tests/integratedtests/`, `enum-v10` (outside the mirror), `core-v9 → core-v9` mojibake, `.lovable/user-preferences line 8` citations?
 
 A claim that is ❓ on code-vs-spec can still be ✅ on spec-internal consistency. Track both.
 

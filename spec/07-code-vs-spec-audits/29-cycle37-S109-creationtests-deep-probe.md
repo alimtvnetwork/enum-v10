@@ -82,7 +82,7 @@ Tracked as carry-forward suggestion **S-111** below.
 ## 4. Spec-internal-consistency checks (re-run)
 
 ```bash
-rg -nc 'integratedtests|enum-v1|enum-v3|core-v9 → core-v9|\.lovable/user-preferences|core-v8' spec/06-testing-guidelines/*.md
+rg -nc 'integratedtests|enum-v10|enum-v10|core-v9 → core-v9|\.lovable/user-preferences|core-v8' spec/06-testing-guidelines/*.md
 ```
 
 Result identical to Cycle 15 — README + `01-folder-structure.md` callouts still in place. No regression.

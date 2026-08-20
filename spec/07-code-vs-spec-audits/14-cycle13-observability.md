@@ -62,7 +62,7 @@ ls spec/06-testing-guidelines/07-diagnostics-output-standards.md \
 Specifically checked-and-clean:
 
 - No occurrences of `tests/integratedtests/` (the recurring anti-pattern from cycles 1, 3, 6, 8, 9, 10, 11, 12).
-- No occurrences of `enum-v1`.
+- No occurrences of `enum-v10`.
 - No mojibake `core-v9 → core-v9` (the cycle-9 pattern).
 - No references to nonexistent `.lovable/user-preferences` (the cycle-9 pattern).
 - All inter-spec cross-references (`04-error-system.md`, `08-validators.md`, `13-testing-patterns.md`, `16-security.md`, `06-testing-guidelines/07-diagnostics-output-standards.md`) resolve to existing files.

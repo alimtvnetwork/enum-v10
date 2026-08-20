@@ -453,7 +453,7 @@ Cumulative AB pattern: across the 2 sections audited so far, ~25 % of API claims
 ### Fixed
 - **`spec/04-tooling/00-overview.md`** (D-CVS-49) — fixed 2 broken `cross-repo/core-v9/` paths (Map table row 06 + Maintenance §3) to `cross-repo/core-v9/` with explicit Core-memory note that the directory intentionally retains its historical `core-v8` name even though the import path is `core-v9`.
 - **`spec/04-tooling/04-bootstrap-into-new-repo.md`** (D-CVS-50) — §7 decoupling row "tests/integratedtests/ mirror layout required ❌ No" now names both upstream-`core-v9` and `enum-v10` (`tests/creationtests/`) layouts as concrete examples. Closes the AH-tracked occurrence for this directory.
-- **`spec/04-tooling/06-cross-repo-sync.md`** (D-CVS-51 → D-CVS-55) — fixed 5 stale-token sites: `enum-v2 → enum-v10` at lines 11, 80 (template comment), 91; `cross-repo/core-v9 → cross-repo/core-v9` at lines 19, 80 (template comment), 103 (See Also). Template comment at line 80 carried both stale tokens (D-CVS-53). Each rewrite includes a Core-memory clarification where appropriate.
+- **`spec/04-tooling/06-cross-repo-sync.md`** (D-CVS-51 → D-CVS-55) — fixed 5 stale-token sites: `enum-v10 → enum-v10` at lines 11, 80 (template comment), 91; `cross-repo/core-v9 → cross-repo/core-v9` at lines 19, 80 (template comment), 103 (See Also). Template comment at line 80 carried both stale tokens (D-CVS-53). Each rewrite includes a Core-memory clarification where appropriate.
 
 ### Changed
 - **`spec/07-code-vs-spec-audits/01-scoreboard.md`** — added Cycle 17 history row; lifted top-line milestone to include **`spec/04-tooling/` baselined & closed**; bumped open-❓ aggregate from **164 → 172** (8 from `spec/04` workflow-internal behaviours).

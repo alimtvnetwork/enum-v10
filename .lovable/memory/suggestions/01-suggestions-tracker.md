@@ -211,7 +211,7 @@
 
 - **completed:** 2026-05-06 (Cycle 35)
 - **source:** Lovable (Cycle 17 carry-forward)
-- **resolution:** Added a prominent top-of-file callout to `cross-repo/core-v9/README.md` covering: (1) the directory name is historical and intentional (mirrors a separate upstream repo), (2) the actual import path used by `enum-v10` source is `github.com/alimtvnetwork/core-v9` (renamed 2026-05-05, tagged `v1.5.8`), (3) editors must always write `cross-repo/core-v9/` even when the surrounding sentence is about `core-v9` content, (4) the historical `enum-v1` / `core-v8` body references must NOT be rewritten (Core-memory rule). Body untouched. Closes the Cycle-17 root cause of D-CVS-49/52/53/55 at the point of truth.
+- **resolution:** Added a prominent top-of-file callout to `cross-repo/core-v9/README.md` covering: (1) the directory name is historical and intentional (mirrors a separate upstream repo), (2) the actual import path used by `enum-v10` source is `github.com/alimtvnetwork/core-v9` (renamed 2026-05-05, tagged `v1.5.8`), (3) editors must always write `cross-repo/core-v9/` even when the surrounding sentence is about `core-v9` content, (4) the historical `enum-v10` / `core-v8` body references must NOT be rewritten (Core-memory rule). Body untouched. Closes the Cycle-17 root cause of D-CVS-49/52/53/55 at the point of truth.
 - **acceptance criteria:** ✅ Head section includes the 4-point explanation. ✅ Body content preserved.
 
 ### S-105: CI guard — `spec/02-app-issues/` index-drift detector

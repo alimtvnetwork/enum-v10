@@ -14,7 +14,7 @@ Dual-dimension probe:
 2. **Spec-internal-consistency** — README index matches `00-issues-index.md`; severity declarations match across files; status banners ("resolved" vs "open") consistent; cross-refs resolve; no banned tokens.
 
 ```bash
-rg -nc 'integratedtests|enum-v1|enum-v2|enum-v3|core-v9 → core-v9|\.lovable/user-preferences|cross-repo/core-v9' spec/02-app-issues/*.md
+rg -nc 'integratedtests|enum-v10|enum-v10|enum-v10|core-v9 → core-v9|\.lovable/user-preferences|cross-repo/core-v9' spec/02-app-issues/*.md
 rg -n '^> \*\*Severity\*\*|^> \*\*Status\*\*' spec/02-app-issues/0*.md
 ls tests/testwrappers/ internal/ 2>&1
 ```
@@ -51,7 +51,7 @@ ls tests/testwrappers/ internal/ 2>&1
 | 18 | 00-issues-index | Severity Legend (high / medium / low) | ✅ | Internal definitions; consistent. |
 | 19 | 00-issues-index | Status Legend (open / in-progress / resolved / wont-fix) | ✅ | Consistent with banners. |
 | 20 | 00-issues-index | Cross-ref summary line: "9 issues total: ALL 9 resolved. #02 reopened+resolved at spec-v0.6.0; #03 + #04 reclassified wont-fix → resolved at spec-v0.8.0" | ✅ | Per-file banners match (verified row by row). |
-| 21 | All files | Zero `enum-v1` / `enum-v2` / `enum-v3` references | ✅ | Verified `rg`. |
+| 21 | All files | Zero `enum-v10` / `enum-v10` / `enum-v10` references | ✅ | Verified `rg`. |
 | 22 | All files | Zero mojibake `core-v9 → core-v9` | ✅ | Zero hits. |
 | 23 | All files | Zero `.lovable/user-preferences` citations | ✅ | Zero hits. |
 | 24 | All files | Zero `cross-repo/core-v9/` (broken-path) references | ✅ | Zero hits. |
@@ -94,7 +94,7 @@ Specifically checked-and-clean (after fixes):
 - README index matches `00-issues-index.md` (9 rows, all ✅ resolved).
 - Severity banners match across all 9 issue files + the index (8× low + 1× medium for #01).
 - All cross-refs resolve.
-- No banned tokens (`enum-v1`, `enum-v2`, `enum-v3`, mojibake `core-v9 → core-v9`, `.lovable/user-preferences`, `cross-repo/core-v9`).
+- No banned tokens (`enum-v10`, `enum-v10`, `enum-v10`, mojibake `core-v9 → core-v9`, `.lovable/user-preferences`, `cross-repo/core-v9`).
 - No contradiction with the **`spec/01-app/` freeze** (`spec-v0.30.0`) — Cycle 18 touches only `spec/02-` files.
 - No contradiction with Cycles 15, 16, 17 callouts — Cycle 18's `enum-v10`-scope footnotes follow the same pattern.
 

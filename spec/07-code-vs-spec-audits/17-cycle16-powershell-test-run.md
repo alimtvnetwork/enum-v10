@@ -11,10 +11,10 @@
 Dual-dimension probe (same as Cycles 13–15):
 
 1. **Code-vs-spec** — confirm that `run.ps1`, `scripts/*.psm1`, `data/precommit/api-check.json`, and the documented runner CLI exist in `enum-v10` and behave as described.
-2. **Spec-internal-consistency** — cross-refs resolve, no banned tokens (`enum-v1`, `enum-v3`, mojibake `core-v9 → core-v9`, `.lovable/user-preferences`, raw `core-v8` outside the cross-repo mirror), no contradiction with `spec/01-app/13-testing-patterns.md` §6.1 or `spec/06-testing-guidelines/`.
+2. **Spec-internal-consistency** — cross-refs resolve, no banned tokens (`enum-v10`, `enum-v10`, mojibake `core-v9 → core-v9`, `.lovable/user-preferences`, raw `core-v8` outside the cross-repo mirror), no contradiction with `spec/01-app/13-testing-patterns.md` §6.1 or `spec/06-testing-guidelines/`.
 
 ```bash
-rg -nc 'integratedtests|enum-v1|enum-v3|core-v9 → core-v9|\.lovable/user-preferences|core-v8' spec/03-powershell-test-run/*.md
+rg -nc 'integratedtests|enum-v10|enum-v10|core-v9 → core-v9|\.lovable/user-preferences|core-v8' spec/03-powershell-test-run/*.md
 ls run.ps1 scripts/CoverageRunner.psm1 scripts/CoverageCompileCheck.psm1 scripts/TestRunnerCore.psm1 2>&1
 ```
 
@@ -53,7 +53,7 @@ ls run.ps1 scripts/CoverageRunner.psm1 scripts/CoverageCompileCheck.psm1 scripts
 | 21 | 08-generic-go-test-coverage-runner | `tests/integratedtests/` references throughout (lines 76, 94) | ⚠️→✅ | **D-CVS-47** — fixed via top-of-file *Consumer-coverage note (enum-v10)* this cycle (same pattern as `spec/06-testing-guidelines/README.md` D-CVS-43). |
 | 22 | 09-ai-agent-complete-reference | Self-described as portable AI-agent reference for any Go module | ✅ | Header lines explicit: "self-contained reference for any AI agent working on a Go project". |
 | 23 | 09-ai-agent-complete-reference | 7 occurrences of `tests/integratedtests/` (lines 70, 81, 234, 645, 683, 823, 882) | ⚠️→✅ | **D-CVS-48** — fixed via top-of-file *Consumer-coverage note (enum-v10)* this cycle. Per-token rewrite would damage portability; the callout pattern is consistent with `01-app/13` §6.1, `01-app/14` consumer-coverage callout, and `spec/06-testing-guidelines/README.md`. |
-| 24 | All files | Zero `enum-v1` / `enum-v3` references | ✅ | Verified via post-rename Cycle (enum-v3 → enum-v10 sweep). |
+| 24 | All files | Zero `enum-v10` / `enum-v10` references | ✅ | Verified via post-rename Cycle (enum-v10 → enum-v10 sweep). |
 | 25 | All files | Zero mojibake `core-v9 → core-v9` | ✅ | Zero hits. |
 | 26 | All files | Zero `.lovable/user-preferences` citations | ✅ | Zero hits. |
 | 27 | All files | Zero raw `core-v8` references | ✅ | Zero hits (the cross-repo mirror lives under `cross-repo/core-v9/`, out of scope). |
@@ -88,7 +88,7 @@ ls run.ps1 scripts/CoverageRunner.psm1 scripts/CoverageCompileCheck.psm1 scripts
 ## 4. Spec-internal consistency
 
 Specifically checked-and-clean:
-- No `enum-v1` / `enum-v3` (post-rename verified).
+- No `enum-v10` / `enum-v10` (post-rename verified).
 - No mojibake `core-v9 → core-v9`.
 - No `.lovable/user-preferences` citations.
 - No `core-v8` outside `cross-repo/core-v9/` (which is out of scope).

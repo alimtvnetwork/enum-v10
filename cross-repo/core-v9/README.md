@@ -12,12 +12,12 @@
 > always write `cross-repo/core-v9/`** — even when the surrounding sentence
 > is about `core-v9` content. The mismatch is by design.
 >
-> Historical body references below (`enum-v1`, `core-v8`) likewise track the
+> Historical body references below (`enum-v10`, `core-v8`) likewise track the
 > mirrored repo's vintage and must NOT be rewritten — see Core memory.
 
 Adapted CI/CD workflows and CI-guard scripts ready to be copied into the
 upstream **`alimtvnetwork/core-v8`** repository. They are **not** wired
-into this `enum-v1` repo's own CI — they live here only because the
+into this `enum-v10` repo's own CI — they live here only because the
 Lovable workspace can't directly edit the other GitHub repo.
 
 ## How to apply
@@ -29,20 +29,20 @@ git checkout -b ci/initial-pipeline
 
 # Workflows
 mkdir -p .github/workflows
-cp <enum-v1>/cross-repo/core-v9/.github/workflows/*.yml .github/workflows/
+cp <enum-v10>/cross-repo/core-v9/.github/workflows/*.yml .github/workflows/
 
 # CI guard scripts (shared, repo-agnostic)
 mkdir -p scripts/ci
-cp <enum-v1>/scripts/ci/check-collisions.py     scripts/ci/
-cp <enum-v1>/scripts/ci/lint-baseline-diff.py   scripts/ci/
+cp <enum-v10>/scripts/ci/check-collisions.py     scripts/ci/
+cp <enum-v10>/scripts/ci/lint-baseline-diff.py   scripts/ci/
 
 # Lint baseline seed
 mkdir -p .ci-baselines
-cp <enum-v1>/cross-repo/core-v9/.ci-baselines/golangci-lint.json .ci-baselines/
+cp <enum-v10>/cross-repo/core-v9/.ci-baselines/golangci-lint.json .ci-baselines/
 
 # Repo metadata
-cp <enum-v1>/cross-repo/core-v9/.golangci.yml .
-cp <enum-v1>/cross-repo/core-v9/.github/dependabot.yml .github/
+cp <enum-v10>/cross-repo/core-v9/.golangci.yml .
+cp <enum-v10>/cross-repo/core-v9/.github/dependabot.yml .github/
 
 git add .github scripts/ci .ci-baselines .golangci.yml
 git commit -m "ci: add CI/CD pipeline, vulncheck, release, guards, and Dependabot"
@@ -50,15 +50,15 @@ git push -u origin ci/initial-pipeline
 ```
 
 Then open a PR. Once merged, configure the same branch-protection rules
-described in `enum-v1`'s `spec/04-tooling/05-branch-protection.md`.
+described in `enum-v10`'s `spec/04-tooling/05-branch-protection.md`.
 
-## What was changed vs. the `enum-v1` originals
+## What was changed vs. the `enum-v10` originals
 
 | File | Adaptation for core-v8 |
 |---|---|
 | `ci.yml` | Test matrix replaced with a **single `./...` shard** — `core-v8` has 100+ packages and no natural curated split. Coverage gate kept at 60%. No `replace` directive juggling. |
 | `vulncheck.yml` | Identical — the standalone weekly scan is repo-agnostic. |
-| `release.yml` | Archive name changed from `enum-v1-…` to `core-v8-…`. Otherwise identical. |
+| `release.yml` | Archive name changed from `enum-v10-…` to `core-v8-…`. Otherwise identical. |
 | `ci-guards.yml` | Identical — references shared scripts under `scripts/ci/`. |
 | `.golangci.yml` | Same baseline config; `core-v8` may want to tighten `enabled` linters over time. |
 | `.ci-baselines/golangci-lint.json` | Empty seed — gate runs in warning-only mode until the first `main` push populates the cache. |

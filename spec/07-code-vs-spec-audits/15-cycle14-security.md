@@ -11,7 +11,7 @@
 Same dual-dimension probe as Cycle 13 — *code-vs-spec* (probe `enum-v10` source for consumer usage) plus *spec-internal-consistency* (cross-refs resolve, no banned-pattern occurrences, no contradiction with sibling files).
 
 ```bash
-rg -n 'tests/integratedtests|enum-v1|core-v9 → core-v9|\.lovable/user-preferences' spec/01-app/16-security.md
+rg -n 'tests/integratedtests|enum-v10|core-v9 → core-v9|\.lovable/user-preferences' spec/01-app/16-security.md
 rg -n 'corevalidator\.|coredynamic\.SetField|coredynamic\.InvokeMethod|corestr\.IsValidUTF8|reflectinternal' --type go --glob '!cross-repo/**'
 rg -n 'panic\(|recover\(\)' --type go --glob '!cross-repo/**' --glob '!tests/**' --glob '!cmd/**'
 ls spec/01-app/{04-error-system,15-observability,08-validators,10-reflection-and-dynamic,02-design-philosophy}.md
@@ -62,7 +62,7 @@ ls spec/01-app/{04-error-system,15-observability,08-validators,10-reflection-and
 
 Specifically checked-and-clean:
 - No `tests/integratedtests/`.
-- No `enum-v1`.
+- No `enum-v10`.
 - No mojibake `core-v9 → core-v9`.
 - No `.lovable/user-preferences` citations.
 - All inter-spec cross-references resolve.

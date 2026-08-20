@@ -11,10 +11,10 @@
 Dual-dimension probe (same as Cycles 13–16):
 
 1. **Code-vs-spec** — confirm referenced workflow files exist (`.github/workflows/{ci,release,vulncheck,ci-guards,python-tests}.yml`), `cross-repo/<dir>/` actually exists with the documented layout, and the staged `cross-repo/` README path is reachable.
-2. **Spec-internal-consistency** — cross-refs resolve, no banned tokens (`enum-v1`, `enum-v2`, `enum-v3`, mojibake `core-v9 → core-v9`, `.lovable/user-preferences`), no contradiction with Core memory rule "the `cross-repo/core-v9/` directory intentionally keeps its `core-v8` name."
+2. **Spec-internal-consistency** — cross-refs resolve, no banned tokens (`enum-v10`, `enum-v10`, `enum-v10`, mojibake `core-v9 → core-v9`, `.lovable/user-preferences`), no contradiction with Core memory rule "the `cross-repo/core-v9/` directory intentionally keeps its `core-v8` name."
 
 ```bash
-rg -nc 'integratedtests|enum-v1|enum-v2|enum-v3|core-v9 → core-v9|\.lovable/user-preferences|cross-repo/core-v9' spec/04-tooling/*.md
+rg -nc 'integratedtests|enum-v10|enum-v10|enum-v10|core-v9 → core-v9|\.lovable/user-preferences|cross-repo/core-v9' spec/04-tooling/*.md
 ls cross-repo/ .github/workflows/ scripts/ci/ 2>&1
 ```
 
@@ -52,10 +52,10 @@ ls cross-repo/ .github/workflows/ scripts/ci/ 2>&1
 | 20 | 04-ci-guards | References `.github/workflows/ci-guards.yml` | ✅ | `ls` → present. |
 | 21 | 04-ci-guards | Cross-ref to upstream `coding-guidelines-v20/spec/12 §03-reusable-ci-guards` | ✅ | URL well-formed. |
 | 22 | 05-branch-protection | Repo-admin guidance for branch protection rules | ✅ | Process spec; no API surface to verify. |
-| 23 | 06-cross-repo-sync | "`enum-v2` depends on `core-v9`" (line 11) | ⚠️→✅ | **D-CVS-51** — `enum-v2` is stale (project is now `enum-v10` after two renames). Fixed inline. |
+| 23 | 06-cross-repo-sync | "`enum-v10` depends on `core-v9`" (line 11) | ⚠️→✅ | **D-CVS-51** — `enum-v10` is stale (project is now `enum-v10` after two renames). Fixed inline. |
 | 24 | 06-cross-repo-sync | "`cross-repo/core-v9/README.md`" (line 19) | ⚠️→✅ | **D-CVS-52** — broken path (actual dir is `cross-repo/core-v9/`). Fixed inline with Core-memory clarification. |
-| 25 | 06-cross-repo-sync | Comment template "Synced from github.com/alimtvnetwork/enum-v2/cross-repo/core-v9/" (line 80) | ⚠️→✅ | **D-CVS-53** — combines both stale tokens (`enum-v2` + `cross-repo/core-v9`). Fixed inline to `enum-v10/cross-repo/core-v9/`. |
-| 26 | 06-cross-repo-sync | "both `enum-v2` and `core-v9` calling it via `uses:`" (line 91) | ⚠️→✅ | **D-CVS-54** — `enum-v2` stale. Fixed inline to `enum-v10`. |
+| 25 | 06-cross-repo-sync | Comment template "Synced from github.com/alimtvnetwork/enum-v10/cross-repo/core-v9/" (line 80) | ⚠️→✅ | **D-CVS-53** — combines both stale tokens (`enum-v10` + `cross-repo/core-v9`). Fixed inline to `enum-v10/cross-repo/core-v9/`. |
+| 26 | 06-cross-repo-sync | "both `enum-v10` and `core-v9` calling it via `uses:`" (line 91) | ⚠️→✅ | **D-CVS-54** — `enum-v10` stale. Fixed inline to `enum-v10`. |
 | 27 | 06-cross-repo-sync | "See Also: `cross-repo/core-v9/README.md`" (line 103) | ⚠️→✅ | **D-CVS-55** — broken path. Fixed inline with Core-memory note. |
 | 28 | 06-cross-repo-sync | §3 sync rules (workflows are source of truth, deltas documented, `actionlint` gate) | ✅ | Spec-internal best practice; consistent with `04-tooling/01-ci-pipeline.md`. |
 | 29 | All files | Zero mojibake `core-v9 → core-v9` | ✅ | Zero hits. |
@@ -77,9 +77,9 @@ ls cross-repo/ .github/workflows/ scripts/ci/ 2>&1
 
 **Severity:** LOW (already semantically correct — claims `tests/integratedtests/` is **not** required). **Location:** line 242. **Fix:** inline rewrite to name both upstream-`core-v9` (`tests/integratedtests/<pkg>tests/`) and `enum-v10` (`tests/creationtests/`) layouts as concrete examples. Closes the AH-tracked occurrence for this directory.
 
-### D-CVS-51 — `06-cross-repo-sync.md` line 11 cites stale `enum-v2`
+### D-CVS-51 — `06-cross-repo-sync.md` line 11 cites stale `enum-v10`
 
-**Severity:** LOW. **Fix:** `enum-v2` → `enum-v10` (project went through two renames: `v1 → v2 → v3 → v4`; this occurrence was missed in earlier sweeps).
+**Severity:** LOW. **Fix:** `enum-v10` → `enum-v10` (project went through two renames: `v1 → v2 → v3 → v4`; this occurrence was missed in earlier sweeps).
 
 ### D-CVS-52 — `06-cross-repo-sync.md` line 19 cites broken `cross-repo/core-v9/README.md`
 
@@ -87,11 +87,11 @@ ls cross-repo/ .github/workflows/ scripts/ci/ 2>&1
 
 ### D-CVS-53 — `06-cross-repo-sync.md` line 80 comment template combines two stale tokens
 
-**Severity:** LOW (the template is meant to be copy-pasted into other repos, so propagates the drift). **Fix:** inline rewrite of both `enum-v2 → enum-v10` and `cross-repo/core-v9 → cross-repo/core-v9`.
+**Severity:** LOW (the template is meant to be copy-pasted into other repos, so propagates the drift). **Fix:** inline rewrite of both `enum-v10 → enum-v10` and `cross-repo/core-v9 → cross-repo/core-v9`.
 
-### D-CVS-54 — `06-cross-repo-sync.md` line 91 cites stale `enum-v2`
+### D-CVS-54 — `06-cross-repo-sync.md` line 91 cites stale `enum-v10`
 
-**Severity:** LOW. **Fix:** `enum-v2` → `enum-v10`.
+**Severity:** LOW. **Fix:** `enum-v10` → `enum-v10`.
 
 ### D-CVS-55 — `06-cross-repo-sync.md` line 103 "See Also" cites broken `cross-repo/core-v9/`
 
@@ -102,7 +102,7 @@ ls cross-repo/ .github/workflows/ scripts/ci/ 2>&1
 ## 4. Spec-internal consistency
 
 Specifically checked-and-clean (after fixes):
-- No `enum-v1` / `enum-v2` / `enum-v3` references remain (post-rename verified).
+- No `enum-v10` / `enum-v10` / `enum-v10` references remain (post-rename verified).
 - No mojibake `core-v9 → core-v9`.
 - No `.lovable/user-preferences` citations.
 - All `cross-repo/...` paths resolve (only `cross-repo/core-v9/` exists).
